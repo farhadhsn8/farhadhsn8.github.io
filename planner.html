@@ -1,0 +1,740 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>مشاور و برنامه‌ریز هوشمند دهم تا دوازدهم</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f6f4ef; --surface:#ffffff; --ink:#1b2030; --muted:#6b7280;
+  --line:#e8e4da; --brand:#4f46e5; --brand-soft:#eef0ff; --teal:#0e9384;
+  --teal-soft:#e2f5f1; --coral:#f2685a; --coral-soft:#ffece9; --gold:#e0a72b;
+  --mint:#bfe9dd; --shadow:0 18px 44px rgba(30,35,60,.10);
+  --radius:22px; --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.75}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.wrap{max-width:1180px;margin:auto;padding:0 22px}
+
+/* ---------- header ---------- */
+.hero{padding:42px 0 30px;background:linear-gradient(135deg,#eef0ff,#e2f5f1 55%,#fff3e6);border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;width:320px;height:320px;border-radius:50%;background:rgba(79,70,229,.10);left:-120px;top:-160px}
+.hero:after{content:"";position:absolute;width:220px;height:220px;border-radius:50%;background:rgba(242,104,90,.10);right:-80px;bottom:-140px}
+.hero .wrap{position:relative;z-index:1}
+.eyebrow{font-size:.76rem;font-weight:800;letter-spacing:.12em;color:var(--brand);text-transform:uppercase}
+.hero h1{margin:10px 0 12px;font-size:clamp(1.8rem,4vw,3.3rem);line-height:1.15;font-weight:900;letter-spacing:-.02em;max-width:20ch}
+.hero p{margin:0;max-width:64ch;color:var(--muted)}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+.badge{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.82rem;font-weight:600;box-shadow:0 4px 12px rgba(30,35,60,.05)}
+
+/* ---------- stepper ---------- */
+.stepper{position:sticky;top:0;z-index:20;background:rgba(246,244,239,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 0}
+.stepper-inner{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.stepper-inner::-webkit-scrollbar{display:none}
+.chip{display:flex;align-items:center;gap:8px;white-space:nowrap;border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 14px;font-size:.85rem;font-weight:700;color:var(--muted);transition:.25s var(--ease)}
+.chip i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--paper);font-style:normal;font-size:.75rem;font-weight:800}
+.chip.active{color:#fff;background:var(--brand);border-color:var(--brand);box-shadow:0 8px 20px rgba(79,70,229,.28)}
+.chip.active i{background:rgba(255,255,255,.22);color:#fff}
+.chip.done{color:var(--teal);border-color:var(--mint);background:var(--teal-soft)}
+.chip.done i{background:var(--teal);color:#fff}
+
+/* ---------- layout ---------- */
+main{padding:30px 0 70px}
+.stage{display:none;animation:fade .45s var(--ease)}
+.stage.show{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+.card + .card{margin-top:18px}
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+h2{margin:0 0 6px;font-size:1.4rem;font-weight:800}
+h3{margin:0 0 4px;font-size:1.05rem;font-weight:800}
+.sub{color:var(--muted);margin:0 0 18px;font-size:.95rem}
+.field{display:flex;flex-direction:column;gap:7px}
+.field label{font-size:.86rem;font-weight:700;color:var(--muted)}
+.input{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:11px 14px;outline:none;width:100%;transition:.2s}
+.input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(79,70,229,.15);background:#fff}
+textarea.input{resize:vertical;min-height:84px}
+
+/* selectable pills */
+.pick{display:grid;gap:12px}
+.opt{border:1.5px solid var(--line);background:var(--surface);border-radius:18px;padding:16px;text-align:right;transition:.25s var(--ease);position:relative}
+.opt:hover{transform:translateY(-3px);border-color:#c9c6f5}
+.opt.sel{border-color:var(--brand);background:var(--brand-soft);box-shadow:0 10px 24px rgba(79,70,229,.14)}
+.opt .em{font-size:1.5rem;display:block;margin-bottom:6px}
+.opt strong{display:block;font-size:1rem}
+.opt span{color:var(--muted);font-size:.84rem}
+.opt .tick{position:absolute;top:12px;left:12px;width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;display:none;place-items:center;font-size:.72rem}
+.opt.sel .tick{display:grid}
+
+/* score rows */
+.srow{display:grid;grid-template-columns:1fr 130px;gap:12px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line)}
+.srow:last-child{border-bottom:0}
+.srow .name{font-weight:600}
+.srow .name small{display:block;color:var(--muted);font-weight:400}
+.scorewrap{display:flex;align-items:center;gap:10px}
+.scorenum{width:54px;text-align:center;font-weight:800}
+input[type=range]{accent-color:var(--brand);width:100%}
+
+/* buttons */
+.actions{display:flex;gap:12px;justify-content:space-between;margin-top:24px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:12px 22px;font-weight:800;transition:.2s var(--ease);display:inline-flex;align-items:center;gap:8px}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--brand);border-color:var(--brand);color:#fff;box-shadow:0 10px 24px rgba(79,70,229,.28)}
+.btn.primary:hover{background:#4338ca}
+.btn.ghost{background:transparent}
+.btn.small{padding:8px 14px;font-size:.84rem;border-radius:11px}
+.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none}
+
+/* dynamic rows */
+.drow{display:grid;grid-template-columns:1.2fr 1fr 1fr auto;gap:10px;align-items:center;margin-bottom:10px}
+.drow.exam{grid-template-columns:1fr 1fr auto}
+.icon-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;color:var(--coral);font-weight:800}
+.icon-btn:hover{background:var(--coral-soft)}
+
+/* category result */
+.result{border-radius:20px;padding:22px;display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.result .big{font-size:2.4rem}
+.result .rlabel{font-size:.78rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.result h3{margin:2px 0 6px;font-size:1.25rem}
+.meter{height:10px;border-radius:999px;background:rgba(0,0,0,.08);overflow:hidden;margin-top:10px;min-width:180px}
+.meter i{display:block;height:100%;border-radius:999px;background:currentColor}
+.cat-a{background:#e8f6f1;color:#0b6b5e}
+.cat-b{background:#eef0ff;color:#4338ca}
+.cat-c{background:#fff4e0;color:#a96b00}
+.cat-d{background:#ffece9;color:#b83b2c}
+
+/* plan */
+.plan-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.plan-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.day{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.day-head{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:var(--paper);border-bottom:1px solid var(--line);font-weight:800}
+.day-head .hrs{font-size:.78rem;color:var(--muted);font-weight:600}
+.block{display:flex;gap:12px;align-items:flex-start;padding:11px 16px;border-bottom:1px dashed var(--line);cursor:pointer;transition:.15s}
+.block:last-child{border-bottom:0}
+.block:hover{background:var(--brand-soft)}
+.block.done{opacity:.55}
+.block.done .b-sub{text-decoration:line-through}
+.block .time{font-size:.76rem;font-weight:700;color:var(--brand);background:var(--brand-soft);border-radius:9px;padding:4px 8px;white-space:nowrap}
+.block .b-sub{font-weight:700}
+.block .b-type{font-size:.76rem;color:var(--muted)}
+.block .chk{width:20px;height:20px;border-radius:6px;border:2px solid var(--line);margin-inline-start:auto;flex:0 0 auto;display:grid;place-items:center;color:#fff;font-size:.7rem;transition:.2s}
+.block.done .chk{background:var(--teal);border-color:var(--teal)}
+.classnote{background:var(--teal-soft);border:1px solid var(--mint);border-radius:14px;padding:10px 14px;font-size:.85rem;margin-top:10px}
+.examnote{background:var(--coral-soft);border:1px solid #ffd0c9;border-radius:14px;padding:10px 14px;font-size:.85rem;margin-top:10px}
+
+/* report */
+.report-hero{background:linear-gradient(135deg,#1b2030,#312e81);color:#fff;border-radius:var(--radius);padding:28px;position:relative;overflow:hidden}
+.report-hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;background:rgba(255,255,255,.07);left:-70px;bottom:-120px}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.kpi div{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:14px;text-align:center}
+.kpi b{display:block;font-size:1.5rem}
+.kpi span{font-size:.78rem;opacity:.8}
+.progressbar{height:12px;border-radius:999px;background:rgba(255,255,255,.16);overflow:hidden;margin-top:16px}
+.progressbar i{display:block;height:100%;background:linear-gradient(90deg,#34d399,#60a5fa);border-radius:999px;transition:width .5s var(--ease)}
+.logitem{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px dashed var(--line);font-size:.9rem}
+.logitem:last-child{border-bottom:0}
+
+/* roadmap */
+.roadmap{display:grid;gap:12px}
+.phase{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface)}
+.phase summary{padding:16px 18px;font-weight:800;cursor:pointer;display:flex;gap:12px;align-items:center;list-style:none}
+.phase summary::-webkit-details-marker{display:none}
+.phase summary .n{width:30px;height:30px;border-radius:10px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-weight:900;flex:0 0 auto}
+.phase[open] summary{border-bottom:1px solid var(--line)}
+.phase .body{padding:16px 18px;color:var(--muted);font-size:.92rem}
+.phase .body ul{margin:0;padding-inline-start:20px}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:2px 10px;margin:0 4px 4px 0}
+footer{padding:30px 0 50px;text-align:center;color:var(--muted);font-size:.85rem}
+
+@media(max-width:900px){.g3,.g4,.kpi{grid-template-columns:repeat(2,1fr)}.plan-grid{grid-template-columns:1fr}}
+@media(max-width:620px){.g2,.g3,.g4,.kpi{grid-template-columns:1fr}.drow{grid-template-columns:1fr 1fr}.drow .icon-btn{grid-column:1/-1;width:100%}.card{padding:18px}}
+@media print{.stepper,.actions,.hero,.btn{display:none!important}.stage{display:block!important}.card{box-shadow:none}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">سامانه مشاوره و برنامه‌ریزی · دهم، یازدهم، دوازدهم</div>
+    <h1>برنامه‌ی درسی که مخصوص خودِ تو ساخته می‌شود</h1>
+    <p>ریزنمراتت را بده، سامانه سطح و دسته‌ات را تشخیص می‌دهد؛ بعد با تمپلیت دلخواه، برنامه‌ی کلاس و امتحان، و چند سؤال شخصیت‌شناسی، یک برنامه‌ی هفتگی دقیق و هدف‌محور تحویل می‌گیری — همراه با نمونه‌سؤال و ارزیابی هفتگی.</p>
+    <div class="badges">
+      <span class="badge">🎯 دسته‌بندی خودکار</span>
+      <span class="badge">🧩 تمپلیت قابل انتخاب</span>
+      <span class="badge">🗓 برنامه‌ی هفتگی شخصی</span>
+      <span class="badge">📊 گزارش و ثبت عملکرد</span>
+    </div>
+  </div>
+</header>
+
+<nav class="stepper">
+  <div class="wrap stepper-inner" id="stepper"></div>
+</nav>
+
+<main class="wrap">
+
+  <!-- STEP 0: start -->
+  <section class="stage show" data-step="0">
+    <div class="card">
+      <h2>۱. بگو کی هستی</h2>
+      <p class="sub">پایه و رشته‌ات تعیین می‌کند چه درس‌هایی و چه سطحی برایت مناسب است.</p>
+      <div class="field" style="margin-bottom:16px">
+        <label>پایه‌ی تحصیلی</label>
+        <div class="pick g3" data-group="grade">
+          <button class="opt sel" data-val="10"><i class="tick">✓</i><span class="em">🌱</span><strong>دهم</strong><span>شروع مسیر، انتخاب رشته</span></button>
+          <button class="opt" data-val="11"><i class="tick">✓</i><span class="em">🚀</span><strong>یازدهم</strong><span>تثبیت پایه و روش مطالعه</span></button>
+          <button class="opt" data-val="12"><i class="tick">✓</i><span class="em">🏁</span><strong>دوازدهم</strong><span>کنکور و جمع‌بندی</span></button>
+        </div>
+      </div>
+      <div class="field">
+        <label>رشته</label>
+        <div class="pick g3" data-group="field">
+          <button class="opt sel" data-val="math"><i class="tick">✓</i><strong>ریاضی و فیزیک</strong><span>ریاضی، هندسه، فیزیک…</span></button>
+          <button class="opt" data-val="exp"><i class="tick">✓</i><strong>علوم تجربی</strong><span>زیست، شیمی، فیزیک…</span></button>
+          <button class="opt" data-val="human"><i class="tick">✓</i><strong>علوم انسانی</strong><span>ادبیات، عربی، تاریخ…</span></button>
+        </div>
+      </div>
+      <div class="actions">
+        <span></span>
+        <button class="btn primary" onclick="next()">مرحله‌ی بعد ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 1: transcript -->
+  <section class="stage" data-step="1">
+    <div class="card">
+      <h2>۲. ریزنمرات</h2>
+      <p class="sub">نمره‌ی هر درس را با اسلایدر تنظیم کن. سامانه میانگین، ضعیف‌ترین و قوی‌ترین درس را می‌سنجد و تو را در یک دسته قرار می‌دهد.</p>
+      <div id="subjects"></div>
+      <div id="categoryBox" style="margin-top:18px"></div>
+      <div class="actions">
+        <button class="btn ghost" onclick="go(0)">→ قبلی</button>
+        <button class="btn primary" onclick="next()">دیدن دسته‌بندی و ادامه ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 2: template -->
+  <section class="stage" data-step="2">
+    <div class="card">
+      <h2>۳. انتخاب تمپلیت برنامه</h2>
+      <p class="sub">هم ظاهر و حال‌وهوای برنامه، هم میزان ریز بودن جزئیات را انتخاب کن.</p>
+      <div class="field" style="margin-bottom:18px">
+        <label>تم برنامه</label>
+        <div class="pick g3" data-group="template">
+          <button class="opt" data-val="minimal"><i class="tick">✓</i><span class="em">⚪️</span><strong>مینیمال</strong><span>ساده، بدون شلوغی، تمرکز روی انجام کار</span></button>
+          <button class="opt sel" data-val="focus"><i class="tick">✓</i><span class="em">🎯</span><strong>تمرکز عمیق</strong><span>بلوک‌های طولانی، مناسب مطالعه‌ی سنگین</span></button>
+          <button class="opt" data-val="energy"><i class="tick">✓</i><span class="em">⚡️</span><strong>پرانرژی</strong><span>تنوع، رنگ، پاداش و انگیزه‌ی روزانه</span></button>
+        </div>
+      </div>
+      <div class="field" style="margin-bottom:18px">
+        <label>سطح جزئیات</label>
+        <div class="pick g3" data-group="detail">
+          <button class="opt" data-val="low"><i class="tick">✓</i><strong>کلی</strong><span>فقط عنوان درس و ساعت</span></button>
+          <button class="opt sel" data-val="mid"><i class="tick">✓</i><strong>متوسط</strong><span>درس + نوع فعالیت (مطالعه/تست/مرور)</span></button>
+          <button class="opt" data-val="high"><i class="tick">✓</i><strong>دقیق</strong><span>فصل، تعداد تست، استراحت، بازه‌ی زمانی</span></button>
+        </div>
+      </div>
+      <div class="field">
+        <label>ساعت مطالعه‌ی هفتگی (خارج از مدرسه): <b id="hoursOut">۲۰</b> ساعت</label>
+        <input type="range" min="6" max="45" value="20" id="hours" oninput="setHours(this.value)">
+      </div>
+      <div class="actions">
+        <button class="btn ghost" onclick="go(1)">→ قبلی</button>
+        <button class="btn primary" onclick="next()">مرحله‌ی بعد ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 3: weekly schedule -->
+  <section class="stage" data-step="3">
+    <div class="card">
+      <h2>۴. برنامه‌ی کلاس و امتحان‌ها</h2>
+      <p class="sub">کلاس‌های مدرسه/آموزشگاه و امتحان‌های هفته را وارد کن تا در برنامه لحاظ شوند.</p>
+      <h3>🗓 کلاس‌ها</h3>
+      <div id="classRows" style="margin:10px 0 6px"></div>
+      <button class="btn small" onclick="addClass()">+ افزودن کلاس</button>
+
+      <h3 style="margin-top:26px">📝 امتحان‌ها و آزمون‌ها</h3>
+      <div id="examRows" style="margin:10px 0 6px"></div>
+      <button class="btn small" onclick="addExam()">+ افزودن امتحان</button>
+
+      <div class="actions">
+        <button class="btn ghost" onclick="go(2)">→ قبلی</button>
+        <button class="btn primary" onclick="next()">مرحله‌ی بعد ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 4: personality -->
+  <section class="stage" data-step="4">
+    <div class="card">
+      <h2>۵. شخصیت، روحیات و هدف</h2>
+      <p class="sub">با این پاسخ‌ها، برنامه‌ات با ریتم و انگیزه‌ی خودت هماهنگ می‌شود.</p>
+      <div class="grid g2">
+        <div class="field">
+          <label>⏰ اوج انرژی تو کِی است؟</label>
+          <select class="input" id="peak">
+            <option value="morning">صبح زود</option>
+            <option value="afternoon">بعدازظهر</option>
+            <option value="night">شب / نیمه‌شب</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>👥 سبک مطالعه</label>
+          <select class="input" id="style">
+            <option value="solo">تنها و متمرکز</option>
+            <option value="group">گروهی و پرسش‌وپاسخ</option>
+            <option value="mixed">ترکیبی</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>⏳ طول هر جلسه‌ی مطالعه</label>
+          <select class="input" id="session">
+            <option value="25">۲۵ دقیقه (پومودورو)</option>
+            <option value="45">۴۵ دقیقه</option>
+            <option value="60">۶۰ دقیقه</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>🔥 انگیزه‌ی اصلی</label>
+          <select class="input" id="motivation">
+            <option value="rank">رتبه و قبولی</option>
+            <option value="learn">یادگیری عمیق</option>
+            <option value="gpa">معدل و کارنامه</option>
+            <option value="family">خواسته‌ی خانواده</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>😮‍💨 سطح استرس فعلی: <b id="stressOut">۳</b> از ۵</label>
+          <input type="range" min="1" max="5" value="3" id="stress" oninput="document.getElementById('stressOut').textContent=fa(this.value)">
+        </div>
+        <div class="field">
+          <label>😴 میانگین خواب شبانه: <b id="sleepOut">۷</b> ساعت</label>
+          <input type="range" min="4" max="10" value="7" id="sleep" oninput="document.getElementById('sleepOut').textContent=fa(this.value)">
+        </div>
+      </div>
+      <div class="field" style="margin-top:14px">
+        <label>🎯 هدف این ترم / سال</label>
+        <textarea class="input" id="goalText" placeholder="مثلاً: معدل بالای ۱۸ و تسلط روی فصل‌های ضعیف ریاضی"></textarea>
+      </div>
+      <div class="actions">
+        <button class="btn ghost" onclick="go(3)">→ قبلی</button>
+        <button class="btn primary" onclick="next()">ساخت برنامه‌ی من ←</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 5: generated plan + report -->
+  <section class="stage" data-step="5">
+    <div class="card">
+      <div class="plan-head">
+        <div>
+          <h2>برنامه‌ی هفتگی شخصی تو</h2>
+          <p class="sub" style="margin:0" id="planSummary"></p>
+        </div>
+        <div>
+          <button class="btn small" onclick="go(4)">✎ ویرایش پاسخ‌ها</button>
+          <button class="btn small" onclick="window.print()">🖨 چاپ / PDF</button>
+        </div>
+      </div>
+      <div class="grid g2" style="margin-bottom:18px">
+        <div class="card" style="box-shadow:none;padding:16px">
+          <h3>🎯 هدف هفتگی</h3>
+          <p style="margin:6px 0 0;color:var(--muted)" id="weeklyGoal"></p>
+        </div>
+        <div class="card" style="box-shadow:none;padding:16px">
+          <h3>📚 نمونه‌سؤال و ارزیابی</h3>
+          <div id="quiz"></div>
+        </div>
+      </div>
+      <div id="classExams"></div>
+      <div class="plan-grid" id="planGrid" style="margin-top:16px"></div>
+      <div class="actions">
+        <button class="btn ghost" onclick="go(4)">→ قبلی</button>
+        <button class="btn primary" onclick="finishWeek()">پایان هفته و دیدن گزارش 📊</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STEP 6: report -->
+  <section class="stage" data-step="6">
+    <div class="report-hero">
+      <div class="eyebrow" style="color:#a5b4fc">گزارش عملکرد</div>
+      <h2 style="color:#fff;margin:8px 0 4px" id="reportTitle">هفته‌ی خوبی بود!</h2>
+      <p style="margin:0;color:rgba(255,255,255,.75)" id="reportSub"></p>
+      <div class="kpi">
+        <div><b id="kpiDone">۰</b><span>بلوک انجام‌شده</span></div>
+        <div><b id="kpiPct">۰٪</b><span>درصد تحقق</span></div>
+        <div><b id="kpiHours">۰</b><span>ساعت مطالعه</span></div>
+        <div><b id="kpiGoal">—</b><span>وضعیت هدف</span></div>
+      </div>
+      <div class="progressbar"><i id="reportBar" style="width:0%"></i></div>
+    </div>
+
+    <div class="card">
+      <h3>📝 ثبت عملکرد و یادداشت هفته</h3>
+      <p class="sub">هر هفته اینجا ثبت کن تا روند پیشرفتت را ببینی.</p>
+      <div class="grid g3">
+        <div class="field">
+          <label>ساعت مطالعه‌ی واقعی این هفته</label>
+          <input class="input" type="number" id="logHours" min="0" max="80" value="0">
+        </div>
+        <div class="field">
+          <label>میزان رضایت از خودت (۱ تا ۵)</label>
+          <input class="input" type="number" id="logMood" min="1" max="5" value="4">
+        </div>
+        <div class="field">
+          <label>تمرکز روی کدام درس؟</label>
+          <input class="input" id="logFocus" placeholder="مثلاً ریاضی">
+        </div>
+      </div>
+      <div class="field" style="margin-top:12px">
+        <label>یادداشت / مشکلی که داشتی</label>
+        <textarea class="input" id="logNote" placeholder="این هفته کجا عقب افتادی؟ چه چیزی خوب پیش رفت؟"></textarea>
+      </div>
+      <div class="actions" style="justify-content:flex-start">
+        <button class="btn primary" onclick="saveLog()">ثبت گزارش</button>
+        <button class="btn ghost" onclick="go(5)">→ بازگشت به برنامه</button>
+        <button class="btn ghost" onclick="resetAll()">شروع دوباره</button>
+      </div>
+      <div id="history" style="margin-top:18px"></div>
+    </div>
+  </section>
+
+  <!-- ROADMAP -->
+  <section class="card" style="margin-top:22px">
+    <h2>🗺 نقشه‌ی راه ساخت نسخه‌ی واقعی</h2>
+    <p class="sub">این صفحه یک دمو است. برای تبدیلش به محصول واقعی، این فازها را به ترتیب جلو ببر.</p>
+    <div class="roadmap" id="roadmap"></div>
+  </section>
+
+</main>
+
+<footer>ساخته‌شده برای دمو · داده‌ها فقط در مرورگر خودت ذخیره می‌شوند</footer>
+
+<script>
+/* ============ helpers ============ */
+const fa = n => String(n).replace(/\d/g, d => '۰۱۲۳۴۵۶۷۸۹'[d]);
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const DAYS = ['شنبه','یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه'];
+const STEPS = ['شروع','ریزنمرات','تمپلیت','کلاس و امتحان','شخصیت و هدف','برنامه و گزارش'];
+
+const SUBJECTS = {
+  math:  [['ریاضی','حساب و مثلثات'],['هندسه','هندسه ۱/۲'],['گسسته','ریاضی گسسته'],['فیزیک','حرکت و نیرو'],['شیمی','استوکیومتری'],['ادبیات','فارسی'],['عربی','قواعد'],['دینی','دین و زندگی'],['زبان','انگلیسی']],
+  exp:   [['زیست','سلول تا بدن'],['ریاضی','حساب'],['فیزیک','حرکت'],['شیمی','استوکیومتری'],['ادبیات','فارسی'],['عربی','قواعد'],['دینی','دین و زندگی'],['زمین','زمین‌شناسی'],['زبان','انگلیسی']],
+  human: [['ادبیات','تخصصی'],['عربی','تخصصی'],['ریاضی و آمار','تخصصی'],['تاریخ','ایران و جهان'],['جغرافیا','تخصصی'],['جامعه‌شناسی','تخصصی'],['اقتصاد','تخصصی'],['فلسفه و منطق','تخصصی'],['دینی','دین و زندگی'],['زبان','انگلیسی']]
+};
+
+const QUIZ = {
+  'ریاضی':['اگر f(x)=۲x+۳ باشد، f(۴) چند است؟','مشتق تابع x² در نقطه‌ی x=۳ چقدر است؟'],
+  'هندسه':['زاویه‌ی داخلی یک شش‌ضلعی منتظم چند درجه است؟','مساحت مثلث با اضلاع ۳ و ۴ و زاویه‌ی ۹۰ درجه؟'],
+  'فیزیک':['شتاب جسمی که سرعتش در ۴ ثانیه از ۰ به ۲۰ m/s می‌رسد؟','یکای اندازه‌گیری نیرو در SI چیست؟'],
+  'شیمی':['تعداد مول در ۳۶ گرم آب چند است؟','عدد اکسایش گوگرد در H₂SO₄ چند است؟'],
+  'زیست':['اندامک مسئول تولید انرژی سلول کدام است؟','در میتوز تعداد کروموزوم‌ها چگونه تغییر می‌کند؟'],
+  'ادبیات':['آرایه‌ی «دست روزگار» چیست؟','وزن شعر «بنی‌آدم» کدام است؟'],
+  'عربی':['ترجمه‌ی «اِنَّ اللهَ غَفورٌ رحیمٌ» چیست؟','اعراب کلمه‌ی «الطالبُ» چیست؟'],
+  'دینی':['شرط اصلی صحت نماز چیست؟','تفاوت وحی و الهام را بنویس.'],
+  'زبان':['Choose the correct form: She ___ (go) to school every day.','Rewrite in passive: They built the bridge.'],
+  'گسسته':['تعداد گراف‌های کامل روی ۴ راس چند است؟','متمم گراف مسیر P₄ چیست؟'],
+  'زمین':['علت ایجاد زلزله چیست؟','لایه‌های زمین را نام ببر.'],
+  'تاریخ':['علت اصلی انقلاب مشروطه چه بود؟','معاهده‌ی ترکمانچای در زمان کدام شاه بسته شد؟'],
+  'جغرافیا':['عوامل اقلیمی ایران را نام ببر.','تفاوت آب‌وهوای مدیترانه‌ای و بیابانی؟'],
+  'جامعه‌شناسی':['تفاوت جامعه‌ی سنتی و مدرن چیست؟','نهاد اجتماعی را تعریف کن.'],
+  'اقتصاد':['تفاوت اقتصاد خرد و کلان چیست؟','قانون تقاضا را توضیح بده.'],
+  'فلسفه و منطق':['تفاوت تصور و تصدیق چیست؟','قضیه‌ی شرطی را تعریف کن.'],
+  'ریاضی و آمار':['میانگین اعداد ۲، ۴، ۶ و ۸ چند است؟','احتمال آمدن عدد زوج در تاس چقدر است؟']
+};
+
+const TEMPLATE_INFO = {
+  minimal:{name:'مینیمال', emoji:'⚪️'},
+  focus:{name:'تمرکز عمیق', emoji:'🎯'},
+  energy:{name:'پرانرژی', emoji:'⚡️'}
+};
+const DETAIL_INFO = {low:'کلی', mid:'متوسط', high:'دقیق'};
+
+/* ============ state ============ */
+let state = load() || {
+  step:0, grade:'10', field:'math', scores:{}, template:'focus', detail:'mid', hours:20,
+  classes:[{day:0,start:'08:00',end:'12:00',title:'مدرسه'}],
+  exams:[{day:4,subject:'ریاضی',title:'آزمون ریاضی'}],
+  peak:'morning', style:'solo', session:25, motivation:'rank', stress:3, sleep:7, goalText:'',
+  plan:null, logs:[]
+};
+
+function save(){ try{ localStorage.setItem('far-plan-v1', JSON.stringify(state)); }catch(e){} }
+function load(){ try{ return JSON.parse(localStorage.getItem('far-plan-v1')); }catch(e){ return null; } }
+
+/* ============ stepper ============ */
+function renderStepper(){
+  $('#stepper').innerHTML = STEPS.map((s,i)=>`
+    <button class="chip ${i===state.step?'active':''} ${i<state.step?'done':''}" onclick="go(${i})">
+      <i>${i<state.step?'✓':fa(i+1)}</i>${s}
+    </button>`).join('');
+}
+function go(n){ state.step = n; save(); render(); window.scrollTo({top:0,behavior:'smooth'}); }
+function next(){ go(Math.min(state.step+1, STEPS.length-1)); }
+
+/* ============ option groups ============ */
+function bindGroups(){
+  $$('.pick').forEach(g=>{
+    const key = g.dataset.group;
+    g.querySelectorAll('.opt').forEach(btn=>{
+      btn.classList.toggle('sel', state[key] === btn.dataset.val);
+      btn.onclick = ()=>{ state[key] = btn.dataset.val; save();
+        g.querySelectorAll('.opt').forEach(b=>b.classList.toggle('sel', b===btn));
+        if(key==='field'){ state.scores={}; buildSubjects(); }
+      };
+    });
+  });
+}
+
+/* ============ subjects / transcript ============ */
+function buildSubjects(){
+  const list = SUBJECTS[state.field];
+  $('#subjects').innerHTML = list.map(([name,desc])=>{
+    const v = state.scores[name] ?? 15;
+    state.scores[name] = v;
+    return `<div class="srow">
+      <div class="name">${name}<small>${desc}</small></div>
+      <div class="scorewrap">
+        <input type="range" min="0" max="20" step="0.25" value="${v}" oninput="setScore('${name}', this.value, this)">
+        <span class="scorenum" id="sc-${name}">${fa(v)}</span>
+      </div>
+    </div>`;
+  }).join('');
+  renderCategory();
+}
+function setScore(name,val,el){
+  state.scores[name] = parseFloat(val);
+  document.getElementById('sc-'+name).textContent = fa(val);
+  save(); renderCategory();
+}
+function category(){
+  const vals = Object.values(state.scores);
+  if(!vals.length) return null;
+  const avg = vals.reduce((a,b)=>a+b,0)/vals.length;
+  const sorted = Object.entries(state.scores).sort((a,b)=>a[1]-b[1]);
+  const weak = sorted.slice(0,3).map(x=>x[0]);
+  const strong = sorted.slice(-2).map(x=>x[0]);
+  let key,label,emoji,desc;
+  if(avg>=17){key='a';label='پیشرو';emoji='🏆';desc='پایه‌ات قوی است؛ وقتشه سراغ تست‌های سطح بالا و جمع‌بندی بروی.'}
+  else if(avg>=14){key='b';label='متعادل';emoji='⚖️';desc='پایه‌ات خوب است؛ با تمرکز روی درس‌های ضعیف سریع بالا می‌روی.'}
+  else if(avg>=10){key='c';label='در حال رشد';emoji='🌿';desc='نیاز به تثبیت پایه داری؛ برنامه با مرور و تمرین پایه شروع می‌شود.'}
+  else {key='d';label='نیازمند تقویت پایه';emoji='🧱';desc='از مفاهیم پایه شروع می‌کنیم و آهسته ولی پیوسته جلو می‌رویم.'}
+  return {avg, weak, strong, key, label, emoji, desc};
+}
+function renderCategory(){
+  const c = category(); const box = $('#categoryBox'); if(!box) return;
+  if(!c){ box.innerHTML=''; return; }
+  const pct = Math.round(c.avg/20*100);
+  box.innerHTML = `<div class="result cat-${c.key}">
+    <span class="big">${c.emoji}</span>
+    <div style="flex:1;min-width:220px">
+      <div class="rlabel">دسته‌ی تشخیص‌داده‌شده</div>
+      <h3>${c.label} · میانگین ${fa(c.avg.toFixed(2))}</h3>
+      <div style="font-size:.9rem">${c.desc}</div>
+      <div class="meter"><i style="width:${pct}%"></i></div>
+    </div>
+    <div style="font-size:.85rem;min-width:200px">
+      <div>🎯 تمرکز اصلی: <b>${c.weak.join('، ')}</b></div>
+      <div>💪 نقاط قوت: <b>${c.strong.join('، ')}</b></div>
+    </div>
+  </div>`;
+}
+
+/* ============ classes & exams ============ */
+function dayOptions(sel){ return DAYS.map((d,i)=>`<option value="${i}" ${i===sel?'selected':''}>${d}</option>`).join(''); }
+function renderClasses(){
+  $('#classRows').innerHTML = state.classes.map((c,i)=>`
+    <div class="drow">
+      <select class="input" onchange="upd('classes',${i},'title',this.value)">${['مدرسه','آموزشگاه','کلاس خصوصی','زبان','المپیاد'].map(t=>`<option ${c.title===t?'selected':''}>${t}</option>`).join('')}</select>
+      <select class="input" onchange="upd('classes',${i},'day',+this.value)">${dayOptions(c.day)}</select>
+      <div style="display:flex;gap:6px"><input class="input" type="time" value="${c.start}" onchange="upd('classes',${i},'start',this.value)"><input class="input" type="time" value="${c.end}" onchange="upd('classes',${i},'end',this.value)"></div>
+      <button class="icon-btn" onclick="del('classes',${i})">✕</button>
+    </div>`).join('');
+}
+function renderExams(){
+  $('#examRows').innerHTML = state.exams.map((e,i)=>`
+    <div class="drow exam">
+      <input class="input" value="${e.subject}" placeholder="درس" onchange="upd('exams',${i},'subject',this.value)">
+      <select class="input" onchange="upd('exams',${i},'day',+this.value)">${dayOptions(e.day)}</select>
+      <button class="icon-btn" onclick="del('exams',${i})">✕</button>
+    </div>`).join('');
+}
+function addClass(){ state.classes.push({day:0,start:'08:00',end:'12:00',title:'مدرسه'}); save(); renderClasses(); }
+function addExam(){ state.exams.push({day:4,subject:'ریاضی',title:'آزمون'}); save(); renderExams(); }
+function upd(kind,i,key,val){ state[kind][i][key]=val; save(); }
+function del(kind,i){ state[kind].splice(i,1); save(); kind==='classes'?renderClasses():renderExams(); }
+
+/* ============ plan generation ============ */
+function minutes(t){ const [h,m]=t.split(':').map(Number); return h*60+m; }
+function fmt(min){ min=((min%1440)+1440)%1440; const h=Math.floor(min/60), m=min%60; return fa(String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')); }
+
+function buildPlan(){
+  const c = category() || {weak:[],strong:[]};
+  const weak = c.weak.length ? c.weak : Object.keys(state.scores).slice(0,3);
+  const sess = +state.session;
+  const hours = +state.hours;
+  const startBase = state.peak==='morning'?8*60 : state.peak==='afternoon'?14*60 : 17*60;
+
+  const weights = {};
+  weak.forEach((s,i)=> weights[s] = (weak.length-i)+1);
+  let queue = [];
+  weak.forEach(s=>{ for(let i=0;i<weights[s];i++) queue.push(s); });
+  const otherSubjects = Object.keys(state.scores).filter(s=>!weak.includes(s));
+  otherSubjects.forEach((s,i)=>{ if(i<2) queue.push(s); });
+  if(!queue.length) queue = ['ریاضی'];
+
+  // friday (index 6) lighter, thursday (index 5) exam review
+  const dayShare = [1,1,1,1,1,.7,.4];
+  const totalShare = dayShare.reduce((a,b)=>a+b,0);
+  let qi = 0;
+  const plan = DAYS.map((name, d)=>{
+    const target = Math.round(hours * dayShare[d] / totalShare * 60 / 15) * 15;
+    const blocks = [];
+    let t = startBase;
+    let left = target;
+    while(left >= sess){
+      const subj = queue[qi % queue.length]; qi++;
+      const kind = d===5 ? 'جمع‌بندی و تست' : (d%3===0 ? 'تست و تمرین' : 'مطالعه‌ی عمیق');
+      blocks.push({subject:subj, type:kind, start:t, end:t+sess, mins:sess, done:false});
+      t += sess + (sess>=45?10:5);
+      left -= sess;
+    }
+    return {name, blocks};
+  });
+  return {plan, weak, strong:c.strong};
+}
+
+function renderPlan(){
+  const built = buildPlan();
+  state.plan = built; save();
+  const c = category() || {label:'—', avg:0};
+  const t = TEMPLATE_INFO[state.template];
+  $('#planSummary').textContent = `پایه‌ی ${fa(state.grade)} · ${c.label} · تم ${t.emoji} ${t.name} · جزئیات ${DETAIL_INFO[state.detail]} · ${fa(state.hours)} ساعت در هفته`;
+
+  // weekly goal
+  const weakTxt = built.weak.join('، ');
+  const goal = state.goalText?.trim() || `تسلط بر ${weakTxt} و رساندن میانگین به بالای ${fa(Math.min(20,(c.avg+1.5)).toFixed(1))}`;
+  $('#weeklyGoal').innerHTML = `<b>${goal}</b><br><span style="font-size:.85rem">معیار موفقیت: انجام حداقل ۸۰٪ بلوک‌ها و حل ${fa(40)} تست از درس‌های هدف.</span>`;
+
+  // quiz
+  $('#quiz').innerHTML = built.weak.slice(0,2).map(s=>{
+    const q = (QUIZ[s]||['یک نمونه‌سؤال برای این درس در نسخه‌ی واقعی اضافه می‌شود.'])[0];
+    return `<div style="margin-bottom:8px">▪️ <b>${s}:</b> ${q}</div>`;
+  }).join('');
+
+  // class/exam notes
+  let notes='';
+  if(state.classes.length) notes += `<div class="classnote">🗓 کلاس‌ها: ${state.classes.map(x=>`${x.title} (${DAYS[x.day]} ${fa(x.start)}–${fa(x.end)})`).join(' · ')}</div>`;
+  if(state.exams.length) notes += `<div class="examnote">📝 امتحان‌ها: ${state.exams.map(x=>`${x.subject} (${DAYS[x.day]})`).join(' · ')}</div>`;
+  $('#classExams').innerHTML = notes;
+
+  // plan grid
+  $('#planGrid').innerHTML = built.plan.map((d,di)=>{
+    const total = d.blocks.reduce((a,b)=>a+b.mins,0);
+    return `<div class="day">
+      <div class="day-head"><span>${d.name}</span><span class="hrs">${fa((total/60).toFixed(1))} ساعت</span></div>
+      ${d.blocks.length? d.blocks.map((b,bi)=>`
+        <div class="block ${b.done?'done':''}" onclick="toggleBlock(${di},${bi})">
+          <span class="time">${fmt(b.start)}–${fmt(b.end)}</span>
+          <div><div class="b-sub">${b.subject}</div><div class="b-type">${state.detail==='low'?'مطالعه':b.type}</div></div>
+          <span class="chk">✓</span>
+        </div>`).join('') : `<div class="block" style="cursor:default;color:var(--muted)">استراحت و جبران خواب 😴</div>`}
+    </div>`;
+  }).join('');
+}
+function toggleBlock(di,bi){ const b=state.plan.plan[di].blocks[bi]; b.done=!b.done; save(); renderPlan(); }
+
+/* ============ report ============ */
+function finishWeek(){
+  go(6);
+  renderReport();
+}
+function renderReport(){
+  const blocks = state.plan ? state.plan.plan.flatMap(d=>d.blocks) : [];
+  const done = blocks.filter(b=>b.done).length;
+  const pct = blocks.length? Math.round(done/blocks.length*100):0;
+  const hoursDone = blocks.filter(b=>b.done).reduce((a,b)=>a+b.mins,0)/60;
+  const c = category()||{label:'—'};
+  $('#reportTitle').textContent = pct>=80?'فوق‌العاده بود! 🎉' : pct>=50?'خوب بود، ادامه بده 💪' : 'شروع تازه، قدم به قدم 🌱';
+  $('#reportSub').textContent = `دسته‌ی ${c.label} · تم ${TEMPLATE_INFO[state.template].name}`;
+  $('#kpiDone').textContent = fa(done);
+  $('#kpiPct').textContent = fa(pct)+'٪';
+  $('#kpiHours').textContent = fa(hoursDone.toFixed(1));
+  $('#kpiGoal').textContent = pct>=80?'محقق':pct>=50?'نزدیک':'نیاز به تلاش';
+  $('#reportBar').style.width = pct+'%';
+  $('#logHours').value = Math.round(hoursDone);
+  renderHistory();
+}
+function saveLog(){
+  state.logs.unshift({
+    date:new Date().toLocaleDateString('fa-IR'),
+    done:($('#kpiDone').textContent),
+    pct:$('#kpiPct').textContent,
+    hours:fa($('#logHours').value),
+    mood:fa($('#logMood').value),
+    focus:$('#logFocus').value || '—',
+    note:$('#logNote').value || ''
+  });
+  state.logs = state.logs.slice(0,8);
+  save(); $('#logNote').value=''; renderHistory();
+}
+function renderHistory(){
+  const h = state.logs;
+  $('#history').innerHTML = h.length
+    ? `<h3>📚 تاریخچه‌ی هفتگی</h3>` + h.map(l=>`<div class="logitem">
+        <div><b>${l.date}</b> · تمرکز: ${l.focus}<div style="color:var(--muted);font-size:.82rem">${l.note||'—'}</div></div>
+        <div style="text-align:left;white-space:nowrap">تحقق ${l.pct}<br><span style="font-size:.8rem;color:var(--muted)">${l.hours} ساعت · رضایت ${l.mood}/۵</span></div>
+      </div>`).join('')
+    : `<p class="sub" style="margin:0">هنوز گزارشی ثبت نشده است.</p>`;
+}
+function resetAll(){ localStorage.removeItem('far-plan-v1'); location.reload(); }
+
+/* ============ roadmap ============ */
+const ROADMAP = [
+  ['فاز ۰ — اعتبارسنجی',['با ۵ تا ۱۰ دانش‌آموز واقعی صحبت کن و درد اصلی‌شان را پیدا کن.','مشخص کن MVP دقیقاً کدام قابلیت‌ها را دارد (پیشنهاد: فقط ریزنمرات + تولید برنامه‌ی هفتگی).'],['مصاحبه','MVP']],
+  ['فاز ۱ — فرانت‌اند',['همین صفحه را به یک اپ React/Next.js تبدیل کن.','کامپوننت‌ها: Stepper، فرم ریزنمرات، انتخاب تمپلیت، جدول برنامه، گزارش.','فونت وزیرمتن، RTL، طراحی موبایل‌فرست.'],['Next.js','Tailwind','RTL']],
+  ['فاز ۲ — بک‌اند و دیتابیس',['ثبت‌نام و ورود (ایمیل/شماره موبایل + OTP).','ذخیره‌ی پروفایل، نمرات، برنامه‌ها و گزارش‌ها در دیتابیس.','API برای تولید و ذخیره‌ی برنامه.'],['Node/NestJS','PostgreSQL','Prisma']],
+  ['فاز ۳ — موتور برنامه‌ریزی',['الگوریتم دسته‌بندی بر اساس میانگین و وزن درس‌ها.','تولید برنامه بر اساس ساعت آزاد، کلاس‌ها، امتحان‌ها و ریتم انرژی.','نسخه‌ی اول را قانون‌محور (Rule-based) بساز، بعد هوشمندش کن.'],['Rule engine','امتیازدهی','بهینه‌سازی']],
+  ['فاز ۴ — محتوا و هوش مصنوعی',['بانک نمونه‌سؤال برای هر پایه و درس.','استفاده از LLM برای تولید توضیح، تست و گزارش هفتگی.','شخصی‌سازی بر اساس روحیات و هدف.'],['LLM API','بانک سؤال','شخصی‌سازی']],
+  ['فاز ۵ — گزارش و گیمیفیکیشن',['داشبورد پیشرفت، نمودار هفتگی و streak.','یادآور پیامکی/نوتیفیکیشن برای کلاس و امتحان.','پاداش، سطح و رقابت دوستانه.'],['Chart','Push/SMS','Gamification']],
+  ['فاز ۶ — انتشار و رشد',['نسخه‌ی بتا برای دبیرستان‌ها و آموزشگاه‌ها.','مدل درآمد: اشتراک ماهانه / پلن مدرسه.','بازخورد بگیر و هر دو هفته یک نسخه منتشر کن.'],['Deploy','اشتراک','بازخورد']]
+];
+function renderRoadmap(){
+  $('#roadmap').innerHTML = ROADMAP.map(([title,items,tags],idx)=>`
+    <details class="phase"><summary><span class="n">${fa(idx+1)}</span>${title}</summary>
+      <div class="body"><ul>${items.map(i=>`<li>${i}</li>`).join('')}</ul>
+      <div style="margin-top:10px">${tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>
+    </details>`).join('');
+}
+
+/* ============ render ============ */
+function setHours(v){ state.hours=+v; $('#hoursOut').textContent=fa(v); save(); }
+function render(){
+  renderStepper();
+  $$('.stage').forEach(s=>s.classList.toggle('show', +s.dataset.step===state.step));
+  bindGroups();
+  if(state.step===1){ buildSubjects(); }
+  if(state.step===3){ renderClasses(); renderExams(); }
+  if(state.step===5){ renderPlan(); }
+  if(state.step===6){ renderReport(); }
+}
+renderRoadmap();
+render();
+</script>
+</body>
+</html>

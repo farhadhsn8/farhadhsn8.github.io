@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Farhad Hosseini</title>
+    <title>فرهاد حسینی</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <style>
         * {
@@ -13,9 +17,9 @@
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            color: #222;
+            font-family: Vazirmatn, Tahoma, sans-serif;
+            background: #f6f4ef;
+            color: #1b2030;
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -26,37 +30,70 @@
             text-align: center;
             background: white;
             padding: 60px 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            max-width: 600px;
+            border-radius: 24px;
+            box-shadow: 0 18px 44px rgba(30, 35, 60, 0.10);
+            max-width: 640px;
             width: 90%;
         }
 
         h1 {
-            font-size: 48px;
+            font-size: 42px;
+            font-weight: 800;
             margin: 0 0 15px;
         }
 
         p {
-            font-size: 20px;
-            color: #666;
+            font-size: 19px;
+            color: #6b7280;
             margin-bottom: 35px;
+            line-height: 1.8;
         }
 
-        .grammar-link {
-            display: inline-block;
-            padding: 14px 28px;
-            background: #222;
-            color: white;
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            align-items: stretch;
+        }
+
+        .link {
+            display: block;
+            padding: 16px 28px;
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 14px;
             font-size: 18px;
+            font-weight: 700;
             transition: 0.2s;
         }
 
-        .grammar-link:hover {
-            background: #444;
+        .link.primary {
+            background: #4f46e5;
+            color: white;
+            box-shadow: 0 10px 24px rgba(79, 70, 229, 0.28);
+        }
+
+        .link.primary:hover {
+            background: #4338ca;
             transform: translateY(-2px);
+        }
+
+        .link.secondary {
+            background: #f6f4ef;
+            color: #1b2030;
+            border: 1px solid #e8e4da;
+        }
+
+        .link.secondary:hover {
+            background: #eef0ff;
+            transform: translateY(-2px);
+        }
+
+        .link small {
+            display: block;
+            font-size: 13px;
+            font-weight: 400;
+            opacity: 0.75;
+            margin-top: 4px;
         }
 
         footer {
@@ -71,18 +108,25 @@
 
     <main class="container">
 
-        <h1>Hi, I'm Farhad 👋</h1>
+        <h1>سلام، من فرهاد هستم 👋</h1>
 
         <p>
-            Welcome to my website.
+            به وب‌سایت من خوش آمدید.
         </p>
 
-        <a href="grammar.html" class="grammar-link">
-            Learn Grammar
-        </a>
+        <div class="links">
+            <a href="planner.html" class="link primary">
+                مشاور و برنامه‌ریز درسی (دهم تا دوازدهم)
+                <small>ریزنمرات، دسته‌بندی، برنامه‌ی هفتگی شخصی، نمونه‌سؤال و گزارش</small>
+            </a>
+            <a href="grammar.html" class="link secondary">
+                جزوه‌ی تعاملی چالش گرامر ۳۰ روزه
+                <small>یادگیری گرامر انگلیسی قدم‌به‌قدم</small>
+            </a>
+        </div>
 
         <footer>
-            © 2026 Farhad Hosseini
+            © ۲۰۲۶ فرهاد حسینی
         </footer>
 
     </main>
