@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<!-- skill:chrome -->
+<style>
+/* Credit line — bottom-right */
+.design-ui-credit {
+  position: fixed;
+  bottom: 12px;
+  right: 12px;
+  font: 11px/1 system-ui, sans-serif;
+  color: rgba(128,128,128,0.5);
+  pointer-events: none;
+  z-index: 2147483647;
+  transition: opacity 0.4s ease;
+  user-select: none;
+  letter-spacing: 0.02em;
+}
+
+/* Hide chrome on touch devices */
+@media (hover: none) {
+  .design-ui-credit { display: none; }
+}
+
+/* Print fixes */
+@media print {
+  * {
+    transition: none !important;
+    animation: none !important;
+    box-shadow: none !important;
+  }
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .design-ui-credit { display: none !important; }
+}
+
+</style>
+<script>
+(function () {
+    // Design-ui pages are single compositions, so the whole body is editable.
+    function markEditable() {
+        document.body.classList.add('artifact-editable');
+    }
+
+    // Credit badge with idle-fade. Hover devices only.
+    function initChromeUI() {
+        if (!matchMedia('(hover: hover)').matches) return;
+
+        var credit = document.createElement('div');
+        credit.className = 'design-ui-credit';
+        credit.setAttribute('aria-hidden', 'true');
+        credit.innerHTML = '\u{1F49C} by ClickUp Brain';
+        document.body.appendChild(credit);
+
+        var timer = null;
+        var fade = function (out) { credit.style.opacity = out ? '0' : ''; };
+        fade(true);
+        var show = function () {
+            fade(false);
+            clearTimeout(timer);
+            timer = setTimeout(function () { fade(true); }, 3000);
+        };
+        document.addEventListener('mousemove', show);
+        show();
+    }
+
+    function init() {
+        markEditable();
+        initChromeUI();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
+
+</script>
+<!-- /skill:chrome -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>جزوه تعاملی چالش گرامر ۳۰ روزه</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
+:root{--ink:oklch(25% .035 250);--muted:oklch(49% .025 250);--paper:oklch(98.5% .012 75);--surface:oklch(100% .006 75);--line:oklch(88% .02 75);--coral:oklch(66% .18 20);--teal:oklch(56% .12 185);--yellow:oklch(84% .14 85);--lav:oklch(77% .10 290);--mint:oklch(85% .10 165);--shadow:0 14px 36px oklch(35% .03 250 / .09);--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Vazirmatn,system-ui,sans-serif;line-height:1.6}button,input{font:inherit}button{cursor:pointer}.wrap{max-width:1240px;margin:auto;padding:0 24px}.hero{padding:44px 0 30px;position:relative;overflow:hidden;background:linear-gradient(135deg,oklch(95% .035 20),oklch(97% .025 185) 58%,oklch(96% .035 85));border-bottom:1px solid var(--line)}.hero:after{content:"";position:absolute;width:340px;height:340px;border-radius:50%;background:oklch(87% .09 20 / .34);left:-110px;top:-150px}.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:end;position:relative;z-index:1}.eyebrow{font-size:.78rem;font-weight:800;letter-spacing:.1em;color:var(--coral);text-transform:uppercase}.hero h1{font-size:clamp(2rem,4vw,4.4rem);line-height:1.08;margin:10px 0 14px;max-width:12ch;font-weight:800;letter-spacing:-.04em}.hero p{max-width:58ch;color:var(--muted);margin:0;font-size:1.05rem}.hero-note{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:20px;box-shadow:var(--shadow);transform:rotate(1deg)}.hero-note strong{font-size:1.15rem}.hero-note ul{padding:0 20px 0 0;margin:12px 0 0;color:var(--muted);font-size:.93rem}.toolbar{position:sticky;top:0;z-index:10;background:oklch(98.5% .012 75 / .95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:12px 0}.toolbar-inner{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.search{flex:1;min-width:220px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:11px 14px;color:var(--ink);outline:none}.search:focus{border-color:var(--teal);box-shadow:0 0 0 3px oklch(56% .12 185 / .18)}.btn{min-height:44px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:9px 14px;font-weight:700;transition:transform .2s var(--ease),background .2s}.btn:hover{transform:translateY(-2px);background:oklch(96% .02 185)}.btn.primary{background:var(--ink);color:var(--paper);border-color:var(--ink)}.progress-wrap{margin-right:auto;display:flex;align-items:center;gap:9px;font-size:.85rem;color:var(--muted)}.progress{width:120px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;width:0;background:var(--teal);border-radius:inherit;transition:width .35s var(--ease)}.main{padding:34px 0 70px}.section{margin:0 0 34px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:14px}.section-head h2{font-size:1.6rem;margin:0;letter-spacing:-.03em}.section-head p{margin:0;color:var(--muted);font-size:.9rem}.days{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.day{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 4px 15px oklch(35% .03 250 / .04);transition:transform .25s var(--ease),box-shadow .25s}.day:hover{transform:translateY(-3px);box-shadow:var(--shadow)}.day.done{outline:2px solid oklch(56% .12 185 / .34)}.day summary{list-style:none;padding:18px;display:flex;align-items:center;gap:12px;cursor:pointer}.day summary::-webkit-details-marker{display:none}.day summary:focus-visible{outline:3px solid var(--teal);outline-offset:-3px}.num{flex:0 0 42px;height:42px;border-radius:14px;display:grid;place-items:center;background:var(--accent,var(--coral));color:oklch(99% .01 75);font-weight:800;font-family:"Space Grotesk",sans-serif;font-size:1.05rem}.summary-copy{min-width:0;flex:1}.summary-copy strong{display:block;font-size:1.04rem;line-height:1.35}.summary-copy small{color:var(--muted);display:block;margin-top:3px}.chev{color:var(--muted);transition:transform .25s var(--ease)}details[open] .chev{transform:rotate(180deg)}.day-body{padding:0 18px 18px;border-top:1px dashed var(--line)}.mission{margin-top:16px;background:oklch(96% .025 185);border-radius:15px;padding:13px 15px}.mission b{color:var(--teal);font-size:.82rem;letter-spacing:.04em}.mission p{margin:5px 0 0}.cols{display:grid;grid-template-columns:1.05fr .95fr;gap:16px;margin-top:16px}.box{padding:0}.box h3{font-size:.88rem;margin:0 0 7px;color:var(--coral)}.rule{margin:0;background:oklch(97% .016 75);border:1px solid var(--line);border-radius:13px;padding:12px 14px;direction:ltr;text-align:left;font-family:"Space Grotesk",system-ui;font-size:.92rem}.examples{margin:0;padding:0 19px 0 0}.examples li{margin:7px 0;direction:ltr;text-align:left}.exercises{margin-top:16px}.exercises h3{color:var(--teal)}.exercise{display:flex;gap:8px;align-items:flex-start;margin:8px 0;font-size:.92rem}.exercise input{width:17px;height:17px;margin-top:5px;accent-color:var(--teal)}.flash-section{margin-top:18px}.flash-title{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.flash-title h3{margin:0;font-size:.88rem;color:var(--lav)}.flashcards{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.flash{min-height:104px;perspective:800px;cursor:pointer}.flash-inner{height:100%;min-height:104px;position:relative;transform-style:preserve-3d;transition:transform .45s var(--ease)}.flash.flipped .flash-inner{transform:rotateY(180deg)}.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:14px;padding:12px;background:oklch(96% .025 290);border:1px solid oklch(84% .06 290);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}.back{transform:rotateY(180deg);background:oklch(95% .035 165);border-color:oklch(80% .07 165)}.face small{color:var(--muted);font-size:.72rem;margin-bottom:4px}.face b{direction:ltr;font-family:"Space Grotesk",system-ui}.check{margin-top:16px;width:100%;border:0;border-radius:12px;padding:10px;background:oklch(95% .035 85);color:var(--ink);font-weight:800}.check[aria-pressed=true]{background:oklch(88% .11 165)}.empty{display:none;padding:30px;border:1px dashed var(--line);border-radius:18px;color:var(--muted);text-align:center}.footer{border-top:1px solid var(--line);padding:28px 0 44px;color:var(--muted);font-size:.86rem}.kbd{font-family:"Space Grotesk";padding:2px 6px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.hero-note{transform:none}.days{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.wrap{padding:0 15px}.hero{padding-top:30px}.days,.cols{grid-template-columns:1fr}.toolbar-inner{align-items:stretch}.progress-wrap{width:100%;margin:0}.search{min-width:0}.hero h1{max-width:14ch}.day summary{padding:15px}.day-body{padding:0 15px 15px}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="wrap hero-grid"><div><div class="eyebrow">Grammar practice system · 30 days</div><h1>جزوه‌ی تعاملی چالش گرامر</h1><p>هر روز یک مبحث، یک توضیح جمع‌وجور، مثال‌های واقعی، تمرین آماده و فلش‌کارت. فقط بازش کن و شروع کن.</p></div><aside class="hero-note"><strong>روش استفاده</strong><ul><li>هر روز ۲۰ تا ۳۰ دقیقه وقت بگذار.</li><li>اول توضیح و مثال‌ها را بخوان، بعد تمرین را حل کن.</li><li>روی فلش‌کارت بزن تا جواب برگردد.</li><li>پس از انجام روز، تیک «تمام شد» را بزن.</li></ul></aside></div></header>
+<nav class="toolbar"><div class="wrap toolbar-inner"><input id="search" class="search" placeholder="جست‌وجو در روزها، مباحث و تمرین‌ها…" aria-label="جست‌وجو"/><button class="btn" id="openAll">باز کردن همه</button><button class="btn" id="closeAll">بستن همه</button><button class="btn primary" id="reset">پاک کردن پیشرفت</button><div class="progress-wrap"><span id="progressText">۰ از ۳۰ روز</span><div class="progress"><i id="bar"></i></div></div></div></nav>
+<main class="main wrap"><section class="section"><div class="section-head"><div><h2>نقشه‌ی ۳۰ روزه</h2><p>از زمان‌های پایه شروع می‌کنیم و به ساختارهای پیشرفته می‌رسیم.</p></div></div><div id="sections"></div><div class="empty" id="empty">چیزی پیدا نشد. عبارت کوتاه‌تری امتحان کن.</div></section></main>
+<footer class="footer"><div class="wrap">نکته‌ی طلایی: جواب‌ها را فقط نگاه نکن؛ با صدای بلند بگو و در یک جمله‌ی شخصی استفاده کن. <span class="kbd">Space</span> روی هر فلش‌کارت، جواب را برمی‌گرداند.</div></footer>
+<script>
+const days=[
+['Present Simple','حال ساده','توصیف عادت‌ها، واقعیت‌ها و برنامه‌های ثابت.','subject + base verb (he/she/it: verb + s)','I usually walk to work. / She studies English every evening. / Do you drink coffee?',['I usually ___ before breakfast.','My best friend ___ (live) near me.','___ your parents ___ (work) on Fridays?']],
+['Present Continuous','حال استمراری','کاری که الان یا در یک بازه‌ی موقت در حال انجام است.','am / is / are + verb-ing','I am working right now. / They are staying with us this week. / She isn’t sleeping.',['Right now, I ___ (read) this lesson.','We ___ (try) a new routine this month.','What ___ you ___ (do) at the moment?']],
+['Present Simple vs Present Continuous','تفاوت حال ساده و استمراری','عادت همیشگی را از وضعیت موقت جدا کن.','simple = routine; continuous = now / temporary','I work from home, but this week I am working from a café. / He usually cooks, but today he is ordering food.',['I usually ___, but today I ___.','My city normally ___, but this month it is ___.','Write one routine and one temporary action.']],
+['Past Simple','گذشته ساده','اتفاق تمام‌شده در زمان مشخص گذشته.','subject + past verb; did + base verb in questions','I visited Shiraz last spring. / We didn’t watch TV. / Did you call her?',['Yesterday, I ___ (finish) ___.','Last weekend, we ___ (go) to ___.','___ you ___ (enjoy) the trip?']],
+['Past Continuous','گذشته استمراری','کاری که در لحظه‌ای از گذشته در جریان بود.','was / were + verb-ing','At 8 p.m., I was studying. / They were talking when I arrived. / He wasn’t listening.',['At 7 yesterday, I was ___.','While I was ___, someone ___.','What were you doing when ___?']],
+['Past Simple vs Past Continuous','تفاوت گذشته ساده و استمراری','پس‌زمینه را با استمراری و اتفاق اصلی را با ساده بساز.','was/were + ing + when + past simple','I was walking home when it started to rain. / While she was cooking, the phone rang.',['I was ___ when ___.','While we were ___, ___.','Tell a 3-sentence story with one interruption.']],
+['Future Forms','ساختارهای آینده','برای تصمیم لحظه‌ای، برنامه و پیش‌بینی انتخاب درست داشته باش.','will = decision/prediction; be going to = plan/evidence; present continuous = arrangement','I’ll help you. / I’m going to start a course. / We’re meeting on Friday.',['This weekend, I am going to ___.','I think technology will ___.','I am meeting ___ on ___.']],
+['Present Perfect','حال کامل','تجربه یا نتیجه‌ای که به اکنون وصل است.','have / has + past participle','I have visited Tabriz. / She has just arrived. / Have you ever tried sushi?',['I have never ___.','Recently, I have ___.','Have you ever ___?']],
+['Present Perfect vs Past Simple','حال کامل در برابر گذشته ساده','زمان مشخص گذشته با past simple؛ تجربه یا نتیجه‌ی مرتبط با حال با present perfect.','past time = past simple; unfinished/relevant time = present perfect','I went there in 2022. / I have been there twice. / She has finished her work.',['I have ___, but I ___ in ___.','This week, I have ___.','In 2020, I ___.']],
+['Present Perfect Continuous','حال کامل استمراری','مدت یا فعالیتی که اخیراً ادامه داشته و اثرش پیداست.','have / has been + verb-ing','I have been studying for two hours. / It has been raining since noon.',['I have been ___ for ___.','Since ___, I have been ___.','What have you been doing recently?']],
+['Modal Verbs','افعال وجهی','توانایی، اجازه، اجبار، توصیه و احتمال را دقیق بیان کن.','modal + base verb','You should rest. / We must leave now. / She can speak three languages.',['You should ___.','I must ___ before ___.','It might ___ tomorrow.']],
+['Articles','حروف تعریف','بین چیز مشخص، چیز نامشخص و مفهوم کلی فرق بگذار.','a/an = one non-specific; the = specific; zero = general plural/uncountable','I saw a dog. The dog was friendly. Dogs need care.',['I bought a ___ yesterday.','The ___ in my room is ___.','___ water is essential for life.']],
+['Countable & Uncountable Nouns + Quantifiers','اسم‌های قابل شمارش و غیرقابل شمارش','مقدار را با many, much, a few, a little, some و any بساز.','many/few + plural countable; much/little + uncountable','We need some information. / There are a few apples. / I don’t have much time.',['I need some ___.','There are a few ___.','I don’t have much ___.']],
+['Comparatives & Superlatives','صفت تفضیلی و عالی','مقایسه‌ی دو چیز و انتخاب برجسته‌ترین مورد.','adj-er / more + adj; the adj-est / the most + adj','This book is more useful than that one. / It is the most practical option.',['___ is more ___ than ___.','The most ___ place I know is ___.','Compare two cities or two friends.']],
+['Passive Voice','مجهول','وقتی خود عمل یا نتیجه مهم‌تر از انجام‌دهنده است.','be + past participle','The product is made in Italy. / The emails were sent yesterday.',['English is spoken in ___.','My favorite food is made from ___.','The task was completed by ___.']],
+['Relative Clauses','جملات موصولی','اطلاعات بیشتری درباره‌ی آدم، مکان یا چیز بده.','who = people; which = things; where = places; that = people/things','The woman who teaches me is patient. / This is the café where we met.',['I know someone who ___.','This is a place where ___.','I bought a book that ___.']],
+['Gerunds & Infinitives','مصدر با to و اسم‌مصدر','بعد از بعضی فعل‌ها ing و بعد از بعضی فعل‌ها to می‌آید.','enjoy/avoid + ing; want/plan/decide + to + verb','I enjoy learning. / She decided to leave. / We avoid wasting time.',['I enjoy ___.','I plan to ___.','I avoid ___ when ___.']],
+['Conditionals','جملات شرطی','شرط واقعی، احتمالی و غیرواقعی را از هم جدا کن.','zero: if + present, present; first: will; second: past, would; third: had + pp, would have + pp','If I have time, I read. / If it rains, I’ll stay home. / If I had more time, I would travel.',['If I have time, I ___.','If I were you, I would ___.','If I had known, I would have ___.']],
+['Reported Speech','گفتار غیرمستقیم','حرف دیگران را با تغییر زمان و ضمیر گزارش کن.','said that + clause; told + object + clause; asked if/wh-word','“I am tired.” → She said that she was tired. / “Where do you live?” → He asked where I lived.',['She said that she ___.','He told me to ___.','Report: “I will call you tomorrow.”']],
+['Question Tags & Indirect Questions','تگ سوالی و سوال غیرمستقیم','سوال را طبیعی‌تر، مودبانه‌تر و دقیق‌تر بساز.','positive → negative tag; Could you tell me + statement order?','You’re ready, aren’t you? / Could you tell me where the station is?',['It’s cold today, ___?','You like tea, ___?','Could you tell me where ___?']],
+['Phrasal Verbs & Verb Patterns','افعال عبارتی و الگوهای فعل','عبارت‌های پرکاربرد را در جمله‌ی واقعی به کار ببر.','wake up, get up, look for, give up, carry on + gerund','I woke up early. / She is looking for her keys. / Don’t give up.',['I usually wake up at ___.','I am looking for ___.','I decided to carry on ___.']],
+['Participle Clauses','عبارت‌های وصفی کوتاه','دو جمله را با -ing، past participle یا having + pp فشرده کن.','V-ing = active; V3 = passive; having + pp = earlier action','Feeling tired, I went home. / Having finished, she left. / Built in 1900, the house is famous.',['Feeling ___, I ___.','Having finished ___, I ___.','Designed by ___, the ___ is ___.']],
+['Reduced Relative Clauses','جملات موصولی کوتاه‌شده','who is/which was را وقتی ممکن است حذف و جمله را فشرده کن.','active: noun + V-ing; passive: noun + V3','The girl wearing red is my sister. / The book written by Orwell is famous.',['The person sitting next to me ___.','The product made in ___ ___.','The road leading to ___ ___.']],
+['Subjunctive','ساختار التزامی رسمی','در توصیه و الزام رسمی، شکل پایه‌ی فعل را نگه دار.','suggest/insist/important + that + subject + base verb','I suggest that he be careful. / It is essential that she arrive on time.',['I suggest that we ___.','It is important that everyone ___.','The teacher insisted that he ___.']],
+['Inversion','وارونگی','با قیدهای منفی یا محدودکننده، تاکید رسمی و پیشرفته بساز.','Never/Rarely/Only then + auxiliary + subject + verb','Never have I seen such a view. / Rarely do we get this chance.',['Never have I ___.','Only then did I ___.','Under no circumstances should you ___.']],
+['Emphasis Structures','ساختارهای تاکیدی','روی بخش مهم جمله تمرکز بده.','do/does/did + verb; What... is...; It is...that...','I do understand. / What I need is a break. / It was Sara who called.',['I do ___ when ___.','What I really need is ___.','It was ___ who/that ___.']],
+['Cleft Sentences','جملات شکافته','اطلاعات خاص را برجسته و جمله را دقیق‌تر کن.','It is/was + focus + that/who; What + clause + be','It was the timing that caused the problem. / What I want is a clear plan.',['It was ___ that ___.','What matters most is ___.','It is ___ who/that ___.']],
+['Nominalisation','اسم‌سازی در نوشتار آکادمیک','فعل و صفت را به اسم تبدیل کن تا متن رسمی‌تر و فشرده‌تر شود.','decide → decision; improve → improvement; analyse → analysis','The company decided to expand. → The company made a decision to expand.',['The team improved the process. → The ___ was significant.','They analysed the data. → Their ___ was useful.','Rewrite one informal sentence formally.']],
+['Advanced Linking Devices','رابط‌های پیشرفته','ایده‌ها را با تضاد، علت، نتیجه و امتیازدهی به هم وصل کن.','nevertheless, whereas, consequently, notwithstanding, provided that','The plan is expensive; nevertheless, it is effective. / Provided that we prepare, we will succeed.',['Although ___, ___.','___; nevertheless, ___.','Provided that ___, ___.']],
+['Mixed Grammar Review','مرور نهایی و چالش ترکیبی','همه‌ی ساختارها را در یک متن واقعی ترکیب کن.','choose tense/structure by meaning, not by memorised formula','I have been preparing for weeks, but tomorrow I will finally present my plan.',['Write a 150-word opinion paragraph.','Use at least 5 target structures.','Underline one example of each tense you used.']]
+];
+const palettes=['#e85c69','#ea8b4e','#dcae2f','#69a86d','#4da5c4','#8179c5'];
+const groups=[['روزهای ۱ تا ۶','پایه‌های زمان'],['روزهای ۷ تا ۱۲','زمان‌های کامل و ابزارهای ضروری'],['روزهای ۱۳ تا ۱۸','اسم، صفت و ساختار شرطی'],['روزهای ۱۹ تا ۲۴','ساختارهای ارتباطی و پیشرفته'],['روزهای ۲۵ تا ۳۰','تاکید، نوشتار رسمی و مرور']];
+const faNum=n=>String(n).replace(/[0-9]/g,d=>'۰۱۲۳۴۵۶۷۸۹'[d]);
+const state=JSON.parse(localStorage.getItem('grammar30')||'{}');
+function render(){const q=document.getElementById('search').value.trim().toLowerCase();const root=document.getElementById('sections');root.innerHTML='';let shown=0;groups.forEach((g,gi)=>{const start=gi*6;const items=days.slice(start,start+6).map((d,i)=>({d,n:start+i+1})).filter(x=>!q||x.d.join(' ').toLowerCase().includes(q));if(!items.length)return;shown+=items.length;const sec=document.createElement('section');sec.className='section';sec.innerHTML=`<div class="section-head"><div><h2>${g[0]}</h2><p>${g[1]}</p></div><span class="eyebrow">${faNum(start+1)} تا ${faNum(start+6)}</span></div><div class="days"></div>`;const grid=sec.querySelector('.days');items.forEach(({d,n})=>grid.appendChild(dayHTML(d,n)));root.appendChild(sec)});document.getElementById('empty').style.display=shown?'none':'block';updateProgress()}
+function dayHTML(d,n){const [title,fa,mission,rule,examples,ex]=d;const done=!!state[n];const article=document.createElement('details');article.className='day'+(done?' done':'');article.dataset.day=n;article.style.setProperty('--accent',palettes[(n-1)%palettes.length]);article.innerHTML=`<summary><span class="num">${faNum(n)}</span><span class="summary-copy"><strong>${title}</strong><small>${fa}</small></span><span class="chev">⌄</span></summary><div class="day-body"><div class="mission"><b>ماموریت امروز</b><p>${mission}</p></div><div class="cols"><div class="box"><h3>فرمول سریع</h3><p class="rule">${rule}</p></div><div class="box"><h3>مثال‌های کاربردی</h3><ul class="examples">${examples.split(' / ').map(x=>`<li>${x}</li>`).join('')}</ul></div></div><div class="exercises"><h3>تمرین آماده</h3>${ex.map((x,i)=>`<label class="exercise"><input type="checkbox" data-ex="${n}-${i}" ${state['ex-'+n+'-'+i]?'checked':''}><span>${x}</span></label>`).join('')}</div><div class="flash-section"><div class="flash-title"><h3>فلش‌کارت‌های امروز</h3><small>برای برگرداندن کارت کلیک کن</small></div><div class="flashcards"><div class="flash"><div class="flash-inner"><div class="face"><small>قاعده</small><b>${title}</b></div><div class="face back"><small>یادآوری</small><b>${rule}</b></div></div></div><div class="flash"><div class="flash-inner"><div class="face"><small>تولید جمله</small><b>${ex[0]}</b></div><div class="face back"><small>راهنما</small><b>یک جمله‌ی واقعی درباره‌ی زندگی خودت بساز.</b></div></div></div></div></div><button class="check" aria-pressed="${done}">${done?'✓ این روز تمام شد':'علامت‌گذاری به‌عنوان تمام‌شده'}</button></div>`;article.querySelector('.check').addEventListener('click',e=>{state[n]=!state[n];localStorage.setItem('grammar30',JSON.stringify(state));render()});article.querySelectorAll('input[type=checkbox]').forEach(inp=>inp.addEventListener('change',e=>{state['ex-'+n+'-'+inp.dataset.ex.split('-')[1]]=inp.checked;localStorage.setItem('grammar30',JSON.stringify(state))}));article.querySelectorAll('.flash').forEach(f=>f.addEventListener('click',()=>f.classList.toggle('flipped')));return article}
+function updateProgress(){const done=Array.from({length:30},(_,i)=>state[i+1]).filter(Boolean).length;document.getElementById('progressText').textContent=`${faNum(done)} از ۳۰ روز`;document.getElementById('bar').style.width=(done/30*100)+'%'}
+document.getElementById('search').addEventListener('input',render);document.getElementById('openAll').addEventListener('click',()=>document.querySelectorAll('.day').forEach(x=>x.open=true));document.getElementById('closeAll').addEventListener('click',()=>document.querySelectorAll('.day').forEach(x=>x.open=false));document.getElementById('reset').addEventListener('click',()=>{if(confirm('پیشرفت همه‌ی روزها پاک شود؟')){localStorage.removeItem('grammar30');location.reload()}});document.addEventListener('keydown',e=>{if(e.code==='Space'&&e.target.closest('.flash')){e.preventDefault();e.target.closest('.flash').classList.toggle('flipped')}});render();
+</script>
+</body>
+</html>
