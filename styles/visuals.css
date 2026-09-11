@@ -113,3 +113,14 @@
 
 /* canvas rendering quality */
 canvas { image-rendering: auto; }
+
+/* ---------- background diagram sizing ---------- */
+.bg-viz[data-viz="codec"] .bg-canvas { height: min(58vh, 540px); }
+.bg-viz[data-viz="quality"] .bg-canvas { height: min(56vh, 520px); }
+.bg-viz[data-viz="collapse"] .bg-canvas { height: min(58vh, 540px); }
+.bg-viz[data-viz="attention"] .bg-canvas { height: min(54vh, 500px); }
+.bg-viz[data-viz="attention"] #tokens,
+.bg-viz[data-viz="attention"] #latent { height: clamp(90px, 15vh, 160px); }
+.bg-viz[data-viz="probability"] .bg-canvas,
+.bg-viz[data-viz="bitstream"] .bg-canvas,
+.bg-viz[data-viz="codecMini"] .bg-canvas { height: clamp(160px, 32vh, 320px); }

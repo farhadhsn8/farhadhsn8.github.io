@@ -16,7 +16,7 @@ export const smoothstep = (t) => {
 export const easeOut = (t) => 1 - Math.pow(1 - clamp(t), 3);
 
 export function roundRect(ctx, x, y, w, h, r) {
-  const rr = Math.min(r, w * 0.5, h * 0.5);
+  const rr = Math.max(0, Math.min(r, w * 0.5, h * 0.5));
   ctx.beginPath();
   ctx.moveTo(x + rr, y);
   ctx.arcTo(x + w, y, x + w, y + h, rr);

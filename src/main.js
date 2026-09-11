@@ -19,9 +19,9 @@ import { initTape } from "./core/tape.js";
 import { clamp, formatFixed } from "./core/util.js";
 
 import { initField } from "./visuals/field.js";
-import { initTuring } from "./visuals/turing.js";
+import { initTapeBar } from "./visuals/tapeBar.js";
 import { initFSM } from "./visuals/fsm.js";
-import { initSidebar } from "./visuals/sidebar.js";
+import { initBgStage } from "./visuals/bgStage.js";
 import { initProbability } from "./visuals/probability.js";
 import { initCodecMini } from "./visuals/codecMini.js";
 import { initBitstream } from "./visuals/bitstream.js";
@@ -86,14 +86,25 @@ function initContext() {
     ticking = false;
     const mid = window.innerHeight * 0.5;
     let best = null;
-    let bestDist = Infinity;
+    // the section covering the viewport midpoint wins; this keeps the
+    // nav state and the background diagram in step with what is read
     for (const sec of sections) {
       const r = sec.getBoundingClientRect();
-      const c = r.top + r.height / 2;
-      const dist = Math.abs(c - mid);
-      if (dist < bestDist) {
-        bestDist = dist;
+      if (r.top <= mid && r.bottom > mid) {
         best = sec;
+        break;
+      }
+    }
+    // fall back to the nearest centre when no section spans the middle
+    if (!best) {
+      let bestDist = Infinity;
+      for (const sec of sections) {
+        const r = sec.getBoundingClientRect();
+        const dist = Math.abs(r.top + r.height / 2 - mid);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = sec;
+        }
       }
     }
     if (!best) return;
@@ -220,9 +231,9 @@ function main() {
   initTape();
 
   initField();
-  initTuring();
+  initTapeBar();
   initFSM();
-  initSidebar();
+  initBgStage();
   initProbability();
   initCodecMini();
   initBitstream();

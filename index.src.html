@@ -25,43 +25,57 @@
   <div class="bg__glow"></div>
   <div class="bg__grid"></div>
   <canvas id="field" class="bg__field"></canvas>
+
+  <div class="bg__stage" id="bg-stage" inert>
+    <div class="bg-viz" data-viz="fsm">
+      <div class="bg-viz__frame bg-viz__frame--fsm">
+        <div class="fsm" id="fsm-hero" role="img" aria-label="Finite state machine: INPUT, ENCODE, LATENT, QUANTIZE, ENTROPY, BITSTREAM, DECODE, RECONSTRUCT, QUALITY"></div>
+      </div>
+    </div>
+    <div class="bg-viz" data-viz="codecMini">
+      <div class="bg-viz__frame">
+        <canvas id="codec-mini" class="bg-canvas" width="640" height="120" aria-label="Compact encoder and decoder schematic"></canvas>
+      </div>
+    </div>
+    <div class="bg-viz" data-viz="probability">
+      <div class="bg-viz__frame">
+        <canvas id="probability" class="bg-canvas" width="360" height="120" aria-label="Probability distribution of the latent variable"></canvas>
+      </div>
+    </div>
+    <div class="bg-viz" data-viz="codec">
+      <div class="bg-viz__frame">
+        <canvas id="codec" class="bg-canvas" aria-label="Encoder and decoder pipeline visualization"></canvas>
+      </div>
+    </div>
+    <div class="bg-viz" data-viz="quality">
+      <div class="bg-viz__frame">
+        <canvas id="quality-canvas" class="bg-canvas" role="img" aria-label="Rate and quality tradeoff for PSNR, SSIM, MS-SSIM and VMAF"></canvas>
+      </div>
+    </div>
+    <div class="bg-viz" data-viz="attention">
+      <div class="bg-viz__frame bg-viz__frame--attn">
+        <canvas id="attention" class="bg-canvas" aria-label="Attention weight matrix visualization"></canvas>
+        <div class="bg-attn__side">
+          <canvas id="tokens" class="bg-canvas" aria-label="Token sequence visualization"></canvas>
+          <canvas id="latent" class="bg-canvas" aria-label="Latent vector representation"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="bg-viz" data-viz="bitstream">
+      <div class="bg-viz__frame">
+        <canvas id="bitstream" class="bg-canvas" width="520" height="120" aria-label="Entropy-coded bitstream density"></canvas>
+      </div>
+    </div>
+    <div class="bg-viz" data-viz="collapse">
+      <div class="bg-viz__frame">
+        <canvas id="collapse" class="bg-canvas" aria-label="Information collapsing to a minimal state"></canvas>
+      </div>
+    </div>
+  </div>
+
   <div class="bg__noise"></div>
   <div class="bg__scan"></div>
 </div>
-
-<aside class="sidebar" id="sidebar" aria-label="Computation instruments">
-  <div class="sidebar__inner">
-    <div class="side-card">
-      <div class="side-card__head">
-        <span class="mono">TURING MACHINE</span>
-        <span class="mono dim" id="side-turing-state">q0</span>
-      </div>
-      <canvas id="side-turing" class="side-card__canvas" width="200" height="74" aria-label="Turing machine tape with a read-write head"></canvas>
-      <p class="side-card__note mono dim" id="side-turing-note">scan 0 · write 1 · move R</p>
-    </div>
-    <div class="side-card">
-      <div class="side-card__head">
-        <span class="mono">ENCODER · DECODER</span>
-        <span class="mono dim">x→ẑ→x̂</span>
-      </div>
-      <canvas id="side-codec" class="side-card__canvas" width="200" height="96" aria-label="Encoder and decoder bottleneck schematic"></canvas>
-    </div>
-    <div class="side-card">
-      <div class="side-card__head">
-        <span class="mono">QUALITY</span>
-        <span class="mono dim" id="side-quality-state">metrics</span>
-      </div>
-      <canvas id="side-quality" class="side-card__canvas" width="200" height="118" aria-label="Quality metrics PSNR, SSIM, MS-SSIM and VMAF"></canvas>
-    </div>
-    <div class="side-card">
-      <div class="side-card__head">
-        <span class="mono">ENTROPY · BITSTREAM</span>
-        <span class="mono dim" id="side-bpp">1.02 bpp</span>
-      </div>
-      <canvas id="side-entropy" class="side-card__canvas" width="200" height="60" aria-label="Entropy-coded bitstream density"></canvas>
-    </div>
-  </div>
-</aside>
 
 <header class="nav" id="nav">
   <div class="nav__brand">
@@ -83,6 +97,15 @@
     <a href="#contact" data-nav="contact"><i>09</i>Contact</a>
   </nav>
 </header>
+
+<div class="tape-bar" aria-label="Turing machine tape">
+  <div class="tape-bar__inner">
+    <span class="mono tape-bar__label">TURING MACHINE</span>
+    <span class="mono tape-bar__state" id="tape-state">q0 · h48</span>
+    <canvas id="turing" class="tape-bar__canvas" width="200" height="74" aria-label="Turing machine tape with a read-write head"></canvas>
+    <span class="mono tape-bar__note" id="tape-status">δ(q0,'·')→(q1,'·',R)</span>
+  </div>
+</div>
 
 <div class="readout" aria-hidden="true">
   <span class="readout__dot"></span>
@@ -109,37 +132,6 @@
         <a class="btn btn--primary" href="#research">Enter the system <span class="mono">→</span></a>
         <a class="btn" href="#projects">Selected work</a>
       </div>
-    </div>
-
-    <div class="hero__instruments" aria-hidden="true">
-      <div class="inst inst--prob">
-        <div class="inst__head"><span class="mono">p(x)</span><span class="inst__note mono">entropy source</span></div>
-        <canvas id="probability" class="inst__canvas" width="360" height="120"></canvas>
-      </div>
-      <div class="inst inst--codec">
-        <div class="inst__head"><span class="mono">x → E → ẑ → Q → bits → D → x̂</span></div>
-        <canvas id="codec-mini" class="inst__canvas" width="640" height="120"></canvas>
-      </div>
-      <div class="inst inst--bits">
-        <div class="inst__head"><span class="mono">ENTROPY CODING</span><span class="inst__note mono">compact bitstream</span></div>
-        <canvas id="bitstream" class="inst__canvas" width="520" height="120"></canvas>
-      </div>
-    </div>
-
-    <div class="hero__fsm">
-      <div class="fsm__head">
-        <span class="mono">FINITE STATE MACHINE</span>
-        <span class="mono dim" id="fsm-transition">δ(INPUT, ·) → ENCODE</span>
-      </div>
-      <div class="fsm" id="fsm-hero" role="img" aria-label="Finite state machine: INPUT, ENCODE, LATENT, QUANTIZE, ENTROPY, BITSTREAM, DECODE, RECONSTRUCT, QUALITY"></div>
-    </div>
-
-    <div class="hero__tape">
-      <div class="tape__head">
-        <span class="mono">TURING TAPE <span class="dim">/ read-write head</span></span>
-        <span class="mono dim" id="tape-status">q0 · scanning 0 · write 1 · move R</span>
-      </div>
-      <canvas id="turing" class="tape__canvas" aria-label="Animated conceptual Turing machine tape"></canvas>
     </div>
 
     <p class="hero__tag mono reveal">PIXELS <span>—</span> REPRESENTATION <span>—</span> INFORMATION <span>—</span> COMPUTATION <span>—</span> RECONSTRUCTION</p>
@@ -254,16 +246,10 @@
     <p class="section__intro reveal">
       Raw pixels become patches, patches become latent vectors, precision is quantized away,
       and an entropy coder emits a compact bitstream. The decoder reverses it — imperfectly.
-      Drag across the visualization to steer the compression rate. Hover the left half to encode,
-      the right half to decode.
+      The encoder/decoder pipeline lives in the background; steer it with the rate control below.
     </p>
 
     <div class="codec reveal" id="codec-stage">
-      <div class="codec__canvas-wrap">
-        <canvas id="codec" class="codec__canvas" aria-label="Encoder and decoder pipeline visualization"></canvas>
-        <div class="codec__hover codec__hover--l mono" aria-hidden="true">ENCODE ◂ forward</div>
-        <div class="codec__hover codec__hover--r mono" aria-hidden="true">reverse ▸ DECODE</div>
-      </div>
       <div class="codec__controls">
         <label class="control" for="rate">
           <span class="mono">compression rate</span>
@@ -307,10 +293,6 @@
           <li><span class="metric__key">VMAF</span><span class="metric__val" data-metric="vmaf">—</span></li>
         </ul>
       </div>
-      <figure class="quality__plot reveal">
-        <canvas id="quality-canvas" class="quality__canvas" role="img" aria-label="Schematic tradeoff between compression rate and reconstruction quality for PSNR, SSIM, MS-SSIM and VMAF"></canvas>
-        <figcaption class="mono">rate → &nbsp;·&nbsp; quality (normalized) ↑ &nbsp;·&nbsp; schematic · WebGL</figcaption>
-      </figure>
     </div>
   </section>
 
@@ -322,25 +304,9 @@
       <span class="section__tag mono">state: LATENT</span>
     </header>
     <p class="section__intro reveal">
-      Attention is how latent tokens negotiate with each other. Move the cursor to select a query
-      token; the matrix re-weights its relationships across the sequence.
+      Attention is how latent tokens negotiate with each other. The background matrix re-weights the
+      relationships across the sequence as the cursor moves.
     </p>
-    <div class="attn">
-      <div class="attn__panel reveal">
-        <div class="attn__head mono"><span>ATTENTION · Q·Kᵀ</span><span class="dim" id="attn-status">query 10 / 20</span></div>
-        <canvas id="attention" class="attn__canvas" aria-label="Attention weight matrix visualization"></canvas>
-      </div>
-      <div class="attn__side">
-        <div class="attn__panel reveal">
-          <div class="attn__head mono"><span>TOKENS</span><span class="dim">patches</span></div>
-          <canvas id="tokens" class="attn__canvas attn__canvas--tokens" aria-label="Token sequence visualization"></canvas>
-        </div>
-        <div class="attn__panel reveal">
-          <div class="attn__head mono"><span>LATENT VECTORS</span><span class="dim">z</span></div>
-          <canvas id="latent" class="attn__canvas attn__canvas--latent" aria-label="Latent vector representation"></canvas>
-        </div>
-      </div>
-    </div>
   </section>
 
   <!-- 07 — PROJECTS -->
@@ -493,6 +459,15 @@
               <li>Background removal, pose estimation, human body-parts and cloth segmentation; generation of human models with new clothing; dress swapping between two humans.</li>
               <li>Optimized and quantized deep-learning models; Dockerized services; Persian sentence embedding and query correction for semantic search.</li>
             </ul>
+            <figure class="tl__demo">
+              <img
+                class="tl__shot"
+                src="boolooz.jpeg"
+                alt="Boolooz virtual try-on pipeline result"
+                loading="lazy"
+                decoding="async" />
+              <figcaption class="tl__demo-cap mono">Boolooz · virtual try-on pipeline</figcaption>
+            </figure>
           </div>
         </li>
         <li class="tl reveal">
@@ -578,10 +553,6 @@
         </div>
         <p class="contact__meta mono">Tehran, Iran · Persian (native) · English (advanced) · German (basic)</p>
         <p class="contact__meta mono dim">GitHub · Google Scholar — listed on resume</p>
-      </div>
-      <div class="contact__viz reveal">
-        <canvas id="collapse" class="contact__canvas" aria-label="Information collapsing to a minimal state"></canvas>
-        <p class="mono dim contact__viz-note">state → minimal</p>
       </div>
     </div>
   </section>

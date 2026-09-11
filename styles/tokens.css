@@ -50,7 +50,8 @@
 
   /* fixed chrome */
   --nav-h: 62px;
-  --sidebar-w: 224px;
+  --tape-h: 56px;
+  --chrome-h: calc(var(--nav-h) + var(--tape-h));
 }
 
 *,

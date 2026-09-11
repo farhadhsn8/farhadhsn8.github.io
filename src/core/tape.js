@@ -170,7 +170,7 @@ function charAtPoint(x, y) {
   if (!node || node.nodeType !== 3) return "";
   const parent = node.parentElement;
   if (!parent || !parent.closest("main, footer")) return "";
-  if (parent.closest("#sidebar, .nav, .readout, .bg, noscript, input, textarea, select")) {
+  if (parent.closest(".nav, .tape-bar, .readout, .bg, noscript, input, textarea, select")) {
     return "";
   }
 
