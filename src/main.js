@@ -15,11 +15,13 @@ import {
   togglePause
 } from "./core/machine.js";
 import { initPointer } from "./core/pointer.js";
+import { initTape } from "./core/tape.js";
 import { clamp, formatFixed } from "./core/util.js";
 
 import { initField } from "./visuals/field.js";
 import { initTuring } from "./visuals/turing.js";
 import { initFSM } from "./visuals/fsm.js";
+import { initSidebar } from "./visuals/sidebar.js";
 import { initProbability } from "./visuals/probability.js";
 import { initCodecMini } from "./visuals/codecMini.js";
 import { initBitstream } from "./visuals/bitstream.js";
@@ -215,10 +217,12 @@ function main() {
   const controls = initControls();
 
   initPointer();
+  initTape();
 
   initField();
   initTuring();
   initFSM();
+  initSidebar();
   initProbability();
   initCodecMini();
   initBitstream();

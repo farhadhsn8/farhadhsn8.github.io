@@ -29,6 +29,40 @@
   <div class="bg__scan"></div>
 </div>
 
+<aside class="sidebar" id="sidebar" aria-label="Computation instruments">
+  <div class="sidebar__inner">
+    <div class="side-card">
+      <div class="side-card__head">
+        <span class="mono">TURING MACHINE</span>
+        <span class="mono dim" id="side-turing-state">q0</span>
+      </div>
+      <canvas id="side-turing" class="side-card__canvas" width="200" height="74" aria-label="Turing machine tape with a read-write head"></canvas>
+      <p class="side-card__note mono dim" id="side-turing-note">scan 0 · write 1 · move R</p>
+    </div>
+    <div class="side-card">
+      <div class="side-card__head">
+        <span class="mono">ENCODER · DECODER</span>
+        <span class="mono dim">x→ẑ→x̂</span>
+      </div>
+      <canvas id="side-codec" class="side-card__canvas" width="200" height="96" aria-label="Encoder and decoder bottleneck schematic"></canvas>
+    </div>
+    <div class="side-card">
+      <div class="side-card__head">
+        <span class="mono">QUALITY</span>
+        <span class="mono dim" id="side-quality-state">metrics</span>
+      </div>
+      <canvas id="side-quality" class="side-card__canvas" width="200" height="118" aria-label="Quality metrics PSNR, SSIM, MS-SSIM and VMAF"></canvas>
+    </div>
+    <div class="side-card">
+      <div class="side-card__head">
+        <span class="mono">ENTROPY · BITSTREAM</span>
+        <span class="mono dim" id="side-bpp">1.02 bpp</span>
+      </div>
+      <canvas id="side-entropy" class="side-card__canvas" width="200" height="60" aria-label="Entropy-coded bitstream density"></canvas>
+    </div>
+  </div>
+</aside>
+
 <header class="nav" id="nav">
   <div class="nav__brand">
     <span class="nav__id">S.F.HOSSEINI</span>
@@ -471,6 +505,16 @@
               <li>Developed vision models including background removal, frame selection, car stabilization, shadow generation, plate-number segmentation, window background removal, and image enhancement.</li>
               <li>Collaborated on deploying AI models and a framework for processing 3D car model images; built a dealership chatbot for test-drive bookings and appointment scheduling.</li>
             </ul>
+            <figure class="tl__demo">
+              <iframe
+                class="tl__frame"
+                src="iframe.html"
+                title="Drivee — interactive 360° vehicle preview"
+                loading="lazy"
+                allowfullscreen
+                referrerpolicy="strict-origin-when-cross-origin"></iframe>
+              <figcaption class="tl__demo-cap mono">Drivee · automotive footage → interactive 360° vehicle preview</figcaption>
+            </figure>
           </div>
         </li>
         <li class="tl reveal">

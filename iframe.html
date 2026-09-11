@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive 360° Vehicle Preview</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            border: '#e2e8f0',
+            secondary: '#f1f5f9',
+            'muted-foreground': '#64748b',
+            foreground: '#0f172a',
+            'primary-deep': '#2563eb',
+            primary: '#3b82f6',
+            success: '#10b981'
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-slate-900 min-h-screen flex items-center justify-center p-4 sm:p-6">
+
+  <!-- Centered Container -->
+  <div class="w-full max-w-4xl bg-white rounded-2xl shadow-2xl p-4 sm:p-5">
+    
+    <!-- 360 Viewer Wrapper -->
+    <div class="relative min-h-[min(52dvh,420px)] w-full overflow-hidden rounded-[1.1rem] bg-secondary/60 ring-1 ring-border lg:min-h-[min(62dvh,560px)]">
+      
+      <!-- Loading Spinner Overlay -->
+      <div id="loading-spinner" class="absolute inset-0 z-[1] grid place-items-center rounded-[1.1rem] bg-secondary/60 transition-opacity duration-300" aria-live="polite" aria-busy="true">
+        <div class="size-10 animate-spin rounded-full border-2 border-primary/20 border-t-primary" role="status"></div>
+        <span class="sr-only">Loading 360 viewer</span>
+      </div>
+
+      <!-- 360 Viewer Iframe -->
+      <iframe 
+        id="car-iframe"
+        title="Interactive 360° vehicle preview" 
+        draggable="false" 
+        allowfullscreen="" 
+        loading="lazy" 
+        referrerpolicy="strict-origin-when-cross-origin" 
+        src="https://iframe-b8b2c.web.app/?DBURL=https%3A%2F%2Fpirelly360-iframes.firebaseio.com%2F&amp;style=style1&amp;mid=924209569448&amp;uid=vny6x2w52lSSFfvrF5gUrojwt6m2&amp;nodeName=pIframes&amp;device=gadget&amp;order=34&amp;carHistoryTitle=autocheck&amp;&amp;aspect=4%3A3&amp;" 
+        class="block aspect-[16/10] min-h-[min(52dvh,420px)] w-full rounded-[1.1rem] border-0 transition-opacity duration-300 lg:min-h-[min(62dvh,560px)] opacity-0 pointer-events-none"
+        onload="onIframeLoad()">
+      </iframe>
+
+    </div>
+
+    <!-- Details Footer Bar -->
+    <div class="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 rounded-xl bg-[#fbfafa] px-4 py-2.5 ring-1 ring-border">
+      <span class="flex items-center gap-2 font-mono text-[11px] text-muted-foreground">
+        Scenes <span class="font-semibold text-foreground">10</span>
+      </span>
+      <span class="flex items-center gap-2 font-mono text-[11px] text-muted-foreground">
+        Capture <span class="font-semibold text-foreground">Phone only</span>
+      </span>
+      <span class="flex items-center gap-2 font-mono text-[11px] text-muted-foreground">
+        Output <span class="font-semibold text-foreground">WebGL · MP4</span>
+      </span>
+      <span class="ml-auto flex items-center gap-1.5 font-mono text-[11px] text-primary-deep">
+        <span class="size-1.5 rounded-full bg-success"></span>
+        Live preview
+      </span>
+    </div>
+
+  </div>
+
+  <script>
+    function onIframeLoad() {
+      const iframe = document.getElementById('car-iframe');
+      const spinner = document.getElementById('loading-spinner');
+      
+      // Reveal iframe and enable interactions
+      iframe.classList.remove('opacity-0', 'pointer-events-none');
+      iframe.classList.add('opacity-100');
+      
+      // Hide spinner overlay
+      spinner.classList.add('opacity-0', 'pointer-events-none');
+      setTimeout(() => spinner.style.display = 'none', 300);
+    }
+  </script>
+
+</body>
+</html>

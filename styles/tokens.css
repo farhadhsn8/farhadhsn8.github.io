@@ -47,6 +47,10 @@
 
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* fixed chrome */
+  --nav-h: 62px;
+  --sidebar-w: 224px;
 }
 
 *,
