@@ -18,10 +18,10 @@
   --line-3:    rgba(150, 175, 210, 0.32);
 
   /* ink */
-  --ink:       #e9eef6;
-  --ink-2:     #b6c0d0;
-  --muted:     #828d9f;
-  --dim:       #5a6375;
+  --ink:       #f6f9ff;
+  --ink-2:     #d2dbe9;
+  --muted:     #9daabd;
+  --dim:       #7b8698;
 
   /* accent */
   --cyan:      #67d4ff;
@@ -35,7 +35,8 @@
   --violet-rgb: 155, 123, 255;
 
   /* type */
-  --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --sans: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --display: "Sora", "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
   /* rhythm */
@@ -52,6 +53,7 @@
   --nav-h: 62px;
   --tape-h: 56px;
   --chrome-h: calc(var(--nav-h) + var(--tape-h));
+  --sidebar-w: 252px;
 }
 
 *,
@@ -82,6 +84,7 @@ body {
 img, canvas, svg { display: block; max-width: 100%; }
 
 h1, h2, h3, h4 {
+  font-family: var(--display);
   font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.03em;

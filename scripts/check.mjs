@@ -57,6 +57,7 @@ const files = [
   "src/core/tape.js",
   "src/visuals/tapeBar.js",
   "src/visuals/fsm.js",
+  "src/visuals/siteDfa.js",
   "src/visuals/bgStage.js",
   "src/visuals/probability.js",
   "src/visuals/codecMini.js",

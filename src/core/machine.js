@@ -26,6 +26,7 @@ export const SECTION_PHASE = {
   about: 0.25,        // LATENT
   research: 0.375,    // QUANTIZE
   education: 0.5,     // ENTROPY
+  honors: 0.6,        // ENTROPY
   compression: 0.35,  // interactive ENCODE→BITSTREAM
   quality: 1.0,       // QUALITY
   transformers: 0.22, // LATENT

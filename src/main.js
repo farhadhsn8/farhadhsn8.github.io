@@ -20,6 +20,7 @@ import { clamp, formatFixed } from "./core/util.js";
 
 import { initTapeBar } from "./visuals/tapeBar.js";
 import { initFSM } from "./visuals/fsm.js";
+import { initSiteDfa } from "./visuals/siteDfa.js";
 import { initBgStage } from "./visuals/bgStage.js";
 import { initProbability } from "./visuals/probability.js";
 import { initCodecMini } from "./visuals/codecMini.js";
@@ -133,15 +134,6 @@ function initContext() {
 // controls + keyboard
 // ------------------------------------------------------------
 function initControls() {
-  const slider = document.getElementById("rate");
-  const output = document.getElementById("rate-value");
-
-  if (slider) {
-    slider.addEventListener("input", () => {
-      machine.s.rateUser = clamp(Number(slider.value) / 100);
-    });
-  }
-
   // click the tape to halt / resume computation
   const turing = document.getElementById("turing");
   if (turing) {
@@ -165,21 +157,18 @@ function initControls() {
     }
   });
 
-  // expose output for the renderer
-  return { slider, output };
 }
 
 // ------------------------------------------------------------
 // live readouts (throttled to change-only writes)
 // ------------------------------------------------------------
-function initReadout(controls) {
+function initReadout() {
   const readout = document.getElementById("readout-text");
   const navStage = document.getElementById("nav-stage");
   const statLatent = document.getElementById("stat-latent");
   const statBpp = document.getElementById("stat-bpp");
   const statDist = document.getElementById("stat-dist");
   const statQuality = document.getElementById("stat-quality");
-  const { slider, output } = controls || {};
 
   let last = {};
 
@@ -201,13 +190,6 @@ function initReadout(controls) {
     if (statBpp) statBpp.textContent = formatFixed(d.bpp, 2);
     if (statDist) statDist.textContent = formatFixed(d.distortion, 2);
     if (statQuality) statQuality.textContent = formatFixed(d.quality, 2);
-    if (output) output.textContent = formatFixed(d.rate, 2);
-
-    // keep the slider in sync when the rate is driven by dragging
-    if (slider && machine.s.rateUser != null) {
-      const v = Math.round(machine.s.rateUser * 100);
-      if (Number(slider.value) !== v) slider.value = String(v);
-    }
   });
 }
 
@@ -224,13 +206,14 @@ function main() {
   initNav();
   initReveal();
   initContext();
-  const controls = initControls();
+  initControls();
 
   initPointer();
   initTape();
 
   initTapeBar();
   initFSM();
+  initSiteDfa();
   initBgStage();
   initProbability();
   initCodecMini();
@@ -240,7 +223,7 @@ function main() {
   initAttention();
   initCollapse();
 
-  initReadout(controls);
+  initReadout();
   initVisibility();
 
   const year = document.getElementById("year");
