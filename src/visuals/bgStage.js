@@ -14,6 +14,7 @@ const MAP = {
   hero: "fsm",
   about: "codecMini",
   research: "probability",
+  education: "fsm",
   compression: "codec",
   quality: "quality",
   transformers: "attention",

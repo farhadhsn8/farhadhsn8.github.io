@@ -24,7 +24,6 @@
 <div class="bg" aria-hidden="true">
   <div class="bg__glow"></div>
   <div class="bg__grid"></div>
-  <canvas id="field" class="bg__field"></canvas>
 
   <div class="bg__stage" id="bg-stage" inert>
     <div class="bg-viz" data-viz="fsm">
@@ -43,13 +42,25 @@
       </div>
     </div>
     <div class="bg-viz" data-viz="codec">
-      <div class="bg-viz__frame">
+      <div class="bg-viz__frame bg-viz__frame--codec">
         <canvas id="codec" class="bg-canvas" aria-label="Encoder and decoder pipeline visualization"></canvas>
+        <dl class="codec__stats mono bg-stats" aria-live="polite">
+          <div><dt>latent dim</dt><dd id="stat-latent">35</dd></div>
+          <div><dt>bitrate</dt><dd id="stat-bpp">1.02</dd></div>
+          <div><dt>distortion</dt><dd id="stat-dist">0.50</dd></div>
+          <div><dt>quality</dt><dd id="stat-quality">0.60</dd></div>
+        </dl>
       </div>
     </div>
     <div class="bg-viz" data-viz="quality">
-      <div class="bg-viz__frame">
+      <div class="bg-viz__frame bg-viz__frame--quality">
         <canvas id="quality-canvas" class="bg-canvas" role="img" aria-label="Rate and quality tradeoff for PSNR, SSIM, MS-SSIM and VMAF"></canvas>
+        <ul class="metrics mono bg-metrics" aria-label="Quality metrics">
+          <li><span class="metric__key">PSNR</span><span class="metric__val" data-metric="psnr">—</span></li>
+          <li><span class="metric__key">SSIM</span><span class="metric__val" data-metric="ssim">—</span></li>
+          <li><span class="metric__key">MS-SSIM</span><span class="metric__val" data-metric="msssim">—</span></li>
+          <li><span class="metric__key">VMAF</span><span class="metric__val" data-metric="vmaf">—</span></li>
+        </ul>
       </div>
     </div>
     <div class="bg-viz" data-viz="attention">
@@ -89,12 +100,13 @@
   <nav class="nav__menu" id="nav-menu" aria-label="Sections">
     <a href="#about" data-nav="about"><i>02</i>About</a>
     <a href="#research" data-nav="research"><i>03</i>Research</a>
-    <a href="#compression" data-nav="compression"><i>04</i>Compression</a>
-    <a href="#quality" data-nav="quality"><i>05</i>Quality</a>
-    <a href="#transformers" data-nav="transformers"><i>06</i>Transformers</a>
-    <a href="#projects" data-nav="projects"><i>07</i>Projects</a>
+    <a href="#education" data-nav="education"><i>04</i>Education</a>
+    <a href="#compression" data-nav="compression"><i>05</i>Compression</a>
+    <a href="#quality" data-nav="quality"><i>06</i>Quality</a>
+    <a href="#transformers" data-nav="transformers"><i>07</i>Transformers</a>
     <a href="#experience" data-nav="experience"><i>08</i>Experience</a>
-    <a href="#contact" data-nav="contact"><i>09</i>Contact</a>
+    <a href="#projects" data-nav="projects"><i>09</i>Projects</a>
+    <a href="#contact" data-nav="contact"><i>10</i>Contact</a>
   </nav>
 </header>
 
@@ -123,10 +135,10 @@
         <span class="hero__title-b">AS COMPUTATION<span class="hero__period">.</span></span>
       </h1>
       <p class="hero__lead reveal">
-        I build systems that turn raw pixels into compact representations —
-        and measure how much of the image survives the journey back.
-        Learned image &amp; video compression, no-reference quality assessment,
-        and representation learning.
+        Researcher in image and video compression and image quality assessment.
+        I build systems that turn raw pixels into compact representations — and
+        measure how much of the image survives the journey back. My current focus
+        is knowledge distillation for no-reference image quality assessment.
       </p>
       <div class="hero__actions reveal">
         <a class="btn btn--primary" href="#research">Enter the system <span class="mono">→</span></a>
@@ -169,7 +181,9 @@
           <div><dt>role</dt><dd>ML Engineer · CV Researcher</dd></div>
           <div><dt>base</dt><dd>Tehran, Iran</dd></div>
           <div><dt>focus</dt><dd>image/video coding · IQA</dd></div>
-          <div><dt>languages</dt><dd>Persian · English · German</dd></div>
+          <div><dt>languages</dt><dd>Persian (native) · English (advanced) · German (basic)</dd></div>
+          <div><dt>email</dt><dd><a href="mailto:farhadhsn8@gmail.com">farhadhsn8@gmail.com</a></dd></div>
+          <div><dt>profiles</dt><dd><a href="https://github.com/farhadhsn8" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://scholar.google.com/citations?user=Jr6ohtkAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Scholar</a></dd></div>
           <div><dt>status</dt><dd><span class="dot dot--live"></span>open to research &amp; applied roles</dd></div>
         </dl>
         <div class="skills reveal" aria-label="Technical skills">
@@ -188,12 +202,13 @@
   <section id="research" class="section" data-phase="0.375" aria-labelledby="research-title">
     <header class="section__head">
       <span class="section__index mono">03</span>
-      <h2 class="section__title" id="research-title">Research &amp; Work</h2>
+      <h2 class="section__title" id="research-title">Research &amp; Publications</h2>
       <span class="section__tag mono">state: QUANTIZE</span>
     </header>
     <p class="section__intro reveal">
       Each line of work is a transformation: information enters, is reshaped by a model,
-      and leaves as something smaller and more useful. Selected publications and applied systems.
+      and leaves as something smaller and more useful. Selected peer-reviewed publications
+      in image compression and quality assessment.
     </p>
 
     <h3 class="subhead mono">PUBLICATIONS</h3>
@@ -221,25 +236,45 @@
       </li>
     </ol>
 
-    <h3 class="subhead mono">CHALLENGES</h3>
-    <div class="grid grid--2">
-      <article class="card reveal">
-        <span class="card__stage mono">ENCODE · distortion</span>
-        <h4>Challenge on Learned Image Compression — CLIC 2024</h4>
-        <p>Second place in the Image Perceptual Model track, Jan 2024. Developed and optimized image compression methods to improve visual quality while reducing bitrate.</p>
-      </article>
-      <article class="card reveal">
-        <span class="card__stage mono">QUALITY · selection</span>
-        <h4>IPRIA 2023 — Selected Paper</h4>
-        <p>Designated a selected paper at the 2023 6th International Conference on Pattern Recognition and Image Analysis, Feb 2023.</p>
-      </article>
-    </div>
   </section>
 
-  <!-- 04 — COMPRESSION -->
-  <section id="compression" class="section section--wide" data-phase="0.35" aria-labelledby="compression-title">
+  <!-- 04 — EDUCATION & HONORS -->
+  <section id="education" class="section" data-phase="0.5" aria-labelledby="education-title">
     <header class="section__head">
       <span class="section__index mono">04</span>
+      <h2 class="section__title" id="education-title">Education &amp; Honors</h2>
+      <span class="section__tag mono">state: ENTROPY</span>
+    </header>
+    <p class="section__intro reveal">
+      Academic foundations in artificial intelligence and computer engineering, and recognition
+      for work in learned image compression and quality assessment.
+    </p>
+
+    <h3 class="subhead mono">EDUCATION</h3>
+    <div class="grid grid--2">
+      <div class="edu__item reveal">
+        <h4>Kharazmi University</h4>
+        <p class="mono">M.Sc. Artificial Intelligence · 2021 – 2024</p>
+        <p class="dim">Tehran, Iran</p>
+      </div>
+      <div class="edu__item reveal">
+        <h4>Bu-Ali Sina University</h4>
+        <p class="mono">B.Sc. Computer Engineering · 2017 – 2021</p>
+        <p class="dim">Hamedan, Iran</p>
+      </div>
+    </div>
+
+    <h3 class="subhead mono">HONORS</h3>
+    <ul class="honors">
+      <li class="reveal"><span class="mono">Jan 2024</span> CLIC 2024 — 2nd place, Image Perceptual Model track. Challenge on Learned Image Compression.</li>
+      <li class="reveal"><span class="mono">Feb 2023</span> IPRIA 2023 — selected paper, International Conference on Pattern Recognition and Image Analysis.</li>
+    </ul>
+  </section>
+
+  <!-- 05 — COMPRESSION -->
+  <section id="compression" class="section section--wide" data-phase="0.35" aria-labelledby="compression-title">
+    <header class="section__head">
+      <span class="section__index mono">05</span>
       <h2 class="section__title" id="compression-title">Compression</h2>
       <span class="section__tag mono">state: ENCODE → BITSTREAM</span>
     </header>
@@ -256,21 +291,15 @@
           <input type="range" id="rate" name="rate" min="0" max="100" value="50" step="1" aria-describedby="rate-value" />
           <output class="mono" id="rate-value">0.50</output>
         </label>
-        <dl class="codec__stats mono" aria-live="polite">
-          <div><dt>latent dim</dt><dd id="stat-latent">35</dd></div>
-          <div><dt>bitrate</dt><dd id="stat-bpp">1.02</dd></div>
-          <div><dt>distortion</dt><dd id="stat-dist">0.50</dd></div>
-          <div><dt>quality</dt><dd id="stat-quality">0.60</dd></div>
-        </dl>
       </div>
       <p class="codec__note mono">representation ↑ information &nbsp;·&nbsp; compression ↑ fewer bits &nbsp;·&nbsp; schematic, normalized simulation</p>
     </div>
   </section>
 
-  <!-- 05 — QUALITY -->
+  <!-- 06 — QUALITY -->
   <section id="quality" class="section" data-phase="1.0" aria-labelledby="quality-title">
     <header class="section__head">
-      <span class="section__index mono">05</span>
+      <span class="section__index mono">06</span>
       <h2 class="section__title" id="quality-title">Quality Assessment</h2>
       <span class="section__tag mono">state: QUALITY</span>
     </header>
@@ -286,20 +315,14 @@
           assessment, using knowledge distillation, stacking ensembles, and variance-based patch
           selection to predict perceptual quality without the pristine reference.
         </p>
-        <ul class="metrics mono" aria-label="Quality metrics">
-          <li><span class="metric__key">PSNR</span><span class="metric__val" data-metric="psnr">—</span></li>
-          <li><span class="metric__key">SSIM</span><span class="metric__val" data-metric="ssim">—</span></li>
-          <li><span class="metric__key">MS-SSIM</span><span class="metric__val" data-metric="msssim">—</span></li>
-          <li><span class="metric__key">VMAF</span><span class="metric__val" data-metric="vmaf">—</span></li>
-        </ul>
       </div>
     </div>
   </section>
 
-  <!-- 06 — TRANSFORMERS -->
+  <!-- 07 — TRANSFORMERS -->
   <section id="transformers" class="section" data-phase="0.22" aria-labelledby="transformers-title">
     <header class="section__head">
-      <span class="section__index mono">06</span>
+      <span class="section__index mono">07</span>
       <h2 class="section__title" id="transformers-title">Transformers</h2>
       <span class="section__tag mono">state: LATENT</span>
     </header>
@@ -309,101 +332,41 @@
     </p>
   </section>
 
-  <!-- 07 — PROJECTS -->
-  <section id="projects" class="section" data-phase="0.875" aria-labelledby="projects-title">
-    <header class="section__head">
-      <span class="section__index mono">07</span>
-      <h2 class="section__title" id="projects-title">Projects</h2>
-      <span class="section__tag mono">state: RECONSTRUCT</span>
-    </header>
-    <p class="section__intro reveal">
-      Applied systems, ordered as transformations through the pipeline. All roles and descriptions
-      are taken from my resume.
-    </p>
-    <div class="grid grid--3">
-      <article class="card card--project reveal">
-        <span class="card__stage mono">ENCODE</span>
-        <h4>Learned Image Compression</h4>
-        <p class="card__org">IVP-Lab · CLIC &amp; NTIRE</p>
-        <p>Developed and optimized image compression methods to enhance visual quality while reducing bitrate; contributed to the Challenge on Learned Image Compression and NTIRE challenges.</p>
-        <div class="tags mono"><span>image coding</span><span>rate–distortion</span><span>PyTorch</span></div>
-      </article>
-      <article class="card card--project reveal">
-        <span class="card__stage mono">QUALITY</span>
-        <h4>No-Reference IQA via Knowledge Distillation</h4>
-        <p class="card__org">Research · iceeconf-2026 (accepted)</p>
-        <p>Knowledge-distilled no-reference image quality assessment with A. Mansouri and A. Mahmoudi-Aznaveh.</p>
-        <div class="tags mono"><span>IQA</span><span>distillation</span><span>no-reference</span></div>
-      </article>
-      <article class="card card--project reveal">
-        <span class="card__stage mono">QUALITY</span>
-        <h4>Compressed Image Quality Assessment Using Stacking</h4>
-        <p class="card__org">arXiv:2402.00993 · 2024</p>
-        <p>A stacking ensemble for assessing the quality of compressed images.</p>
-        <div class="tags mono"><span>stacking</span><span>compression</span><span>IQA</span></div>
-      </article>
-      <article class="card card--project reveal">
-        <span class="card__stage mono">QUANTIZE</span>
-        <h4>Variance-Based Patch Selection for NR-IQA</h4>
-        <p class="card__org">IPRIA 2023 · selected paper</p>
-        <p>Studied how variance-based patch selection affects no-reference image quality assessment.</p>
-        <div class="tags mono"><span>patches</span><span>variance</span><span>perception</span></div>
-      </article>
-      <article class="card card--project reveal">
-        <span class="card__stage mono">RECONSTRUCT</span>
-        <h4>Virtual Try-On Pipeline</h4>
-        <p class="card__org">Boolooz (Golrang Ventures)</p>
-        <p>Architecture and pipeline for virtual try-on: background removal, pose estimation, human and cloth segmentation, and generation of models in new clothing. Dress swapping between two humans, model quantization, and Dockerized services.</p>
-        <div class="tags mono"><span>segmentation</span><span>generation</span><span>RabbitMQ</span></div>
-      </article>
-      <article class="card card--project reveal">
-        <span class="card__stage mono">ENCODE</span>
-        <h4>Automotive Footage → 3D Car Models</h4>
-        <p class="card__org">Drivee</p>
-        <p>Pipeline transforming raw automotive footage into interactive 3D car models, with vision models for background removal, frame selection, stabilization, shadow generation, plate-number segmentation, and image enhancement.</p>
-        <div class="tags mono"><span>3D</span><span>vision</span><span>enhancement</span></div>
-      </article>
-      <article class="card card--project reveal">
-        <span class="card__stage mono">DECODE</span>
-        <h4>Persian Handwritten Exam Grading</h4>
-        <p class="card__org">maze</p>
-        <p>ML system for automated grading of handwritten Persian biology exams, combining OCR and NLP to interpret free-text and structured answers, with a benchmarking pipeline across models.</p>
-        <div class="tags mono"><span>OCR</span><span>NLP</span><span>benchmarking</span></div>
-      </article>
-      <article class="card card--project reveal">
-        <span class="card__stage mono">BITSTREAM</span>
-        <h4>Medical Voice Reports → Structured Documents</h4>
-        <p class="card__org">reportexx</p>
-        <p>End-to-end ML pipeline converting radiologists&rsquo; abnormal voice reports into structured medical documents using NLP and speech-to-text; models to detect imaging modality and protocol and identify anatomical organs.</p>
-        <div class="tags mono"><span>speech</span><span>NLP</span><span>clinical</span></div>
-      </article>
-      <article class="card card--project reveal">
-        <span class="card__stage mono">LATENT</span>
-        <h4>Provider-Agnostic Memory Pipeline</h4>
-        <p class="card__org">memorybridge</p>
-        <p>Persistent, context-aware conversation memory independent of the underlying LLM provider, with automated context capture and memory classification (core, semantic, archival).</p>
-        <div class="tags mono"><span>memory</span><span>context</span><span>LLM</span></div>
-      </article>
-      <article class="card card--project reveal">
-        <span class="card__stage mono">RECONSTRUCT</span>
-        <h4>Fake News &amp; Deepfake Detection</h4>
-        <p class="card__org">Sahaa</p>
-        <p>Fake-news detection for social networks with a real-time updating knowledge base, plus deepfake detection for images and videos.</p>
-        <div class="tags mono"><span>detection</span><span>deepfake</span><span>real-time</span></div>
-      </article>
-    </div>
-  </section>
-
   <!-- 08 — EXPERIENCE -->
   <section id="experience" class="section" data-phase="0.75" aria-labelledby="experience-title">
     <header class="section__head">
       <span class="section__index mono">08</span>
-      <h2 class="section__title" id="experience-title">Experience &amp; Education</h2>
+      <h2 class="section__title" id="experience-title">Experience</h2>
       <span class="section__tag mono">state: DECODE</span>
     </header>
+    <p class="section__intro reveal">
+      Research and applied roles, ordered with academic work first. All positions and
+      descriptions are taken from my resume.
+    </p>
 
     <div class="exp">
       <ol class="timeline">
+        <li class="tl reveal">
+          <span class="tl__time mono">Mar 2022 – Sep 2024</span>
+          <div class="tl__body">
+            <h4>Computer Vision Researcher <span class="dim">·</span> IVP-Lab</h4>
+            <p class="tl__meta mono">Hybrid — Tehran, Iran · supervised by Dr. Azadeh Mansouri and Dr. Ahmad Mahmoudi Aznaveh</p>
+            <ul>
+              <li>Contributed to the CLIC (Challenge on Learned Image Compression) and NTIRE (New Trends in Image Restoration and Enhancement) challenges.</li>
+              <li>Developed and optimized image compression methods to enhance visual quality while reducing bitrate.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__time mono">Oct 2022 – Dec 2025</span>
+          <div class="tl__body">
+            <h4>Teacher Assistant <span class="dim">·</span> Kharazmi University</h4>
+            <p class="tl__meta mono">Tehran, Iran</p>
+            <ul>
+              <li>Neural networks, Advanced programming, Video processing, Computer vision.</li>
+            </ul>
+          </div>
+        </li>
         <li class="tl reveal">
           <span class="tl__time mono">Sep 2025 – Feb 2026</span>
           <div class="tl__body">
@@ -492,54 +455,165 @@
             </figure>
           </div>
         </li>
-        <li class="tl reveal">
-          <span class="tl__time mono">Mar 2022 – Sep 2024</span>
-          <div class="tl__body">
-            <h4>Computer Vision Researcher <span class="dim">·</span> IVP-Lab</h4>
-            <p class="tl__meta mono">Hybrid — Tehran, Iran · supervised by Dr. Azadeh Mansouri and Dr. Ahmad Mahmoudi Aznaveh</p>
-            <ul>
-              <li>Contributed to the CLIC (Challenge on Learned Image Compression) and NTIRE challenges.</li>
-              <li>Developed and optimized image compression methods to enhance visual quality while reducing bitrate.</li>
-            </ul>
-          </div>
-        </li>
-        <li class="tl reveal">
-          <span class="tl__time mono">Oct 2022 – Dec 2025</span>
-          <div class="tl__body">
-            <h4>Teacher Assistant <span class="dim">·</span> Kharazmi University</h4>
-            <p class="tl__meta mono">Tehran, Iran</p>
-            <ul>
-              <li>Neural networks, Advanced programming, Video processing, Computer vision.</li>
-            </ul>
-          </div>
-        </li>
       </ol>
-
-      <aside class="edu">
-        <h3 class="subhead mono">EDUCATION</h3>
-        <div class="edu__item reveal">
-          <h4>Kharazmi University</h4>
-          <p class="mono">M.Sc. Artificial Intelligence · 2021 – 2024</p>
-          <p class="dim">Tehran, Iran</p>
-        </div>
-        <div class="edu__item reveal">
-          <h4>Bu-Ali Sina University</h4>
-          <p class="mono">B.Sc. Computer Engineering · 2017 – 2021</p>
-          <p class="dim">Hamedan, Iran</p>
-        </div>
-        <h3 class="subhead mono">HONORS</h3>
-        <ul class="honors">
-          <li class="reveal"><span class="mono">Jan 2024</span> CLIC 2024 — 2nd place, Image Perceptual Model track.</li>
-          <li class="reveal"><span class="mono">Feb 2023</span> IPRIA 2023 — selected paper.</li>
-        </ul>
-      </aside>
     </div>
   </section>
 
-  <!-- 09 — CONTACT -->
-  <section id="contact" class="section section--contact" data-phase="0.0" aria-labelledby="contact-title">
+  <!-- 09 — PROJECTS -->
+  <section id="projects" class="section" data-phase="0.875" aria-labelledby="projects-title">
     <header class="section__head">
       <span class="section__index mono">09</span>
+      <h2 class="section__title" id="projects-title">Projects</h2>
+      <span class="section__tag mono">state: RECONSTRUCT</span>
+    </header>
+    <p class="section__intro reveal">
+      Selected open-source projects from my GitHub, spanning computer vision, NLP, and
+      machine-learning fundamentals. Each links to its source code.
+    </p>
+    <div class="grid grid--3">
+      <article class="card card--project reveal">
+        <span class="card__stage mono">VISION</span>
+        <h4>Surveillance System</h4>
+        <p class="card__org">PHP (Laravel) · Python · OpenCV · MySQL</p>
+        <p>Camera sensors detect events with image processing and push them to a server through a RESTful API; the server queues events and emails the user for each one.</p>
+        <div class="tags mono"><span>image processing</span><span>REST API</span><span>Laravel</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/surveillance_system/tree/master/prj" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">VISION</span>
+        <h4>Car Detection &amp; Localization</h4>
+        <p class="card__org">Python · YOLO · OpenCV</p>
+        <p>Extract the background from driving footage, detect street lines with the Hough transform, then use YOLO to find and remove white cars from a given lane.</p>
+        <div class="tags mono"><span>YOLO</span><span>Hough transform</span><span>video</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/deep-learning/tree/master/video-YOLO" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">VISION</span>
+        <h4>Face Recognition with a Siamese Network</h4>
+        <p class="card__org">Python · PyTorch</p>
+        <p>Face recognition on Labeled Faces in the Wild using a Siamese architecture and a triplet loss function.</p>
+        <div class="tags mono"><span>siamese</span><span>triplet loss</span><span>PyTorch</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/deep-learning/tree/master/siameseNet" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">CODING</span>
+        <h4>MPEG2 Video Codec</h4>
+        <p class="card__org">Python</p>
+        <p>Encoder/decoder for MPEG2 video compression: I-frames are block-coded with JPEG; P-frames are coded as residuals and motion vectors after motion estimation.</p>
+        <div class="tags mono"><span>MPEG2</span><span>motion estimation</span><span>codec</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/mpeg2-video-coding" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">VISION</span>
+        <h4>Hockey Fight Detection</h4>
+        <p class="card__org">Python · TensorFlow</p>
+        <p>Sample 20 frames per video and classify fights using features extracted from each frame and fed to a neural network.</p>
+        <div class="tags mono"><span>video classification</span><span>TensorFlow</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/deep-learning/tree/master/hockey-videos" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">ML</span>
+        <h4>Car Type Detection</h4>
+        <p class="card__org">Python · scikit-learn</p>
+        <p>Predict the type of car from the coordinates of the bounding box around the car.</p>
+        <div class="tags mono"><span>data mining</span><span>classification</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/data_mining-car-detection-/blob/master/DM_prj2.ipynb" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">VISION</span>
+        <h4>Image Segmentation with U-Net</h4>
+        <p class="card__org">Python · TensorFlow</p>
+        <p>Segmentation of flower images using the U-Net architecture.</p>
+        <div class="tags mono"><span>U-Net</span><span>segmentation</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/deep-learning/tree/master/U-NET" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">VISION</span>
+        <h4>Facial Emotion Recognition</h4>
+        <p class="card__org">Python · PyTorch</p>
+        <p>Predict seven classes of facial expression using deep neural networks.</p>
+        <div class="tags mono"><span>FER</span><span>deep learning</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/deep-learning/tree/master/FER" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">VISION</span>
+        <h4>Vision Transformer Feature Extraction</h4>
+        <p class="card__org">Python · PyTorch</p>
+        <p>Classify images with a Vision Transformer, then reduce the extracted features to two dimensions (t-SNE, PCA) and visualize them.</p>
+        <div class="tags mono"><span>ViT</span><span>t-SNE</span><span>PCA</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/deep-learning/tree/master/vision-transformer" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">NLP</span>
+        <h4>Persian News Topic Modeling</h4>
+        <p class="card__org">Python · scikit-learn</p>
+        <p>Cluster embeddings of Persian news sentences with two unsupervised methods and identify the main topic of each cluster.</p>
+        <div class="tags mono"><span>NLP</span><span>clustering</span><span>embeddings</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/deep-learning/tree/master/topic-modeling(NLP)" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">VISION</span>
+        <h4>Pose Estimation via Transfer Learning</h4>
+        <p class="card__org">Python · PyTorch</p>
+        <p>Predict 14 key points on a sports dataset using features extracted from pre-trained ResNet and VGG models.</p>
+        <div class="tags mono"><span>pose</span><span>transfer learning</span><span>ResNet</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/deep-learning/tree/master/pose%20estimation" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">TIME-SERIES</span>
+        <h4>Missing-Value Prediction in Time Series</h4>
+        <p class="card__org">Python</p>
+        <p>Predict missing sunspot values using 1D convolution and recurrent networks such as GRU and LSTM.</p>
+        <div class="tags mono"><span>time series</span><span>GRU</span><span>LSTM</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/deep-learning/tree/master/missing-value(time%20series)" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">VISION</span>
+        <h4>Image Captioning (CNN2RNN)</h4>
+        <p class="card__org">Python · PyTorch</p>
+        <p>Encoder/decoder image captioning: the encoder passes extracted image features to the decoder, which derives the appropriate words.</p>
+        <div class="tags mono"><span>captioning</span><span>encoder–decoder</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/deep-learning/tree/master/image_captioning" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">ML</span>
+        <h4>ML Algorithms from Scratch</h4>
+        <p class="card__org">Python</p>
+        <p>Implement decision tree, Gaussian naive Bayes, random forest, MLP, RBF, and KNN from scratch.</p>
+        <div class="tags mono"><span>from scratch</span><span>algorithms</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/implementation_ML_algorithms" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">ML</span>
+        <h4>Heart Disease Prediction</h4>
+        <p class="card__org">Python · scikit-learn</p>
+        <p>Predict the probability of heart disease from characteristics such as age, sex, maximum heart rate, and cholesterol.</p>
+        <div class="tags mono"><span>healthcare</span><span>classification</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/Heart-Disease-Prediction-using-Machine-Learning" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">VISION</span>
+        <h4>Bees and Ants Classification</h4>
+        <p class="card__org">Python · PyTorch</p>
+        <p>Classify ants and bees images with neural networks and transfer learning.</p>
+        <div class="tags mono"><span>transfer learning</span><span>classification</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/deep-learning/tree/master/STN-and-transferLearning/0-transfer%20learning" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">GENERATIVE</span>
+        <h4>Generative Adversarial Networks</h4>
+        <p class="card__org">Python · TensorFlow</p>
+        <p>Generate new celebrity-like images with a GAN trained on celebrity images.</p>
+        <div class="tags mono"><span>GAN</span><span>generation</span></div>
+        <a class="pub__link mono" href="https://github.com/farhadhsn8/deep-learning/tree/master/GAN" target="_blank" rel="noopener noreferrer">source code ↗</a>
+      </article>
+    </div>
+  </section>
+
+  <!-- 10 — CONTACT -->
+  <section id="contact" class="section section--contact" data-phase="0.0" aria-labelledby="contact-title">
+    <header class="section__head">
+      <span class="section__index mono">10</span>
       <h2 class="section__title" id="contact-title">Contact</h2>
       <span class="section__tag mono">state: INPUT</span>
     </header>
@@ -551,8 +625,11 @@
           <a class="btn btn--primary" href="mailto:farhadhsn8@gmail.com">farhadhsn8@gmail.com</a>
           <a class="btn" href="tel:+989335277126">+98 933 527 7126</a>
         </div>
+        <div class="contact__links">
+          <a class="btn" href="https://github.com/farhadhsn8" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <a class="btn" href="https://scholar.google.com/citations?user=Jr6ohtkAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
+        </div>
         <p class="contact__meta mono">Tehran, Iran · Persian (native) · English (advanced) · German (basic)</p>
-        <p class="contact__meta mono dim">GitHub · Google Scholar — listed on resume</p>
       </div>
     </div>
   </section>

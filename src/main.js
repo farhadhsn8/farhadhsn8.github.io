@@ -18,7 +18,6 @@ import { initPointer } from "./core/pointer.js";
 import { initTape } from "./core/tape.js";
 import { clamp, formatFixed } from "./core/util.js";
 
-import { initField } from "./visuals/field.js";
 import { initTapeBar } from "./visuals/tapeBar.js";
 import { initFSM } from "./visuals/fsm.js";
 import { initBgStage } from "./visuals/bgStage.js";
@@ -230,7 +229,6 @@ function main() {
   initPointer();
   initTape();
 
-  initField();
   initTapeBar();
   initFSM();
   initBgStage();

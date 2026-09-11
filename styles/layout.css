@@ -35,14 +35,6 @@
   mask-image: radial-gradient(120% 90% at 50% 0%, #000 0%, rgba(0,0,0,0.35) 55%, transparent 85%);
   opacity: 0.55;
 }
-.bg__field {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.45;
-}
-
 /* ---------- scroll-driven background diagrams ---------- */
 .bg__stage {
   position: absolute;
@@ -60,7 +52,7 @@
   will-change: opacity, transform;
 }
 .bg-viz.is-active {
-  opacity: 0.52;
+  opacity: 0.44;
   transform: none;
 }
 .bg-viz__frame { width: min(1080px, 90vw); }
@@ -74,6 +66,31 @@
 }
 .bg-attn__side { display: grid; gap: 16px; }
 .bg-canvas { display: block; width: 100%; }
+
+/* stat readouts that live inside their background diagram */
+.bg-viz__frame--codec,
+.bg-viz__frame--quality {
+  display: grid;
+  gap: 24px;
+}
+.bg-stats,
+.bg-metrics {
+  width: 100%;
+  opacity: 0.82;
+}
+.bg-stats { justify-content: center; gap: 30px; }
+.bg-stats dt { color: var(--dim); }
+.bg-stats dd { color: var(--muted); }
+.bg-viz .bg-metrics {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-top: 0;
+}
+.bg-metrics li { background: rgba(18, 22, 31, 0.28); }
+.bg-metrics .metric__key { color: var(--dim); }
+.bg-metrics .metric__val { color: var(--muted); font-size: 1rem; }
+@media (max-width: 680px) {
+  .bg-viz .bg-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
 .bg__noise {
   position: absolute;
   inset: 0;
@@ -415,7 +432,7 @@ main, .nav, .footer, .readout { position: relative; z-index: 1; }
 /* ---------- experience ---------- */
 .exp {
   display: grid;
-  grid-template-columns: 1.6fr 0.9fr;
+  grid-template-columns: 1fr;
   gap: clamp(28px, 5vw, 72px);
   align-items: start;
 }

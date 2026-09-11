@@ -55,7 +55,6 @@ const files = [
   "src/core/util.js",
   "src/core/gl.js",
   "src/core/tape.js",
-  "src/visuals/field.js",
   "src/visuals/tapeBar.js",
   "src/visuals/fsm.js",
   "src/visuals/bgStage.js",
