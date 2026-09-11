@@ -1,0 +1,115 @@
+/* ============================================================
+   VISUALS · FSM svg · quality svg · canvas states
+   ============================================================ */
+
+/* ---------- finite state machine ---------- */
+.fsm {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.fsm::-webkit-scrollbar { display: none; }
+.fsm svg { width: 100%; height: auto; display: block; overflow: visible; }
+@media (max-width: 680px) {
+  .fsm svg { min-width: 620px; }
+}
+
+.fsm__edge {
+  fill: none;
+  stroke: var(--line-2);
+  stroke-width: 1;
+  transition: stroke 0.45s var(--ease), stroke-width 0.45s var(--ease);
+}
+.fsm__edge.is-active {
+  stroke: var(--cyan);
+  stroke-width: 1.4;
+  filter: drop-shadow(0 0 5px rgba(var(--accent-rgb), 0.55));
+}
+.fsm__edge.is-flow {
+  stroke-dasharray: 5 7;
+  animation: dash 1.1s linear infinite;
+}
+@keyframes dash { to { stroke-dashoffset: -24; } }
+
+.fsm__node { cursor: pointer; }
+.fsm__node circle {
+  fill: rgba(16, 19, 26, 0.9);
+  stroke: var(--line-2);
+  stroke-width: 1;
+  transition: stroke 0.35s var(--ease), fill 0.35s var(--ease), r 0.35s var(--ease);
+}
+.fsm__node text {
+  fill: var(--dim);
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-anchor: middle;
+  transition: fill 0.35s var(--ease);
+}
+.fsm__node:hover circle { stroke: var(--line-3); fill: rgba(22, 27, 38, 0.95); }
+.fsm__node:hover text { fill: var(--ink-2); }
+.fsm__node.is-active circle {
+  stroke: var(--cyan);
+  fill: rgba(var(--accent-rgb), 0.14);
+  filter: drop-shadow(0 0 7px rgba(var(--accent-rgb), 0.6));
+}
+.fsm__node.is-active text { fill: var(--ink); }
+.fsm__node.is-done circle { stroke: var(--line-3); }
+.fsm__node.is-done text { fill: var(--muted); }
+.fsm__node:focus-visible { outline: none; }
+.fsm__node:focus-visible circle { stroke: var(--cyan); stroke-width: 1.6; }
+
+.fsm__pulse {
+  fill: var(--cyan);
+  filter: drop-shadow(0 0 6px rgba(var(--accent-rgb), 0.9));
+}
+.fsm__label {
+  fill: var(--dim);
+  font-family: var(--mono);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+}
+
+/* ---------- quality plot ---------- */
+.quality__canvas {
+  display: block;
+  width: 100%;
+  height: clamp(260px, 34vh, 380px);
+}
+.quality__svg text {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.05em;
+  fill: var(--dim);
+}
+.quality__axis { stroke: var(--line-2); stroke-width: 1; }
+.quality__grid { stroke: var(--line); stroke-width: 1; stroke-dasharray: 2 6; }
+.quality__curve {
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  transition: opacity 0.4s var(--ease);
+}
+.quality__curve--psnr   { stroke: var(--cyan); }
+.quality__curve--ssim   { stroke: var(--blue); }
+.quality__curve--msssim { stroke: var(--violet); }
+.quality__curve--vmaf   { stroke: var(--good); }
+.quality__curve.is-dim { opacity: 0.22; }
+.quality__marker { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 4; }
+.quality__dot { r: 3.2; }
+.quality__dot--psnr   { fill: var(--cyan); }
+.quality__dot--ssim   { fill: var(--blue); }
+.quality__dot--msssim { fill: var(--violet); }
+.quality__dot--vmaf   { fill: var(--good); }
+.quality__legend text { fill: var(--muted); }
+.quality__legend rect { rx: 1; }
+
+/* ---------- contact collapse ---------- */
+.contact__canvas { }
+
+/* ---------- paused state cue ---------- */
+.tape__canvas.is-paused { opacity: 0.75; }
+
+/* canvas rendering quality */
+canvas { image-rendering: auto; }

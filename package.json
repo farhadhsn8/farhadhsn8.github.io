@@ -1,0 +1,19 @@
+{
+  "name": "farhad-hosseini-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Compression as computation — interactive portfolio of S. Farhad Hosseini",
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "start": "node server.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}

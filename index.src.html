@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>S. Farhad Hosseini — Compression as Computation</title>
+<meta name="description" content="S. Farhad Hosseini — ML engineer and computer vision researcher working on learned image compression and image/video quality assessment." />
+<meta name="theme-color" content="#0d0e12" />
+<meta name="color-scheme" content="dark" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles/tokens.css" />
+<link rel="stylesheet" href="styles/layout.css" />
+<link rel="stylesheet" href="styles/components.css" />
+<link rel="stylesheet" href="styles/visuals.css" />
+<script type="importmap">
+{ "imports": { "three": "./vendor/three.module.js" } }
+</script>
+</head>
+<body>
+<a class="skip-link" href="#about">Skip to content</a>
+
+<div class="bg" aria-hidden="true">
+  <div class="bg__glow"></div>
+  <div class="bg__grid"></div>
+  <canvas id="field" class="bg__field"></canvas>
+  <div class="bg__noise"></div>
+  <div class="bg__scan"></div>
+</div>
+
+<header class="nav" id="nav">
+  <div class="nav__brand">
+    <span class="nav__id">S.F.HOSSEINI</span>
+    <span class="nav__sep">/</span>
+    <span class="nav__state" id="nav-stage" data-state="INPUT">INPUT</span>
+  </div>
+  <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+    <span></span><span></span>
+  </button>
+  <nav class="nav__menu" id="nav-menu" aria-label="Sections">
+    <a href="#about" data-nav="about"><i>02</i>About</a>
+    <a href="#research" data-nav="research"><i>03</i>Research</a>
+    <a href="#compression" data-nav="compression"><i>04</i>Compression</a>
+    <a href="#quality" data-nav="quality"><i>05</i>Quality</a>
+    <a href="#transformers" data-nav="transformers"><i>06</i>Transformers</a>
+    <a href="#projects" data-nav="projects"><i>07</i>Projects</a>
+    <a href="#experience" data-nav="experience"><i>08</i>Experience</a>
+    <a href="#contact" data-nav="contact"><i>09</i>Contact</a>
+  </nav>
+</header>
+
+<div class="readout" aria-hidden="true">
+  <span class="readout__dot"></span>
+  <span id="readout-text" class="mono">q=INPUT · rate 0.50 · latent 35 · bpp 1.02</span>
+</div>
+
+<main>
+
+  <!-- 01 — HERO -->
+  <section id="hero" class="hero" data-stage="0" data-phase="hero" aria-label="Introduction">
+    <div class="hero__inner">
+      <p class="hero__meta mono reveal">S. FARHAD HOSSEINI-BENVIDI <span class="dim">—</span> ML ENGINEER <span class="dim">·</span> COMPUTER VISION RESEARCHER <span class="dim">·</span> TEHRAN</p>
+      <h1 class="hero__title reveal">
+        <span class="hero__title-a">COMPRESSION</span>
+        <span class="hero__title-b">AS COMPUTATION<span class="hero__period">.</span></span>
+      </h1>
+      <p class="hero__lead reveal">
+        I build systems that turn raw pixels into compact representations —
+        and measure how much of the image survives the journey back.
+        Learned image &amp; video compression, no-reference quality assessment,
+        and representation learning.
+      </p>
+      <div class="hero__actions reveal">
+        <a class="btn btn--primary" href="#research">Enter the system <span class="mono">→</span></a>
+        <a class="btn" href="#projects">Selected work</a>
+      </div>
+    </div>
+
+    <div class="hero__instruments" aria-hidden="true">
+      <div class="inst inst--prob">
+        <div class="inst__head"><span class="mono">p(x)</span><span class="inst__note mono">entropy source</span></div>
+        <canvas id="probability" class="inst__canvas" width="360" height="120"></canvas>
+      </div>
+      <div class="inst inst--codec">
+        <div class="inst__head"><span class="mono">x → E → ẑ → Q → bits → D → x̂</span></div>
+        <canvas id="codec-mini" class="inst__canvas" width="640" height="120"></canvas>
+      </div>
+      <div class="inst inst--bits">
+        <div class="inst__head"><span class="mono">ENTROPY CODING</span><span class="inst__note mono">compact bitstream</span></div>
+        <canvas id="bitstream" class="inst__canvas" width="520" height="120"></canvas>
+      </div>
+    </div>
+
+    <div class="hero__fsm">
+      <div class="fsm__head">
+        <span class="mono">FINITE STATE MACHINE</span>
+        <span class="mono dim" id="fsm-transition">δ(INPUT, ·) → ENCODE</span>
+      </div>
+      <div class="fsm" id="fsm-hero" role="img" aria-label="Finite state machine: INPUT, ENCODE, LATENT, QUANTIZE, ENTROPY, BITSTREAM, DECODE, RECONSTRUCT, QUALITY"></div>
+    </div>
+
+    <div class="hero__tape">
+      <div class="tape__head">
+        <span class="mono">TURING TAPE <span class="dim">/ read-write head</span></span>
+        <span class="mono dim" id="tape-status">q0 · scanning 0 · write 1 · move R</span>
+      </div>
+      <canvas id="turing" class="tape__canvas" aria-label="Animated conceptual Turing machine tape"></canvas>
+    </div>
+
+    <p class="hero__tag mono reveal">PIXELS <span>—</span> REPRESENTATION <span>—</span> INFORMATION <span>—</span> COMPUTATION <span>—</span> RECONSTRUCTION</p>
+    <a class="hero__scroll mono" href="#about" aria-label="Scroll to about">scroll to compute <span>↓</span></a>
+  </section>
+
+  <!-- 02 — ABOUT -->
+  <section id="about" class="section" data-phase="0.25" aria-labelledby="about-title">
+    <header class="section__head">
+      <span class="section__index mono">02</span>
+      <h2 class="section__title" id="about-title">About</h2>
+      <span class="section__tag mono">state: LATENT</span>
+    </header>
+    <div class="about">
+      <div class="about__body reveal">
+        <p class="lead">
+          I am an AI/ML engineer and computer vision researcher. My work sits where
+          <em>learned image compression</em> meets <em>image and video quality assessment</em>:
+          designing models that compress visual information, then quantifying what perception loses.
+        </p>
+        <p>
+          I contributed to the <strong>CLIC</strong> (Challenge on Learned Image Compression) and
+          <strong>NTIRE</strong> (New Trends in Image Restoration and Enhancement) challenges, and have
+          co-authored publications on no-reference and compressed-image quality assessment. Alongside
+          research, I have shipped applied ML systems across medical NLP, virtual try-on, automotive
+          3D reconstruction, and content integrity.
+        </p>
+        <p>
+          I hold a Master&rsquo;s degree in Artificial Intelligence from Kharazmi University and a
+          Bachelor&rsquo;s degree in Computer Engineering from Bu-Ali Sina University.
+        </p>
+      </div>
+      <aside class="about__side">
+        <dl class="facts mono reveal">
+          <div><dt>role</dt><dd>ML Engineer · CV Researcher</dd></div>
+          <div><dt>base</dt><dd>Tehran, Iran</dd></div>
+          <div><dt>focus</dt><dd>image/video coding · IQA</dd></div>
+          <div><dt>languages</dt><dd>Persian · English · German</dd></div>
+          <div><dt>status</dt><dd><span class="dot dot--live"></span>open to research &amp; applied roles</dd></div>
+        </dl>
+        <div class="skills reveal" aria-label="Technical skills">
+          <div class="skills__group"><span class="mono skills__k">skills</span><p>Machine-learning, Deep-learning, Image and video coding methods, Data-structure and algorithms, Image and video processing, text processing, signal processing</p></div>
+          <div class="skills__group"><span class="mono skills__k">languages</span><p>Python, C, C++, PHP</p></div>
+          <div class="skills__group"><span class="mono skills__k">frameworks</span><p>PyTorch, TensorFlow (Keras), scikit-learn, OpenCV, NumPy, Pandas, Matplotlib, Laravel, Yii2</p></div>
+          <div class="skills__group"><span class="mono skills__k">databases</span><p>MySQL, MongoDB, Redis, Google RTDB</p></div>
+          <div class="skills__group"><span class="mono skills__k">cloud</span><p>GCP (cloud functions, storage, RTDB)</p></div>
+          <div class="skills__group"><span class="mono skills__k">tools</span><p>Linux, Git, Docker, RabbitMQ, Kafka</p></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 03 — RESEARCH -->
+  <section id="research" class="section" data-phase="0.375" aria-labelledby="research-title">
+    <header class="section__head">
+      <span class="section__index mono">03</span>
+      <h2 class="section__title" id="research-title">Research &amp; Work</h2>
+      <span class="section__tag mono">state: QUANTIZE</span>
+    </header>
+    <p class="section__intro reveal">
+      Each line of work is a transformation: information enters, is reshaped by a model,
+      and leaves as something smaller and more useful. Selected publications and applied systems.
+    </p>
+
+    <h3 class="subhead mono">PUBLICATIONS</h3>
+    <ol class="pubs" reversed>
+      <li class="pub reveal">
+        <span class="pub__venue mono">iceeconf-2026 · accepted</span>
+        <h4 class="pub__title">No-Reference Image Quality Assessment Using Knowledge Distillation</h4>
+        <p class="pub__authors">S. Farhad Hosseini-Benvidi, Azadeh Mansouri, Ahmad Mahmoudi-Aznaveh</p>
+      </li>
+      <li class="pub reveal">
+        <span class="pub__venue mono">CVPR 2024 · pp. 6337–6362</span>
+        <h4 class="pub__title">NTIRE 2024 Quality Assessment of AI-Generated Content Challenge</h4>
+        <p class="pub__authors">Liu, Xiaohong, Xiongkuo Min, Guangtao Zhai, Chunyi Li, Tengchuan Kou, Wei Sun, Haoning Wu, et al.</p>
+      </li>
+      <li class="pub reveal">
+        <span class="pub__venue mono">arXiv:2402.00993 · 2024</span>
+        <h4 class="pub__title">Compressed Image Quality Assessment Using Stacking</h4>
+        <p class="pub__authors">Hosseini-Benvidi, S.F., Motamednia, H., Mansouri, A., Raei, M., Mahmoudi-Aznaveh, A.</p>
+        <a class="pub__link mono" href="https://arxiv.org/abs/2402.00993" target="_blank" rel="noopener noreferrer">arxiv.org/abs/2402.00993 ↗</a>
+      </li>
+      <li class="pub reveal">
+        <span class="pub__venue mono">IPRIA 2023 · pp. 1–5 · selected paper</span>
+        <h4 class="pub__title">The Effect of Variance-Based Patch Selection on No-Reference Image Quality Assessment</h4>
+        <p class="pub__authors">Hosseini-Benvidi, S.F. and Mansouri, A.</p>
+      </li>
+    </ol>
+
+    <h3 class="subhead mono">CHALLENGES</h3>
+    <div class="grid grid--2">
+      <article class="card reveal">
+        <span class="card__stage mono">ENCODE · distortion</span>
+        <h4>Challenge on Learned Image Compression — CLIC 2024</h4>
+        <p>Second place in the Image Perceptual Model track, Jan 2024. Developed and optimized image compression methods to improve visual quality while reducing bitrate.</p>
+      </article>
+      <article class="card reveal">
+        <span class="card__stage mono">QUALITY · selection</span>
+        <h4>IPRIA 2023 — Selected Paper</h4>
+        <p>Designated a selected paper at the 2023 6th International Conference on Pattern Recognition and Image Analysis, Feb 2023.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- 04 — COMPRESSION -->
+  <section id="compression" class="section section--wide" data-phase="0.35" aria-labelledby="compression-title">
+    <header class="section__head">
+      <span class="section__index mono">04</span>
+      <h2 class="section__title" id="compression-title">Compression</h2>
+      <span class="section__tag mono">state: ENCODE → BITSTREAM</span>
+    </header>
+    <p class="section__intro reveal">
+      Raw pixels become patches, patches become latent vectors, precision is quantized away,
+      and an entropy coder emits a compact bitstream. The decoder reverses it — imperfectly.
+      Drag across the visualization to steer the compression rate. Hover the left half to encode,
+      the right half to decode.
+    </p>
+
+    <div class="codec reveal" id="codec-stage">
+      <div class="codec__canvas-wrap">
+        <canvas id="codec" class="codec__canvas" aria-label="Encoder and decoder pipeline visualization"></canvas>
+        <div class="codec__hover codec__hover--l mono" aria-hidden="true">ENCODE ◂ forward</div>
+        <div class="codec__hover codec__hover--r mono" aria-hidden="true">reverse ▸ DECODE</div>
+      </div>
+      <div class="codec__controls">
+        <label class="control" for="rate">
+          <span class="mono">compression rate</span>
+          <input type="range" id="rate" name="rate" min="0" max="100" value="50" step="1" aria-describedby="rate-value" />
+          <output class="mono" id="rate-value">0.50</output>
+        </label>
+        <dl class="codec__stats mono" aria-live="polite">
+          <div><dt>latent dim</dt><dd id="stat-latent">35</dd></div>
+          <div><dt>bitrate</dt><dd id="stat-bpp">1.02</dd></div>
+          <div><dt>distortion</dt><dd id="stat-dist">0.50</dd></div>
+          <div><dt>quality</dt><dd id="stat-quality">0.60</dd></div>
+        </dl>
+      </div>
+      <p class="codec__note mono">representation ↑ information &nbsp;·&nbsp; compression ↑ fewer bits &nbsp;·&nbsp; schematic, normalized simulation</p>
+    </div>
+  </section>
+
+  <!-- 05 — QUALITY -->
+  <section id="quality" class="section" data-phase="1.0" aria-labelledby="quality-title">
+    <header class="section__head">
+      <span class="section__index mono">05</span>
+      <h2 class="section__title" id="quality-title">Quality Assessment</h2>
+      <span class="section__tag mono">state: QUALITY</span>
+    </header>
+    <div class="quality">
+      <div class="quality__copy reveal">
+        <p class="lead">
+          Compression is a tradeoff. Push the rate up and the bitstream shrinks — but distortion
+          grows and perceived quality falls. Quality assessment is how we decide whether the
+          reconstruction is good enough.
+        </p>
+        <p>
+          My research spans <strong>no-reference</strong> and <strong>compressed-image</strong> quality
+          assessment, using knowledge distillation, stacking ensembles, and variance-based patch
+          selection to predict perceptual quality without the pristine reference.
+        </p>
+        <ul class="metrics mono" aria-label="Quality metrics">
+          <li><span class="metric__key">PSNR</span><span class="metric__val" data-metric="psnr">—</span></li>
+          <li><span class="metric__key">SSIM</span><span class="metric__val" data-metric="ssim">—</span></li>
+          <li><span class="metric__key">MS-SSIM</span><span class="metric__val" data-metric="msssim">—</span></li>
+          <li><span class="metric__key">VMAF</span><span class="metric__val" data-metric="vmaf">—</span></li>
+        </ul>
+      </div>
+      <figure class="quality__plot reveal">
+        <canvas id="quality-canvas" class="quality__canvas" role="img" aria-label="Schematic tradeoff between compression rate and reconstruction quality for PSNR, SSIM, MS-SSIM and VMAF"></canvas>
+        <figcaption class="mono">rate → &nbsp;·&nbsp; quality (normalized) ↑ &nbsp;·&nbsp; schematic · WebGL</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- 06 — TRANSFORMERS -->
+  <section id="transformers" class="section" data-phase="0.22" aria-labelledby="transformers-title">
+    <header class="section__head">
+      <span class="section__index mono">06</span>
+      <h2 class="section__title" id="transformers-title">Transformers</h2>
+      <span class="section__tag mono">state: LATENT</span>
+    </header>
+    <p class="section__intro reveal">
+      Attention is how latent tokens negotiate with each other. Move the cursor to select a query
+      token; the matrix re-weights its relationships across the sequence.
+    </p>
+    <div class="attn">
+      <div class="attn__panel reveal">
+        <div class="attn__head mono"><span>ATTENTION · Q·Kᵀ</span><span class="dim" id="attn-status">query 10 / 20</span></div>
+        <canvas id="attention" class="attn__canvas" aria-label="Attention weight matrix visualization"></canvas>
+      </div>
+      <div class="attn__side">
+        <div class="attn__panel reveal">
+          <div class="attn__head mono"><span>TOKENS</span><span class="dim">patches</span></div>
+          <canvas id="tokens" class="attn__canvas attn__canvas--tokens" aria-label="Token sequence visualization"></canvas>
+        </div>
+        <div class="attn__panel reveal">
+          <div class="attn__head mono"><span>LATENT VECTORS</span><span class="dim">z</span></div>
+          <canvas id="latent" class="attn__canvas attn__canvas--latent" aria-label="Latent vector representation"></canvas>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 — PROJECTS -->
+  <section id="projects" class="section" data-phase="0.875" aria-labelledby="projects-title">
+    <header class="section__head">
+      <span class="section__index mono">07</span>
+      <h2 class="section__title" id="projects-title">Projects</h2>
+      <span class="section__tag mono">state: RECONSTRUCT</span>
+    </header>
+    <p class="section__intro reveal">
+      Applied systems, ordered as transformations through the pipeline. All roles and descriptions
+      are taken from my resume.
+    </p>
+    <div class="grid grid--3">
+      <article class="card card--project reveal">
+        <span class="card__stage mono">ENCODE</span>
+        <h4>Learned Image Compression</h4>
+        <p class="card__org">IVP-Lab · CLIC &amp; NTIRE</p>
+        <p>Developed and optimized image compression methods to enhance visual quality while reducing bitrate; contributed to the Challenge on Learned Image Compression and NTIRE challenges.</p>
+        <div class="tags mono"><span>image coding</span><span>rate–distortion</span><span>PyTorch</span></div>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">QUALITY</span>
+        <h4>No-Reference IQA via Knowledge Distillation</h4>
+        <p class="card__org">Research · iceeconf-2026 (accepted)</p>
+        <p>Knowledge-distilled no-reference image quality assessment with A. Mansouri and A. Mahmoudi-Aznaveh.</p>
+        <div class="tags mono"><span>IQA</span><span>distillation</span><span>no-reference</span></div>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">QUALITY</span>
+        <h4>Compressed Image Quality Assessment Using Stacking</h4>
+        <p class="card__org">arXiv:2402.00993 · 2024</p>
+        <p>A stacking ensemble for assessing the quality of compressed images.</p>
+        <div class="tags mono"><span>stacking</span><span>compression</span><span>IQA</span></div>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">QUANTIZE</span>
+        <h4>Variance-Based Patch Selection for NR-IQA</h4>
+        <p class="card__org">IPRIA 2023 · selected paper</p>
+        <p>Studied how variance-based patch selection affects no-reference image quality assessment.</p>
+        <div class="tags mono"><span>patches</span><span>variance</span><span>perception</span></div>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">RECONSTRUCT</span>
+        <h4>Virtual Try-On Pipeline</h4>
+        <p class="card__org">Boolooz (Golrang Ventures)</p>
+        <p>Architecture and pipeline for virtual try-on: background removal, pose estimation, human and cloth segmentation, and generation of models in new clothing. Dress swapping between two humans, model quantization, and Dockerized services.</p>
+        <div class="tags mono"><span>segmentation</span><span>generation</span><span>RabbitMQ</span></div>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">ENCODE</span>
+        <h4>Automotive Footage → 3D Car Models</h4>
+        <p class="card__org">Drivee</p>
+        <p>Pipeline transforming raw automotive footage into interactive 3D car models, with vision models for background removal, frame selection, stabilization, shadow generation, plate-number segmentation, and image enhancement.</p>
+        <div class="tags mono"><span>3D</span><span>vision</span><span>enhancement</span></div>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">DECODE</span>
+        <h4>Persian Handwritten Exam Grading</h4>
+        <p class="card__org">maze</p>
+        <p>ML system for automated grading of handwritten Persian biology exams, combining OCR and NLP to interpret free-text and structured answers, with a benchmarking pipeline across models.</p>
+        <div class="tags mono"><span>OCR</span><span>NLP</span><span>benchmarking</span></div>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">BITSTREAM</span>
+        <h4>Medical Voice Reports → Structured Documents</h4>
+        <p class="card__org">reportexx</p>
+        <p>End-to-end ML pipeline converting radiologists&rsquo; abnormal voice reports into structured medical documents using NLP and speech-to-text; models to detect imaging modality and protocol and identify anatomical organs.</p>
+        <div class="tags mono"><span>speech</span><span>NLP</span><span>clinical</span></div>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">LATENT</span>
+        <h4>Provider-Agnostic Memory Pipeline</h4>
+        <p class="card__org">memorybridge</p>
+        <p>Persistent, context-aware conversation memory independent of the underlying LLM provider, with automated context capture and memory classification (core, semantic, archival).</p>
+        <div class="tags mono"><span>memory</span><span>context</span><span>LLM</span></div>
+      </article>
+      <article class="card card--project reveal">
+        <span class="card__stage mono">RECONSTRUCT</span>
+        <h4>Fake News &amp; Deepfake Detection</h4>
+        <p class="card__org">Sahaa</p>
+        <p>Fake-news detection for social networks with a real-time updating knowledge base, plus deepfake detection for images and videos.</p>
+        <div class="tags mono"><span>detection</span><span>deepfake</span><span>real-time</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 08 — EXPERIENCE -->
+  <section id="experience" class="section" data-phase="0.75" aria-labelledby="experience-title">
+    <header class="section__head">
+      <span class="section__index mono">08</span>
+      <h2 class="section__title" id="experience-title">Experience &amp; Education</h2>
+      <span class="section__tag mono">state: DECODE</span>
+    </header>
+
+    <div class="exp">
+      <ol class="timeline">
+        <li class="tl reveal">
+          <span class="tl__time mono">Sep 2025 – Feb 2026</span>
+          <div class="tl__body">
+            <h4>AI Engineer <span class="dim">·</span> reportexx</h4>
+            <p class="tl__meta mono">Remote — Isfahan, Iran</p>
+            <ul>
+              <li>Developed an end-to-end ML pipeline to convert radiologists&rsquo; abnormal voice reports into structured, standardized medical documents using NLP and speech-to-text.</li>
+              <li>Built and deployed models to detect imaging modality and protocol (MRI/CT, with vs. without contrast) and identify the relevant anatomical organ from unstructured clinical narratives.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__time mono">Jul 2025 – Oct 2025</span>
+          <div class="tl__body">
+            <h4>ML Engineer <span class="dim">·</span> memorybridge</h4>
+            <p class="tl__meta mono">Remote — Ottawa, Canada</p>
+            <ul>
+              <li>Designed and developed a provider-agnostic memory pipeline for AI chatbots to enable persistent, context-aware conversations independent of the underlying LLM service providers.</li>
+              <li>Built automated context-capture and memory classification systems (core, semantic, archival, etc.) to structure, store, and selectively retrieve conversation history.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__time mono">Apr 2025 – Jul 2025</span>
+          <div class="tl__body">
+            <h4>ML Engineer <span class="dim">·</span> maze</h4>
+            <p class="tl__meta mono">Remote — Tehran, Iran</p>
+            <ul>
+              <li>Led R&amp;D for an ML system for automated grading of handwritten Persian biology exams, combining OCR and NLP to interpret free-text and structured answers.</li>
+              <li>Built a benchmarking pipeline to evaluate and compare models, establishing performance metrics and optimizing accuracy.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__time mono">Sep 2024 – Jul 2025</span>
+          <div class="tl__body">
+            <h4>AI Engineer <span class="dim">·</span> Sahaa</h4>
+            <p class="tl__meta mono">Remote — Tehran, Iran</p>
+            <ul>
+              <li>Developed a comprehensive fake-news detection system for social networks.</li>
+              <li>Designed a real-time updating model using a knowledge base to enhance detection accuracy.</li>
+              <li>Conducted deepfake detection for images and videos to identify manipulated content.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__time mono">Nov 2024 – Apr 2025</span>
+          <div class="tl__body">
+            <h4>ML Engineer <span class="dim">·</span> Boolooz <span class="dim">(under Golrang Ventures)</span></h4>
+            <p class="tl__meta mono">Office — Tehran, Iran</p>
+            <ul>
+              <li>Designed and implemented architecture and pipeline for Virtual Try-On (VTO) using RPC connections and RabbitMQ.</li>
+              <li>Background removal, pose estimation, human body-parts and cloth segmentation; generation of human models with new clothing; dress swapping between two humans.</li>
+              <li>Optimized and quantized deep-learning models; Dockerized services; Persian sentence embedding and query correction for semantic search.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__time mono">Sep 2021 – Oct 2024</span>
+          <div class="tl__body">
+            <h4>AI Engineer <span class="dim">·</span> Drivee</h4>
+            <p class="tl__meta mono">Remote/Office — CA, USA</p>
+            <ul>
+              <li>Designed and implemented a pipeline to transform raw automotive footage into interactive 3D car models.</li>
+              <li>Developed vision models including background removal, frame selection, car stabilization, shadow generation, plate-number segmentation, window background removal, and image enhancement.</li>
+              <li>Collaborated on deploying AI models and a framework for processing 3D car model images; built a dealership chatbot for test-drive bookings and appointment scheduling.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__time mono">Mar 2022 – Sep 2024</span>
+          <div class="tl__body">
+            <h4>Computer Vision Researcher <span class="dim">·</span> IVP-Lab</h4>
+            <p class="tl__meta mono">Hybrid — Tehran, Iran · supervised by Dr. Azadeh Mansouri and Dr. Ahmad Mahmoudi Aznaveh</p>
+            <ul>
+              <li>Contributed to the CLIC (Challenge on Learned Image Compression) and NTIRE challenges.</li>
+              <li>Developed and optimized image compression methods to enhance visual quality while reducing bitrate.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__time mono">Oct 2022 – Dec 2025</span>
+          <div class="tl__body">
+            <h4>Teacher Assistant <span class="dim">·</span> Kharazmi University</h4>
+            <p class="tl__meta mono">Tehran, Iran</p>
+            <ul>
+              <li>Neural networks, Advanced programming, Video processing, Computer vision.</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+
+      <aside class="edu">
+        <h3 class="subhead mono">EDUCATION</h3>
+        <div class="edu__item reveal">
+          <h4>Kharazmi University</h4>
+          <p class="mono">M.Sc. Artificial Intelligence · 2021 – 2024</p>
+          <p class="dim">Tehran, Iran</p>
+        </div>
+        <div class="edu__item reveal">
+          <h4>Bu-Ali Sina University</h4>
+          <p class="mono">B.Sc. Computer Engineering · 2017 – 2021</p>
+          <p class="dim">Hamedan, Iran</p>
+        </div>
+        <h3 class="subhead mono">HONORS</h3>
+        <ul class="honors">
+          <li class="reveal"><span class="mono">Jan 2024</span> CLIC 2024 — 2nd place, Image Perceptual Model track.</li>
+          <li class="reveal"><span class="mono">Feb 2023</span> IPRIA 2023 — selected paper.</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- 09 — CONTACT -->
+  <section id="contact" class="section section--contact" data-phase="0.0" aria-labelledby="contact-title">
+    <header class="section__head">
+      <span class="section__index mono">09</span>
+      <h2 class="section__title" id="contact-title">Contact</h2>
+      <span class="section__tag mono">state: INPUT</span>
+    </header>
+    <div class="contact">
+      <div class="contact__main reveal">
+        <p class="contact__kicker mono">raw information → representation → information</p>
+        <h3 class="contact__lead">Let&rsquo;s compress a hard problem into a working system.</h3>
+        <div class="contact__links">
+          <a class="btn btn--primary" href="mailto:farhadhsn8@gmail.com">farhadhsn8@gmail.com</a>
+          <a class="btn" href="tel:+989335277126">+98 933 527 7126</a>
+        </div>
+        <p class="contact__meta mono">Tehran, Iran · Persian (native) · English (advanced) · German (basic)</p>
+        <p class="contact__meta mono dim">GitHub · Google Scholar — listed on resume</p>
+      </div>
+      <div class="contact__viz reveal">
+        <canvas id="collapse" class="contact__canvas" aria-label="Information collapsing to a minimal state"></canvas>
+        <p class="mono dim contact__viz-note">state → minimal</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <span class="mono">S. FARHAD HOSSEINI-BENVIDI</span>
+    <span class="mono dim">compression as computation</span>
+    <span class="mono dim">© <span id="year"></span> · HTML · CSS · JS · Three.js</span>
+  </div>
+</footer>
+
+<noscript>
+  <p style="padding:2rem;text-align:center;font-family:monospace">
+    This portfolio&rsquo;s visualizations require JavaScript. All written content above remains available.
+  </p>
+</noscript>
+
+<script type="module" src="src/main.js"></script>
+</body>
+</html>
