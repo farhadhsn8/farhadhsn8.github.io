@@ -303,16 +303,53 @@ input[type="range"]::-moz-range-track { height: 2px; background: transparent; }
 .attn__canvas--latent { aspect-ratio: 3 / 1.2; }
 
 /* ---------- timeline ---------- */
-.timeline { position: relative; }
+.timeline {
+  position: relative;
+  counter-reset: tl;
+  padding-left: 46px;
+}
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--line-2) 6%,
+    var(--line-2) 94%,
+    transparent
+  );
+}
 .tl {
   position: relative;
   display: grid;
   grid-template-columns: 1fr;
   gap: 5px;
-  padding: 22px 0;
-  border-top: 1px solid var(--line);
+  padding: 0 0 36px;
+  counter-increment: tl;
 }
-.tl:last-child { border-bottom: 1px solid var(--line); }
+.tl:last-child { padding-bottom: 0; }
+.tl::before {
+  content: counter(tl, decimal-leading-zero);
+  position: absolute;
+  left: -46px;
+  top: -3px;
+  width: 30px;
+  height: 30px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  background: var(--bg-2);
+  color: var(--cyan);
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+  z-index: 1;
+}
 .tl__time { color: var(--dim); letter-spacing: 0.06em; }
 .tl__body h4 { font-size: 1.05rem; margin-bottom: 5px; }
 .tl__org {
@@ -397,6 +434,15 @@ input[type="range"]::-moz-range-track { height: 2px; background: transparent; }
 
 @media (max-width: 680px) {
   .tl { grid-template-columns: 1fr; gap: 8px; }
+  .timeline { padding-left: 38px; }
+  .timeline::before { left: 12px; }
+  .tl::before {
+    left: -38px;
+    width: 24px;
+    height: 24px;
+    font-size: 9px;
+    top: -1px;
+  }
   .skills__group { grid-template-columns: 1fr; gap: 4px; }
   .facts dd { text-align: left; }
   .metrics { grid-template-columns: 1fr; }

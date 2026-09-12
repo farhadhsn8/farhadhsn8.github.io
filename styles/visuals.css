@@ -98,6 +98,8 @@
   font-weight: 500;
   transition: fill 0.35s var(--ease);
 }
+.dfa--bar .dfa__name { font-size: var(--dfa-name-size, 9px); }
+.dfa--bar .dfa__num { font-size: 8px; }
 .dfa__sym {
   fill: var(--dim);
   font-family: var(--mono);

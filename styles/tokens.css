@@ -54,6 +54,7 @@
   --tape-h: 56px;
   --chrome-h: calc(var(--nav-h) + var(--tape-h));
   --sidebar-w: 252px;
+  --dfa-bar-h: 74px;
 }
 
 *,
