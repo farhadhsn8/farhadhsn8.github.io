@@ -80,7 +80,53 @@ function initReveal() {
 function initContext() {
   const sections = Array.from(document.querySelectorAll("section[id]"));
   const navLinks = Array.from(document.querySelectorAll("[data-nav]"));
+
+  // section labels (number + name) read from the nav
+  const labels = new Map();
+  navLinks.forEach((a) => {
+    const id = a.getAttribute("data-nav");
+    const i = a.querySelector("i");
+    labels.set(id, {
+      num: i ? i.textContent.trim() : "",
+      name: a.textContent.replace(i ? i.textContent : "", "").trim()
+    });
+  });
+
+  const hudNum = document.getElementById("nav-section-num");
+  const hudName = document.getElementById("nav-section-name");
+  const rail = document.getElementById("nav-rail");
+  const railFill = document.getElementById("nav-rail-fill");
+
   let ticking = false;
+  let lastContext = null;
+  let ticks = [];
+
+  const setSection = (id) => {
+    if (id === lastContext) return;
+    lastContext = id;
+
+    const info = labels.get(id);
+    if (info) {
+      if (hudNum) hudNum.textContent = info.num;
+      if (hudName) hudName.textContent = info.name;
+    }
+  };
+
+  // boundary ticks on the rail mark where each section begins
+  const measureRail = () => {
+    if (!rail) return;
+    const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+    for (const t of ticks) t.remove();
+    ticks = [];
+    for (const sec of sections) {
+      const top = sec.getBoundingClientRect().top + window.scrollY;
+      const t = document.createElement("span");
+      t.className = "nav__rail-tick";
+      t.style.left = `${(clamp(top / max, 0, 1) * 100).toFixed(2)}%`;
+      rail.appendChild(t);
+      ticks.push(t);
+    }
+  };
 
   const update = () => {
     ticking = false;
@@ -109,6 +155,7 @@ function initContext() {
     }
     if (!best) return;
 
+    setSection(best.id);
     if (best.id !== machine.s.context) machine.s.context = best.id;
 
     const r = best.getBoundingClientRect();
@@ -117,6 +164,11 @@ function initContext() {
     navLinks.forEach((a) => {
       a.classList.toggle("is-active", a.getAttribute("data-nav") === best.id);
     });
+
+    if (railFill) {
+      const max = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      railFill.style.width = `${(clamp(window.scrollY / max, 0, 1) * 100).toFixed(2)}%`;
+    }
   };
 
   const onScroll = () => {
@@ -126,7 +178,16 @@ function initContext() {
   };
 
   window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", onScroll, { passive: true });
+  window.addEventListener("resize", () => {
+    measureRail();
+    onScroll();
+  }, { passive: true });
+  window.addEventListener("load", measureRail);
+  if (typeof ResizeObserver !== "undefined") {
+    new ResizeObserver(measureRail).observe(document.body);
+  }
+
+  measureRail();
   update();
 }
 

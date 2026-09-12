@@ -152,11 +152,6 @@ main, .nav, .footer, .readout { position: relative; z-index: 1; }
   color: var(--ink-2);
 }
 .nav__sep { color: var(--dim); }
-.nav__state {
-  color: var(--cyan);
-  min-width: 5.5em;
-  transition: color 0.4s var(--ease);
-}
 .nav__menu {
   display: flex;
   gap: 4px;
@@ -203,6 +198,77 @@ main, .nav, .footer, .readout { position: relative; z-index: 1; }
 }
 .nav.is-open .nav__toggle span:first-child { transform: translateY(3.25px) rotate(45deg); }
 .nav.is-open .nav__toggle span:last-child  { transform: translateY(-3.25px) rotate(-45deg); }
+
+/* live section readout + scroll rail */
+.nav__state {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  color: var(--cyan);
+  min-width: 12ch;
+}
+.nav__state-num {
+  color: var(--dim);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+}
+.nav__state-name {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.nav__rail {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: rgba(150, 175, 210, 0.08);
+}
+.nav__rail-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  box-shadow: 0 0 12px rgba(var(--accent-rgb), 0.65);
+  transition: width 0.12s linear;
+}
+.nav__rail-tick {
+  position: absolute;
+  top: -2px;
+  width: 1px;
+  height: 6px;
+  background: var(--line-3);
+  transform: translateX(-0.5px);
+}
+
+/* section-change scanline */
+.section-scan {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(var(--accent-rgb), 0.06) 42%,
+    rgba(var(--accent-rgb), 0.22) 50%,
+    rgba(var(--accent-rgb), 0.06) 58%,
+    transparent 100%
+  );
+}
+.section-scan.is-on { animation: sectionScan 0.9s var(--ease-out); }
+@keyframes sectionScan {
+  0%   { opacity: 0; transform: translateY(-100%); }
+  18%  { opacity: 1; }
+  82%  { opacity: 1; }
+  100% { opacity: 0; transform: translateY(100%); }
+}
 
 /* ---------- floating Turing tape bar ---------- */
 .tape-bar {
@@ -337,6 +403,11 @@ main, .nav, .footer, .readout { position: relative; z-index: 1; }
 .section__title {
   font-size: clamp(1.6rem, 3.4vw, 2.6rem);
   font-weight: 500;
+  background: linear-gradient(100deg, #eef6ff 0%, #a9d9ff 52%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--ink);
 }
 .section__tag {
   margin-left: auto;
@@ -653,7 +724,6 @@ main, .nav, .footer, .readout { position: relative; z-index: 1; }
 /* ---------- responsive ---------- */
 @media (min-width: 1180px) {
   .sidebar { display: flex; }
-  .nav__menu { display: none; }
   .nav { padding-left: calc(var(--gutter) + var(--sidebar-w)); }
   main { padding-left: var(--sidebar-w); }
   .footer { padding-left: calc(var(--gutter) + var(--sidebar-w)); }

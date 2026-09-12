@@ -35,7 +35,7 @@
   --violet-rgb: 155, 123, 255;
 
   /* type */
-  --sans: "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --sans: Georgia, "Times New Roman", Times, serif;
   --display: "Sora", "Manrope", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
 
