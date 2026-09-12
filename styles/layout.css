@@ -449,11 +449,19 @@ main, .nav, .footer, .readout { position: relative; z-index: 1; }
 }
 .about__body p:not(.lead) { color: var(--ink-2); }
 .about__side { display: grid; gap: 26px; }
-.about__body .facts { margin-top: 34px; }
-.about__body .skills { margin-top: 26px; }
+.about__meta {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gutter);
+  align-items: start;
+  margin-top: 0;
+}
+.about__meta .facts,
+.about__meta .skills { margin-top: 0; }
 
 /* ---------- profile placeholder ---------- */
-.profile { margin: 0; }
+.profile { margin: 0; max-width: 240px; }
 .profile__frame {
   position: relative;
   aspect-ratio: 4 / 5;
@@ -678,6 +686,7 @@ main, .nav, .footer, .readout { position: relative; z-index: 1; }
 }
 @media (max-width: 680px) {
   .grid--3, .grid--2 { grid-template-columns: 1fr; }
+  .about__meta { grid-template-columns: 1fr; }
   .footer__cols { grid-template-columns: 1fr; }
   .readout { display: none; }
   .hero { justify-content: flex-start; padding-top: calc(var(--chrome-h) + 24px); }

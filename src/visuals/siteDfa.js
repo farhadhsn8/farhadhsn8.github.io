@@ -19,12 +19,12 @@ const el = (tag, attrs = {}) => {
 };
 
 const SECTIONS = [
-  { id: "about", num: "01", name: "About", stage: "LATENT" },
-  { id: "education", num: "02", name: "Education", stage: "ENTROPY" },
-  { id: "experience", num: "03", name: "Experience", stage: "DECODE" },
-  { id: "honors", num: "04", name: "Honors", stage: "ENTROPY" },
-  { id: "research", num: "05", name: "Research", stage: "QUANTIZE" },
-  { id: "projects", num: "06", name: "Projects", stage: "RECONSTRUCT" }
+  { id: "about", num: "01", name: "About" },
+  { id: "education", num: "02", name: "Education" },
+  { id: "experience", num: "03", name: "Experience" },
+  { id: "honors", num: "04", name: "Honors" },
+  { id: "research", num: "05", name: "Research" },
+  { id: "projects", num: "06", name: "Projects" }
 ];
 
 export function initSiteDfa() {
@@ -99,16 +99,13 @@ export function initSiteDfa() {
         "marker-end": "url(#dfa-arrow)"
       });
       edgeLayer.appendChild(path);
-      const sym = el("text", { x: cx + 10, y: (py + y) / 2 + 3, class: "dfa__sym" });
-      sym.textContent = sec.stage;
-      edgeLayer.appendChild(sym);
       edges.push({ path, to: i });
     }
 
     const a = el("a", {
       href: `#${sec.id}`,
       class: "dfa__link",
-      "aria-label": `${sec.name} — state ${sec.stage}`
+      "aria-label": sec.name
     });
     const g = el("g", { class: "dfa__node", transform: `translate(${cx} ${y})` });
 

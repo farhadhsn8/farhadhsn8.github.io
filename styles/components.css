@@ -157,8 +157,38 @@
 .facts > div:last-child { border-bottom: 0; }
 .facts dt { color: var(--dim); letter-spacing: 0.08em; }
 .facts dd { color: var(--ink-2); text-align: right; text-transform: none; letter-spacing: 0.02em; }
+.icon-sprite { display: none; }
+.icon { width: 18px; height: 18px; fill: currentColor; display: block; flex: none; }
+.facts__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  justify-content: flex-end;
+  align-items: center;
+}
+.facts__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--muted);
+  font-size: 0.8rem;
+  transition: color 0.25s var(--ease);
+}
+.facts__links a:hover { color: var(--cyan); }
+.footer__social { display: grid; gap: 9px; }
+.footer__social a {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  width: fit-content;
+  border-bottom: 0;
+  color: var(--ink-2);
+  font-size: 0.95rem;
+  transition: color 0.25s var(--ease);
+}
+.footer__social a:hover { color: var(--cyan); border-color: transparent; }
 
-.skills { display: grid; gap: 0; }
+.skills { display: grid; gap: 0; padding: 0 18px; }
 .skills__group {
   display: grid;
   grid-template-columns: 92px 1fr;

@@ -21,6 +21,13 @@
 <body>
 <a class="skip-link" href="#about">Skip to content</a>
 
+<svg class="icon-sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-mail" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></symbol>
+  <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+  <symbol id="i-scholar" viewBox="0 0 24 24"><path d="M5.242 13.769 0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.749-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></symbol>
+  <symbol id="i-telegram" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></symbol>
+</svg>
+
 <div class="bg" aria-hidden="true">
   <div class="bg__glow"></div>
   <div class="bg__grid"></div>
@@ -91,8 +98,6 @@
 <header class="nav" id="nav">
   <div class="nav__brand">
     <span class="nav__id">S.F.HOSSEINI</span>
-    <span class="nav__sep">/</span>
-    <span class="nav__state" id="nav-stage" data-state="INPUT">INPUT</span>
   </div>
   <button class="nav__toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
     <span></span><span></span>
@@ -128,11 +133,6 @@
   </div>
 </aside>
 
-<div class="readout" aria-hidden="true">
-  <span class="readout__dot"></span>
-  <span id="readout-text" class="mono">q=INPUT · rate 0.50 · latent 35 · bpp 1.02</span>
-</div>
-
 <main>
 
   <!-- 01 — ABOUT & CONTACT -->
@@ -140,7 +140,6 @@
     <header class="section__head">
       <span class="section__index mono">01</span>
       <h2 class="section__title" id="about-title">About</h2>
-      <span class="section__tag mono">state: LATENT</span>
     </header>
     <div class="about">
       <div class="about__body reveal">
@@ -160,23 +159,6 @@
           I hold a Master&rsquo;s degree in Artificial Intelligence from Kharazmi University and a
           Bachelor&rsquo;s degree in Computer Engineering from Bu-Ali Sina University.
         </p>
-        <dl class="facts mono">
-          <div><dt>role</dt><dd>ML Engineer · CV Researcher</dd></div>
-          <div><dt>base</dt><dd>Tehran, Iran</dd></div>
-          <div><dt>focus</dt><dd>image/video coding · IQA</dd></div>
-          <div><dt>languages</dt><dd>Persian (native) · English (advanced) · German (basic)</dd></div>
-          <div><dt>email</dt><dd><a href="mailto:farhadhsn8@gmail.com">farhadhsn8@gmail.com</a></dd></div>
-          <div><dt>profiles</dt><dd><a href="https://github.com/farhadhsn8" target="_blank" rel="noopener noreferrer">GitHub</a> · <a href="https://scholar.google.com/citations?user=Jr6ohtkAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Scholar</a></dd></div>
-          <div><dt>status</dt><dd><span class="dot dot--live"></span>open to research &amp; applied roles</dd></div>
-        </dl>
-        <div class="skills" aria-label="Technical skills">
-          <div class="skills__group"><span class="mono skills__k">skills</span><p>Machine-learning, Deep-learning, Image and video coding methods, Data-structure and algorithms, Image and video processing, text processing, signal processing</p></div>
-          <div class="skills__group"><span class="mono skills__k">languages</span><p>Python, C, C++, PHP</p></div>
-          <div class="skills__group"><span class="mono skills__k">frameworks</span><p>PyTorch, TensorFlow (Keras), scikit-learn, OpenCV, NumPy, Pandas, Matplotlib, Laravel, Yii2</p></div>
-          <div class="skills__group"><span class="mono skills__k">databases</span><p>MySQL, MongoDB, Redis, Google RTDB</p></div>
-          <div class="skills__group"><span class="mono skills__k">cloud</span><p>GCP (cloud functions, storage, RTDB)</p></div>
-          <div class="skills__group"><span class="mono skills__k">tools</span><p>Linux, Git, Docker, RabbitMQ, Kafka</p></div>
-        </div>
       </div>
       <aside class="about__side">
         <figure class="profile reveal" aria-label="Portrait placeholder">
@@ -187,6 +169,42 @@
           <figcaption class="profile__cap mono">S. Farhad Hosseini-Benvidi</figcaption>
         </figure>
       </aside>
+      <div class="about__meta reveal">
+        <dl class="facts mono">
+          <div><dt>role</dt><dd>ML Engineer · CV Researcher</dd></div>
+          <div><dt>base</dt><dd>Tehran, Iran</dd></div>
+          <div><dt>focus</dt><dd>image/video coding · IQA</dd></div>
+          <div><dt>languages</dt><dd>Persian (native) · English (advanced) · German (basic)</dd></div>
+          <div><dt>phone</dt><dd><a href="tel:+989335277126">+98 933 527 7126</a></dd></div>
+          <div><dt>connect</dt><dd class="facts__links">
+            <a href="mailto:farhadhsn8@gmail.com" title="Email" aria-label="Email">
+              <span>Email</span>
+              <svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg>
+            </a>
+            <a href="https://github.com/farhadhsn8" target="_blank" rel="noopener noreferrer" title="GitHub" aria-label="GitHub">
+              <span>GitHub</span>
+              <svg class="icon" aria-hidden="true"><use href="#i-github"/></svg>
+            </a>
+            <a href="https://scholar.google.com/citations?user=Jr6ohtkAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" title="Google Scholar" aria-label="Google Scholar">
+              <span>Scholar</span>
+              <svg class="icon" aria-hidden="true"><use href="#i-scholar"/></svg>
+            </a>
+            <a href="https://t.me/farhosseid" target="_blank" rel="noopener noreferrer" title="Telegram" aria-label="Telegram">
+              <span>Telegram</span>
+              <svg class="icon" aria-hidden="true"><use href="#i-telegram"/></svg>
+            </a>
+          </dd></div>
+        </dl>
+        <div class="skills" aria-label="Technical skills">
+          <div class="skills__group"><span class="mono skills__k">skills</span><p>Machine-learning, Deep-learning, Image and video coding methods, Data-structure and algorithms, Image and video processing, text processing, signal processing</p></div>
+          <div class="skills__group"><span class="mono skills__k">languages</span><p>Python, C, C++, PHP, SQL</p></div>
+          <div class="skills__group"><span class="mono skills__k">frameworks</span><p>PyTorch, TensorFlow (Keras), scikit-learn, OpenCV, NumPy, Pandas, Matplotlib, Hugging Face, LangChain, LangGraph, LlamaIndex, FastAPI, Laravel, Yii2</p></div>
+          <div class="skills__group"><span class="mono skills__k">AI / LLM</span><p>RAG, LLM agents, prompt engineering, fine-tuning (LoRA/QLoRA), embeddings and semantic search, model evaluation (RAGAS)</p></div>
+          <div class="skills__group"><span class="mono skills__k">databases</span><p>MySQL, MongoDB, Redis, Neo4j, Milvus, Chroma, Qdrant, Google RTDB</p></div>
+          <div class="skills__group"><span class="mono skills__k">cloud</span><p>GCP (cloud functions, storage, RTDB)</p></div>
+          <div class="skills__group"><span class="mono skills__k">tools</span><p>Linux, Git, Docker, Kubernetes, MLflow, Weights &amp; Biases, RabbitMQ, Kafka, vLLM</p></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -195,11 +213,7 @@
     <header class="section__head">
       <span class="section__index mono">02</span>
       <h2 class="section__title" id="education-title">Education</h2>
-      <span class="section__tag mono">state: ENTROPY</span>
     </header>
-    <p class="section__intro reveal">
-      Academic foundations in artificial intelligence and computer engineering.
-    </p>
 
     <div class="grid grid--2">
       <div class="edu__item reveal">
@@ -220,36 +234,10 @@
     <header class="section__head">
       <span class="section__index mono">03</span>
       <h2 class="section__title" id="experience-title">Experience</h2>
-      <span class="section__tag mono">state: DECODE</span>
     </header>
-    <p class="section__intro reveal">
-      Research and applied roles, ordered with academic work first. All positions and
-      descriptions are taken from my resume.
-    </p>
 
     <div class="exp">
       <ol class="timeline">
-        <li class="tl reveal">
-          <span class="tl__time mono">Mar 2022 – Sep 2024</span>
-          <div class="tl__body">
-            <h4>Computer Vision Researcher <span class="dim">·</span> IVP-Lab</h4>
-            <p class="tl__meta mono">Hybrid — Tehran, Iran · supervised by <a href="https://eng.khu.ac.ir/cv/307/english" target="_blank" rel="noopener noreferrer">Dr. Azadeh Mansouri</a> and <a href="http://facultymembers.sbu.ac.ir/a_mahmoudi/index.html" target="_blank" rel="noopener noreferrer">Dr. Ahmad Mahmoudi Aznaveh</a></p>
-            <ul>
-              <li>Contributed to the CLIC (Challenge on Learned Image Compression) and NTIRE (New Trends in Image Restoration and Enhancement) challenges.</li>
-              <li>Developed and optimized image compression methods to enhance visual quality while reducing bitrate.</li>
-            </ul>
-          </div>
-        </li>
-        <li class="tl reveal">
-          <span class="tl__time mono">Oct 2022 – Dec 2025</span>
-          <div class="tl__body">
-            <h4>Teacher Assistant <span class="dim">·</span> Kharazmi University</h4>
-            <p class="tl__meta mono">Tehran, Iran</p>
-            <ul>
-              <li>Neural networks, Advanced programming, Video processing, Computer vision.</li>
-            </ul>
-          </div>
-        </li>
         <li class="tl reveal">
           <span class="tl__time mono">Sep 2025 – Feb 2026</span>
           <div class="tl__body">
@@ -284,18 +272,6 @@
           </div>
         </li>
         <li class="tl reveal">
-          <span class="tl__time mono">Sep 2024 – Jul 2025</span>
-          <div class="tl__body">
-            <h4>AI Engineer <span class="dim">·</span> Sahaa</h4>
-            <p class="tl__meta mono">Remote — Tehran, Iran</p>
-            <ul>
-              <li>Developed a comprehensive fake-news detection system for social networks.</li>
-              <li>Designed a real-time updating model using a knowledge base to enhance detection accuracy.</li>
-              <li>Conducted deepfake detection for images and videos to identify manipulated content.</li>
-            </ul>
-          </div>
-        </li>
-        <li class="tl reveal">
           <span class="tl__time mono">Nov 2024 – Apr 2025</span>
           <div class="tl__body">
             <h4>ML Engineer <span class="dim">·</span> <a class="tl__org" href="https://boolooz.com/" target="_blank" rel="noopener noreferrer">Boolooz ↗</a> <span class="dim">(under Golrang Ventures)</span></h4>
@@ -314,6 +290,39 @@
                 decoding="async" />
               <figcaption class="tl__demo-cap mono">Boolooz · virtual try-on pipeline</figcaption>
             </figure>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__time mono">Sep 2024 – Jul 2025</span>
+          <div class="tl__body">
+            <h4>AI Engineer <span class="dim">·</span> Sahaa</h4>
+            <p class="tl__meta mono">Remote — Tehran, Iran</p>
+            <ul>
+              <li>Developed a comprehensive fake-news detection system for social networks.</li>
+              <li>Designed a real-time updating model using a knowledge base to enhance detection accuracy.</li>
+              <li>Conducted deepfake detection for images and videos to identify manipulated content.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__time mono">Oct 2022 – Dec 2025</span>
+          <div class="tl__body">
+            <h4>Teacher Assistant <span class="dim">·</span> Kharazmi University</h4>
+            <p class="tl__meta mono">Tehran, Iran</p>
+            <ul>
+              <li>Neural networks, Advanced programming, Video processing, Computer vision.</li>
+            </ul>
+          </div>
+        </li>
+        <li class="tl reveal">
+          <span class="tl__time mono">Mar 2022 – Sep 2024</span>
+          <div class="tl__body">
+            <h4>Computer Vision Researcher <span class="dim">·</span> IVP-Lab</h4>
+            <p class="tl__meta mono">Hybrid — Tehran, Iran · supervised by <a href="https://eng.khu.ac.ir/cv/307/english" target="_blank" rel="noopener noreferrer">Dr. Azadeh Mansouri</a> and <a href="http://facultymembers.sbu.ac.ir/a_mahmoudi/index.html" target="_blank" rel="noopener noreferrer">Dr. Ahmad Mahmoudi Aznaveh</a></p>
+            <ul>
+              <li>Contributed to the CLIC (Challenge on Learned Image Compression) and NTIRE (New Trends in Image Restoration and Enhancement) challenges.</li>
+              <li>Developed and optimized image compression methods to enhance visual quality while reducing bitrate.</li>
+            </ul>
           </div>
         </li>
         <li class="tl reveal">
@@ -348,11 +357,7 @@
     <header class="section__head">
       <span class="section__index mono">04</span>
       <h2 class="section__title" id="honors-title">Honors</h2>
-      <span class="section__tag mono">state: ENTROPY</span>
     </header>
-    <p class="section__intro reveal">
-      Recognition for work in learned image compression and quality assessment.
-    </p>
     <ul class="honors">
       <li class="reveal"><span class="mono">Jan 2024</span> CLIC 2024 — 2nd place, Image Perceptual Model track. Challenge on Learned Image Compression.</li>
       <li class="reveal"><span class="mono">Feb 2023</span> IPRIA 2023 — selected paper, International Conference on Pattern Recognition and Image Analysis.</li>
@@ -364,13 +369,7 @@
     <header class="section__head">
       <span class="section__index mono">05</span>
       <h2 class="section__title" id="research-title">Research &amp; Publications</h2>
-      <span class="section__tag mono">state: QUANTIZE</span>
     </header>
-    <p class="section__intro reveal">
-      Each line of work is a transformation: information enters, is reshaped by a model,
-      and leaves as something smaller and more useful. Selected peer-reviewed publications
-      in image compression and quality assessment.
-    </p>
 
     <h3 class="subhead mono">PUBLICATIONS</h3>
     <ol class="pubs" reversed>
@@ -404,12 +403,7 @@
     <header class="section__head">
       <span class="section__index mono">06</span>
       <h2 class="section__title" id="projects-title">Projects</h2>
-      <span class="section__tag mono">state: RECONSTRUCT</span>
     </header>
-    <p class="section__intro reveal">
-      Selected open-source projects from my GitHub, spanning computer vision, NLP, and
-      machine-learning fundamentals. Each links to its source code.
-    </p>
     <div class="grid grid--3">
       <article class="card card--project reveal">
         <span class="card__stage mono">VISION</span>
@@ -552,15 +546,10 @@
 
 </main>
 
-<footer class="footer" id="contact" aria-labelledby="footer-title">
+<footer class="footer" id="contact">
   <div class="footer__inner">
     <div class="footer__cta reveal">
       <span class="mono footer__kicker">CONTACT · q0</span>
-      <h2 class="footer__title" id="footer-title">Let&rsquo;s compress a hard problem into a working system.</h2>
-      <p class="footer__lead">
-        Raw information → representation → information. I&rsquo;m open to research and
-        applied roles in learned compression, computer vision and ML engineering.
-      </p>
       <div class="footer__links">
         <a class="btn btn--primary" href="mailto:farhadhsn8@gmail.com">farhadhsn8@gmail.com</a>
         <a class="btn" href="tel:+989335277126">+98 933 527 7126</a>
@@ -569,27 +558,21 @@
     <div class="footer__cols reveal">
       <div class="footer__col">
         <span class="mono footer__h">Profiles</span>
-        <a href="https://github.com/farhadhsn8" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-        <a href="https://scholar.google.com/citations?user=Jr6ohtkAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar ↗</a>
+        <div class="footer__social">
+          <a href="mailto:farhadhsn8@gmail.com"><span>Email</span><svg class="icon" aria-hidden="true"><use href="#i-mail"/></svg></a>
+          <a href="https://github.com/farhadhsn8" target="_blank" rel="noopener noreferrer"><span>GitHub</span><svg class="icon" aria-hidden="true"><use href="#i-github"/></svg></a>
+          <a href="https://scholar.google.com/citations?user=Jr6ohtkAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer"><span>Scholar</span><svg class="icon" aria-hidden="true"><use href="#i-scholar"/></svg></a>
+          <a href="https://t.me/farhosseid" target="_blank" rel="noopener noreferrer"><span>Telegram</span><svg class="icon" aria-hidden="true"><use href="#i-telegram"/></svg></a>
+        </div>
       </div>
       <div class="footer__col">
         <span class="mono footer__h">Based in</span>
         <span>Tehran, Iran</span>
       </div>
-      <div class="footer__col">
-        <span class="mono footer__h">Languages</span>
-        <span>Persian · English · German</span>
-      </div>
-      <div class="footer__col">
-        <span class="mono footer__h">Status</span>
-        <span><span class="dot dot--live"></span> open to roles</span>
-      </div>
     </div>
   </div>
   <div class="footer__base">
     <span class="mono">S. FARHAD HOSSEINI-BENVIDI</span>
-    <span class="mono dim">compression as computation</span>
-    <span class="mono dim">© <span id="year"></span> · HTML · CSS · JS · Three.js</span>
   </div>
 </footer>
 

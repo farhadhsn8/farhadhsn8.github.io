@@ -163,8 +163,6 @@ function initControls() {
 // live readouts (throttled to change-only writes)
 // ------------------------------------------------------------
 function initReadout() {
-  const readout = document.getElementById("readout-text");
-  const navStage = document.getElementById("nav-stage");
   const statLatent = document.getElementById("stat-latent");
   const statBpp = document.getElementById("stat-bpp");
   const statDist = document.getElementById("stat-dist");
@@ -179,13 +177,6 @@ function initReadout() {
     if (key === last.key) return;
     last.key = key;
 
-    if (navStage && navStage.textContent !== d.stageName) {
-      navStage.textContent = d.stageName;
-      navStage.dataset.state = d.stageName;
-    }
-    if (readout) {
-      readout.textContent = `q=${d.stageName} · rate ${formatFixed(d.rate, 2)} · latent ${d.latentDim} · bpp ${formatFixed(d.bpp, 2)}`;
-    }
     if (statLatent) statLatent.textContent = String(d.latentDim);
     if (statBpp) statBpp.textContent = formatFixed(d.bpp, 2);
     if (statDist) statDist.textContent = formatFixed(d.distortion, 2);
@@ -225,9 +216,6 @@ function main() {
 
   initReadout();
   initVisibility();
-
-  const year = document.getElementById("year");
-  if (year) year.textContent = String(new Date().getFullYear());
 
   start();
 }
