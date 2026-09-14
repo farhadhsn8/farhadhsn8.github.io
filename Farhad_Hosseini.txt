@@ -15,11 +15,12 @@
 \usepackage{verbatim} % reimplements the "verbatim" and "verbatim*" environments
 
 \usepackage{titlesec} % provides an interface to sectioning commands i.e. custom elements
+\titlespacing*{\section}
+{0pt}{6pt}{3pt}
 \usepackage{ragged2e}
 \usepackage{color} % provides both foreground and background color management
-
+\usepackage{accsupp}
 \usepackage{enumitem} % provides control over enumerate, itemize and description
-
 \usepackage{fancyhdr} % provides extensive facilities for constructing headers, footers and also controlling their use
 
 \usepackage{tabularx} % defines an environment tabularx, extension of "tabular" with an extra designator x, paragraph like column whose width automatically expands to fill the width of the environment
@@ -168,12 +169,21 @@
 %-----------CONTACT DETAILS------------------
 % Make sure all the details are correct, you can add more links in the first row of second column if needed
 
+
+
+
+
+
+
+
+
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
   \textbf{\Huge S.Farhad Hosseini \vspace{2pt}} & % row = 1, col = 1
   Location: Tehran \\ % row = 1, col = 2
    Age: 27 & Military service: Done \\
   \href{https://github.com/farhadhsn8}{\uline{GitHub}} $|$ % row = 2, col = 1
-  \href{https://scholar.google.com/citations?user=Jr6ohtkAAAAJ&hl=en}{\uline{Google Scholar}} & % row = 2, col = 1
+  \href{https://scholar.google.com/citations?user=Jr6ohtkAAAAJ&hl=en}{\uline{Google Scholar}} $|$ % row = 2, col = 1
+  \href{https://farhadhsn8.github.io}{\uline{Portfolio}} & % row = 2, col = 1
   Email: \href{mailto:farhadhsn8@gmail.com}{\uline{farhadhsn8@gmail.com}} $|$ % row = 2, col = 2
   Mobile: +989335277126 \\ % row = 2, col = 2
 \end{tabular*}
@@ -195,13 +205,17 @@
 
 \section{Technical Skills}
   \resumeHeadingListStart{}
-    \resumeSectionType{Skills}{:}{Machine-learning, Deep-learning, Image and video coding methods,  Data-structure and algorithms, Image and video processing, text processing, signal processing}
-    \resumeSectionType{Languages}{:}{Python, C, C++, PHP}
-    \resumeSectionType{Frameworks and libraries}{:}{Pytorch, Tensorflow (Keras), SK-learn, OpenCV, Numpy, Pandas, Matplotlib, Laravel, Yii2}
+    \resumeSectionType{Skills}{:}{Software Engineering, Machine-learning, Deep-learning, System Architecture,  Data-structure and algorithms, Image and video processing, text processing, signal processing}
+    \resumeSectionType{Languages}{:}{Python, C, C++, PHP, VHDL}
+    \resumeSectionType{Frameworks and libraries}{:}{PyTorch, TensorFlow (Keras), scikit-learn, OpenCV, NumPy, Pandas, Matplotlib, Hugging Face, LangChain, LangGraph, LlamaIndex, FastAPI, Flask, Laravel}
+
+    
+
+    \resumeSectionType{AI / LLM}{:} {RAG, LLM agents, prompt engineering, fine-tuning (LoRA/QLoRA), embeddings and semantic search, model evaluation (like RAGAS)}
     % \resumeSectionType{coding methods}{:}{JPEG, MPEG2, H.264 (AVC), H.265 (HEVC), H.266 (VVC)}
-    \resumeSectionType{Databases}{:}{MySQL, MongoDB, Redis, google RTDB}
+    \resumeSectionType{Databases}{:}{MySQL, MongoDB, Redis, Neo4j, Milvus, Chroma, Qdrant, Google RTDB}
     \resumeSectionType{Cloud }{:}{GCP (cloud functions, storage, and RTDB)}
-    \resumeSectionType{Other tools }{:}{linux, git, docker, rabbitMQ, Kafka}
+    \resumeSectionType{Other tools }{:}{Linux, Git, Docker, MLflow, Weights-Biases, RabbitMQ, Kafka, vLLM}
   \resumeHeadingListEnd{}
 %--------------------------------------------
 
@@ -209,13 +223,13 @@
 %-----------EXPERIENCE-----------------------
 % Distill all your talking points to small bullet points which follow the pattern "challenge-action-result" for maximum efficiency. Try to quantify (use numbers) your points whenver possible, highlist words of importance
 
-\section{Experience}
+\section{Professional Experience}
 \resumeHeadingListStart{}
 
 
 
 
-\resumeQuadHeading{AI Engineer}{Sep 2025 -- Feb 2026}
+\resumeQuadHeading{Lead AI/ML Engineer}{Sep 2025 -- Feb 2026}
   {\href{https://reportexx.ir/}{\uline{reportexx}}}{Remote work  -- Isfahan, Iran}
     \resumeItemListStart{}
         \resumeItem{Developed an end-to-end machine learning pipeline to convert radiologists’ abnormal voice reports into structured, standardized medical documents using NLP and speech-to-text processing. }
@@ -237,7 +251,7 @@
 
 
 
-\resumeQuadHeading{ML Engineer}{Jul 2025 -- Oct 2025}
+\resumeQuadHeading{Software Engineer – AI/ML}{Jul 2025 -- Oct 2025}
   {\href{https://memorybridgeai.com/}{\uline{memorybridge}}}{Remote work  -- Ottawa, Canada}
     \resumeItemListStart{}
         \resumeItem{Designed and developed a provider-agnostic memory pipeline for AI chatbots to enable persistent, context-aware conversations independent of underlying LLM service providers.}
@@ -248,7 +262,7 @@
 
 
 
-\resumeQuadHeading{ML Engineer}{Apr 2025 -- Jul 2025}
+\resumeQuadHeading{Software Engineer – AI/ML}{Apr 2025 -- Jul 2025}
   {\href{https://biomaze.ir/}{\uline{maze}}}{Remote work  -- Tehran, Iran}
     \resumeItemListStart{}
         \resumeItem{Led R\&D efforts to develop an ML-based system for automated grading of handwritten Persian biology exams, combining OCR and NLP techniques to interpret free-text and structured answers. }
@@ -267,7 +281,7 @@
 
 
 
-\resumeQuadHeading{AI Engineer}{Sep 2024 -- Jul 2025}
+\resumeQuadHeading{Lead AI/ML Engineer}{Sep 2024 -- Jul 2025}
   {\href{Sahaa}{\uline{Sahaa}}}{Remote work  -- Tehran, Iran}
     \resumeItemListStart{}
         \resumeItem{Developed and implemented a comprehensive fake news detection system for social networks.}
@@ -278,7 +292,7 @@
     \resumeItemListEnd{}
 
 
-\resumeQuadHeading{ML Engineer}{Nov 2024 -- Apr 2025}
+\resumeQuadHeading{Software Engineer – AI/ML}{Nov 2024 -- Apr 2025}
   {\href{https://boolooz.com/}{\uline{Boolooz} (under Golrang Ventures)}}{Office work  -- Tehran, Iran}
     \resumeItemListStart{}
         \resumeItem{Designed and implemented architecture and pipeline for Virtual Try-On 
@@ -292,10 +306,11 @@
 \resumeItem{Implemented Persian query correction methodologies to improve search accuracy and user experience}
     \resumeItemListEnd{}
 
-   \newpage 
+
+    
 
 
-\resumeQuadHeading{AI Engineer}{Sep 2021 -- Oct 2024}
+\resumeQuadHeading{Software Engineer – AI/ML}{Sep 2021 -- Oct 2024}
   {\href{https://drivee.ai}{\uline{Drivee}}}{Remote/Office work  -- CA, USA}
     \resumeItemListStart{}
         \resumeItem{Designed and implemented a pipeline to transform raw automotive footage into interactive 3D car models}
@@ -353,6 +368,8 @@
 %---------------------------------------------
 
 
+
+%-------------------------------------------------------------------------
 \section{Publications}
 
 
@@ -421,15 +438,7 @@
 
   
   \resumeHeadingListEnd{}
-%---------------------------------------------
-\section{Languages}
-  \resumeHeadingListStart{}
 
-    \resumeQuadHeading{Persian (native), English (Advanced), German (Basic)}  
-    
-
-  
-  \resumeHeadingListEnd{}
 %--------------------------------------------------
 
 
@@ -442,80 +451,93 @@
     \resumeQuadHeading{International Conference on Pattern Recognition and Image Analysis 2023}{}   
     {Designated as a selected paper at IPRIA-2023}{Feb-2023}
 
+
+
+
+
+%---------------------------------------------
+\section{Languages}
+  \resumeHeadingListStart{}
+
+    \resumeQuadHeading{Persian (native), English (Advanced), German (Basic)}  
+    
+
   
+  \resumeHeadingListEnd{}
+
 %-----------PROJECTS--------------------------
 % Use resumeQuadHeading if four elements are feasible (ex: demo video link), else use resumeTrioHeading. Keep the bullet points simple and concise and try to cover wide variety of skills you have used to build these projects
 
 
 % ----------------------------------------------------------------
 
-\section{Projects}
-  \resumeHeadingListStart{}
+% \section{Projects}
+%   \resumeHeadingListStart{}
 
 
 
   
-    \resumeTrioHeading{Surveillance system}{PHP(Laravel), Python, OpenCV, MySQL}{\href{https://github.com/farhadhsn8/surveillance_system/tree/master/prj}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{A surveillance system in which the camera sensor detects events in the environment using image processing and sends them to the server through a restful API. Finally, the server creates a queue of events and sends a special email to the user for each event.}
+%     \resumeTrioHeading{Surveillance system}{PHP(Laravel), Python, OpenCV, MySQL}{\href{https://github.com/farhadhsn8/surveillance_system/tree/master/prj}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{A surveillance system in which the camera sensor detects events in the environment using image processing and sends them to the server through a restful API. Finally, the server creates a queue of events and sends a special email to the user for each event.}
         
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
 
-      \resumeTrioHeading{Car detection and localization}{Python, YOLO}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/video-YOLO}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{In this project, we used a straightforward method to extract the background picture from a video of driving automobiles. Then Hough-transform was used to identify street lines. Using the YOLO technique, we eventually found and eliminated the white automobiles from the video after removing the vehicles from a certain lane.}
+%       \resumeTrioHeading{Car detection and localization}{Python, YOLO}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/video-YOLO}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{In this project, we used a straightforward method to extract the background picture from a video of driving automobiles. Then Hough-transform was used to identify street lines. Using the YOLO technique, we eventually found and eliminated the white automobiles from the video after removing the vehicles from a certain lane.}
   
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
-     \resumeTrioHeading{Face recognition using siamese network}{Python, Pytorch}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/siameseNet}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{Performing face recognition task on the dataset "Labeled Faces in the Wild", using Siamese network architecture and applying triplet loss function.}
+%      \resumeTrioHeading{Face recognition using siamese network}{Python, Pytorch}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/siameseNet}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{Performing face recognition task on the dataset "Labeled Faces in the Wild", using Siamese network architecture and applying triplet loss function.}
         
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
-      \resumeTrioHeading{ Encoder and decoder MPEG2 video coding (without entropy coding)}{Python}{\href{https://github.com/farhadhsn8/mpeg2-video-coding}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{This project is the implementation of MPEG2 video compression, where the first frame of each video is considered the Iframe and after blocking, each block is coded using the JPEG method. The rest of the frames are considered  Pframe and each block of this type of frame is coded as residuals and motion vectors after the motion estimation process.}
+%       \resumeTrioHeading{ Encoder and decoder MPEG2 video coding (without entropy coding)}{Python}{\href{https://github.com/farhadhsn8/mpeg2-video-coding}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{This project is the implementation of MPEG2 video compression, where the first frame of each video is considered the Iframe and after blocking, each block is coded using the JPEG method. The rest of the frames are considered  Pframe and each block of this type of frame is coded as residuals and motion vectors after the motion estimation process.}
         
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
-     \resumeTrioHeading{Video classification on hockey fight detection}{Python, tensorflow}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/hockey-videos}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{In this project, which is related to fight detection from hockey sports videos, 20 frames are randomly sampled from each video and the videos are classified by using the features extracted from each frame and giving them to a neural network.}
+%      \resumeTrioHeading{Video classification on hockey fight detection}{Python, tensorflow}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/hockey-videos}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{In this project, which is related to fight detection from hockey sports videos, 20 frames are randomly sampled from each video and the videos are classified by using the features extracted from each frame and giving them to a neural network.}
       
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
 
-      \resumeTrioHeading{Car detection}{Python, scikit-learn}{\href{https://github.com/farhadhsn8/data_mining-car-detection-/blob/master/DM_prj2.ipynb}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{Predicting the type of car based on the coordinates of the bounding box around the car.}
+%       \resumeTrioHeading{Car detection}{Python, scikit-learn}{\href{https://github.com/farhadhsn8/data_mining-car-detection-/blob/master/DM_prj2.ipynb}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{Predicting the type of car based on the coordinates of the bounding box around the car.}
         
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
-      \resumeTrioHeading{Image segmentation (U-net)}{Python, tensorflow}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/U-NET}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{In this project, segmentation has been done on flower images using U-net architecture.}
-      \resumeItemListEnd{}
+%       \resumeTrioHeading{Image segmentation (U-net)}{Python, tensorflow}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/U-NET}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{In this project, segmentation has been done on flower images using U-net architecture.}
+%       \resumeItemListEnd{}
 
 
 
-      \resumeTrioHeading{Facial emotion recognition (FER)}{Python, pytorch}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/FER}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{Facial emotion recognition (FER) is an important topic in the fields of computer vision and artificial intelligence. In this project, 7 classes are predicted to describe facial expressions using deep neural networks.}
+%       \resumeTrioHeading{Facial emotion recognition (FER)}{Python, pytorch}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/FER}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{Facial emotion recognition (FER) is an important topic in the fields of computer vision and artificial intelligence. In this project, 7 classes are predicted to describe facial expressions using deep neural networks.}
        
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
@@ -527,18 +549,18 @@
 
 
 
-      \resumeTrioHeading{Feature extraction from vision transformer model}{Python, Pytorch}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/vision-transformer}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{Using Vision Transformer architecture, we first classified the images and then converted the features extracted from the network into two dimensions (using dimension reduction methods such as TSNE and PCA) and then displayed them visually.}
+%       \resumeTrioHeading{Feature extraction from vision transformer model}{Python, Pytorch}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/vision-transformer}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{Using Vision Transformer architecture, we first classified the images and then converted the features extracted from the network into two dimensions (using dimension reduction methods such as TSNE and PCA) and then displayed them visually.}
    
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
-      \resumeTrioHeading{Topic modeling of Persian news(NLP)}{Python, scikit-learn}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/topic-modeling(NLP)}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{Using two unsupervised methods, we clustered the embeddings of Persian news sentences and identified the main topic of each cluster.}
-      \resumeItemListEnd{}
+%       \resumeTrioHeading{Topic modeling of Persian news(NLP)}{Python, scikit-learn}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/topic-modeling(NLP)}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{Using two unsupervised methods, we clustered the embeddings of Persian news sentences and identified the main topic of each cluster.}
+%       \resumeItemListEnd{}
 
 
 
@@ -547,30 +569,30 @@
 
 
 
-      \resumeTrioHeading{Pose estimation using transfer learning}{Python, Pytorch}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/pose\%20estimation}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{In this project, we have predicted 14 key points on the sports dataset by using features extracted from two pre-trained models: Resent and VGG.}
+%       \resumeTrioHeading{Pose estimation using transfer learning}{Python, Pytorch}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/pose\%20estimation}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{In this project, we have predicted 14 key points on the sports dataset by using features extracted from two pre-trained models: Resent and VGG.}
      
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
 
-      \resumeTrioHeading{Predict missing values in time series problem}{Python}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/missing-value(time\%20series)}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{Prediction of missing values associated with sunspots using one-dimensional convolution and recurrent neural networks such as GRU and LSTM.}
+%       \resumeTrioHeading{Predict missing values in time series problem}{Python}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/missing-value(time\%20series)}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{Prediction of missing values associated with sunspots using one-dimensional convolution and recurrent neural networks such as GRU and LSTM.}
      
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
 
 
-      \resumeTrioHeading{Image captioning (CNN2RNN model)}{Python, pytorch}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/image_captioning)}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{Model implementation for image captioning using an encoder/decoder architecture. The encoder section gives the features extracted from the input image to the decoder section, which is responsible for deriving the appropriate words.}
+%       \resumeTrioHeading{Image captioning (CNN2RNN model)}{Python, pytorch}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/image_captioning)}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{Model implementation for image captioning using an encoder/decoder architecture. The encoder section gives the features extracted from the input image to the decoder section, which is responsible for deriving the appropriate words.}
        
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
@@ -581,36 +603,36 @@
 
 
 
-            \resumeTrioHeading{Implementation of several machine learning algorithms (from scratch)}{Python}{\href{https://github.com/farhadhsn8/implementation_ML_algorithms}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{Implementation of machine learning algorithms such as decision tree, gaussian naïve bayes, random forest, MLP, RBF, and KNN from scratch}
+%             \resumeTrioHeading{Implementation of several machine learning algorithms (from scratch)}{Python}{\href{https://github.com/farhadhsn8/implementation_ML_algorithms}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{Implementation of machine learning algorithms such as decision tree, gaussian naïve bayes, random forest, MLP, RBF, and KNN from scratch}
    
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
 
-      \resumeTrioHeading{Heart disease prediction}{Python, scikit-learn}{\href{https://github.com/farhadhsn8/Heart-Disease-Prediction-using-Machine-Learning}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{Predicting the probability of heart disease based on some medical characteristics such as age, sex, maximum heart rate, cholesterol, etc; using machine learning algorithms.}
+%       \resumeTrioHeading{Heart disease prediction}{Python, scikit-learn}{\href{https://github.com/farhadhsn8/Heart-Disease-Prediction-using-Machine-Learning}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{Predicting the probability of heart disease based on some medical characteristics such as age, sex, maximum heart rate, cholesterol, etc; using machine learning algorithms.}
 
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
-      \resumeTrioHeading{bees and ants classification}{Python, pytorch}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/STN-and-transferLearning/0-transfer\%20learning}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{In this project, the classification of two categories of images of ants and bees has been implemented using neural networks.}
+%       \resumeTrioHeading{bees and ants classification}{Python, pytorch}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/STN-and-transferLearning/0-transfer\%20learning}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{In this project, the classification of two categories of images of ants and bees has been implemented using neural networks.}
      
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 
-      \resumeTrioHeading{Generative adversarial networks (GAN)}{Python, tensorflow}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/GAN}{\uline{Source Code}}}
-      \resumeItemListStart{}
-        \resumeItem{In this project, we have produced new images using the GAN, which is trained on celebrity images.}
+%       \resumeTrioHeading{Generative adversarial networks (GAN)}{Python, tensorflow}{\href{https://github.com/farhadhsn8/deep-learning/tree/master/GAN}{\uline{Source Code}}}
+%       \resumeItemListStart{}
+%         \resumeItem{In this project, we have produced new images using the GAN, which is trained on celebrity images.}
       
-      \resumeItemListEnd{}
+%       \resumeItemListEnd{}
 
 
 

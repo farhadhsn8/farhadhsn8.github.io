@@ -169,10 +169,16 @@
         </p>
       </div>
       <aside class="about__side">
-        <figure class="profile reveal" aria-label="Portrait placeholder">
-          <div class="profile__frame" role="img" aria-label="Portrait photo placeholder">
-            <span class="profile__initials mono">SFH</span>
-            <span class="profile__hint mono">your photo</span>
+        <figure class="profile reveal" aria-label="Portrait">
+          <div class="profile__frame">
+            <img
+              class="profile__img"
+              src="images/farhad.png"
+              alt="Portrait of S. Farhad Hosseini-Benvidi"
+              width="1254"
+              height="1254"
+              loading="lazy"
+              decoding="async" />
           </div>
           <figcaption class="profile__cap mono">S. Farhad Hosseini-Benvidi</figcaption>
         </figure>
@@ -204,13 +210,13 @@
           </dd></div>
         </dl>
         <div class="skills" aria-label="Technical skills">
-          <div class="skills__group"><span class="mono skills__k">skills</span><p>Machine-learning, Deep-learning, Image and video coding methods, Data-structure and algorithms, Image and video processing, text processing, signal processing</p></div>
-          <div class="skills__group"><span class="mono skills__k">languages</span><p>Python, C, C++, PHP, SQL</p></div>
-          <div class="skills__group"><span class="mono skills__k">frameworks</span><p>PyTorch, TensorFlow (Keras), scikit-learn, OpenCV, NumPy, Pandas, Matplotlib, Hugging Face, LangChain, LangGraph, LlamaIndex, FastAPI, Laravel, Yii2</p></div>
+          <div class="skills__group"><span class="mono skills__k">skills</span><p>Software Engineering, Machine-learning, Deep-learning, System Architecture, Data-structure and algorithms, Image and video processing, text processing, signal processing</p></div>
+          <div class="skills__group"><span class="mono skills__k">languages</span><p>Python, C, C++, PHP, VHDL</p></div>
+          <div class="skills__group"><span class="mono skills__k">frameworks</span><p>PyTorch, TensorFlow (Keras), scikit-learn, OpenCV, NumPy, Pandas, Matplotlib, Hugging Face, LangChain, LangGraph, LlamaIndex, FastAPI, Flask, Laravel</p></div>
           <div class="skills__group"><span class="mono skills__k">AI / LLM</span><p>RAG, LLM agents, prompt engineering, fine-tuning (LoRA/QLoRA), embeddings and semantic search, model evaluation (RAGAS)</p></div>
           <div class="skills__group"><span class="mono skills__k">databases</span><p>MySQL, MongoDB, Redis, Neo4j, Milvus, Chroma, Qdrant, Google RTDB</p></div>
           <div class="skills__group"><span class="mono skills__k">cloud</span><p>GCP (cloud functions, storage, RTDB)</p></div>
-          <div class="skills__group"><span class="mono skills__k">tools</span><p>Linux, Git, Docker, Kubernetes, MLflow, Weights &amp; Biases, RabbitMQ, Kafka, vLLM</p></div>
+          <div class="skills__group"><span class="mono skills__k">tools</span><p>Linux, Git, Docker, MLflow, Weights &amp; Biases, RabbitMQ, Kafka, vLLM</p></div>
         </div>
       </div>
     </div>
@@ -241,7 +247,7 @@
   <section id="experience" class="section" data-phase="0.75" aria-labelledby="experience-title">
     <header class="section__head">
       <span class="section__index mono">03</span>
-      <h2 class="section__title" id="experience-title">Experience</h2>
+      <h2 class="section__title" id="experience-title">Professional Experience</h2>
     </header>
 
     <div class="exp">
@@ -249,7 +255,7 @@
         <li class="tl reveal">
           <span class="tl__time mono">Sep 2025 – Feb 2026</span>
           <div class="tl__body">
-            <h4>AI Engineer <span class="dim">·</span> <a class="tl__org" href="https://reportexx.ir/" target="_blank" rel="noopener noreferrer">reportexx ↗</a></h4>
+            <h4>Lead AI/ML Engineer <span class="dim">·</span> <a class="tl__org" href="https://reportexx.ir/" target="_blank" rel="noopener noreferrer">reportexx ↗</a></h4>
             <p class="tl__meta mono">Remote — Isfahan, Iran</p>
             <ul>
               <li>Developed an end-to-end ML pipeline to convert radiologists&rsquo; abnormal voice reports into structured, standardized medical documents using NLP and speech-to-text.</li>
@@ -260,7 +266,7 @@
         <li class="tl reveal">
           <span class="tl__time mono">Jul 2025 – Oct 2025</span>
           <div class="tl__body">
-            <h4>ML Engineer <span class="dim">·</span> <a class="tl__org" href="https://memorybridgeai.com/" target="_blank" rel="noopener noreferrer">memorybridge ↗</a></h4>
+            <h4>Software Engineer – AI/ML <span class="dim">·</span> <a class="tl__org" href="https://memorybridgeai.com/" target="_blank" rel="noopener noreferrer">memorybridge ↗</a></h4>
             <p class="tl__meta mono">Remote — Ottawa, Canada</p>
             <ul>
               <li>Designed and developed a provider-agnostic memory pipeline for AI chatbots to enable persistent, context-aware conversations independent of the underlying LLM service providers.</li>
@@ -269,7 +275,7 @@
             <figure class="tl__demo">
               <img
                 class="tl__shot"
-                src="memorybridge.png"
+                src="images/memorybridge.png"
                 alt="MemoryBridge provider-agnostic memory pipeline"
                 loading="lazy"
                 decoding="async" />
@@ -280,7 +286,7 @@
         <li class="tl reveal">
           <span class="tl__time mono">Apr 2025 – Jul 2025</span>
           <div class="tl__body">
-            <h4>ML Engineer <span class="dim">·</span> <a class="tl__org" href="https://biomaze.ir/" target="_blank" rel="noopener noreferrer">maze ↗</a></h4>
+            <h4>Software Engineer – AI/ML <span class="dim">·</span> <a class="tl__org" href="https://biomaze.ir/" target="_blank" rel="noopener noreferrer">maze ↗</a></h4>
             <p class="tl__meta mono">Remote — Tehran, Iran</p>
             <ul>
               <li>Led R&amp;D for an ML system for automated grading of handwritten Persian biology exams, combining OCR and NLP to interpret free-text and structured answers.</li>
@@ -291,7 +297,7 @@
         <li class="tl reveal">
           <span class="tl__time mono">Nov 2024 – Apr 2025</span>
           <div class="tl__body">
-            <h4>ML Engineer <span class="dim">·</span> <a class="tl__org" href="https://boolooz.com/" target="_blank" rel="noopener noreferrer">Boolooz ↗</a> <span class="dim">(under Golrang Ventures)</span></h4>
+            <h4>Software Engineer – AI/ML <span class="dim">·</span> <a class="tl__org" href="https://boolooz.com/" target="_blank" rel="noopener noreferrer">Boolooz ↗</a> <span class="dim">(under Golrang Ventures)</span></h4>
             <p class="tl__meta mono">Office — Tehran, Iran</p>
             <ul>
               <li>Designed and implemented architecture and pipeline for Virtual Try-On (VTO) using RPC connections and RabbitMQ.</li>
@@ -301,7 +307,7 @@
             <figure class="tl__demo">
               <img
                 class="tl__shot"
-                src="boolooz.jpeg"
+                src="images/boolooz.jpeg"
                 alt="Boolooz virtual try-on pipeline result"
                 loading="lazy"
                 decoding="async" />
@@ -312,7 +318,7 @@
         <li class="tl reveal">
           <span class="tl__time mono">Sep 2024 – Jul 2025</span>
           <div class="tl__body">
-            <h4>AI Engineer <span class="dim">·</span> Sahaa</h4>
+            <h4>Lead AI/ML Engineer <span class="dim">·</span> Sahaa</h4>
             <p class="tl__meta mono">Remote — Tehran, Iran</p>
             <ul>
               <li>Developed a comprehensive fake-news detection system for social networks.</li>
@@ -324,7 +330,7 @@
         <li class="tl reveal">
           <span class="tl__time mono">Sep 2021 – Oct 2024</span>
           <div class="tl__body">
-            <h4>AI Engineer <span class="dim">·</span> <a class="tl__org" href="https://drivee.ai" target="_blank" rel="noopener noreferrer">Drivee ↗</a></h4>
+            <h4>Software Engineer – AI/ML <span class="dim">·</span> <a class="tl__org" href="https://drivee.ai" target="_blank" rel="noopener noreferrer">Drivee ↗</a></h4>
             <p class="tl__meta mono">Remote/Office — CA, USA</p>
             <ul>
               <li>Designed and implemented a pipeline to transform raw automotive footage into interactive 3D car models.</li>
